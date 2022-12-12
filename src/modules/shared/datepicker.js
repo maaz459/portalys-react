@@ -174,6 +174,7 @@ export const SingleDatepicker = ({
     monthNames: MONTH_NAMES_DEFAULT,
     dayNames: DAY_NAMES_DEFAULT,
   },
+  color,
   ...props
 }) => {
   const { date, name, disabled, onDateChange, id, placeholder, maxW } = props;
@@ -218,14 +219,19 @@ export const SingleDatepicker = ({
         <InputGroup maxW={maxW}>
           <InputComponent
             id={id}
-            bg="white.100"
+            bg="black.400"
+            h="56px"
             autoComplete="off"
             isDisabled={disabled}
             ref={initialFocusRef}
             onClick={() => setPopoverOpen(!popoverOpen)}
             name={name}
+            color={color}
             placeholder={placeholder}
-            value={moment(date).format(configs.dateFormat)}
+            _placeholder={{
+              color,
+            }}
+            value={!date ? "" : moment(date).format(configs.dateFormat)}
             onChange={(e) => e.target.value}
           />
           <InputRightElement color="gray.500" children={icon} />

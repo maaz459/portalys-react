@@ -1,4 +1,11 @@
-import { postUser, getUser, googleLogin } from "../api/registration";
+import secrets from "../../secrets.json";
+import {
+  postUser,
+  getUser,
+  googleLogin,
+  forgotPassword,
+  resetPassword,
+} from "../api/registration";
 export const addNewUser = async (payload) => {
   try {
     const res = await postUser(payload);
@@ -26,6 +33,30 @@ export const fetchUser = async (payload) => {
 export const loginWithGoogle = async (payload) => {
   try {
     const res = await googleLogin(payload);
+    const data = res.data;
+    return {
+      ...data,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const sendForgotEmail = async (payload) => {
+  try {
+    const res = await forgotPassword({ ...payload, link: secrets.resetLink });
+    const data = res.data;
+    return {
+      ...data,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changePassword = async (payload) => {
+  try {
+    const res = await resetPassword(payload);
     const data = res.data;
     return {
       ...data,

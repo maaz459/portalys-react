@@ -61,24 +61,26 @@ const events = [
 ];
 
 const EventsComponent = () => {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(null);
   const [displayType, setDisplayType] = useState("table");
   const navigate = useNavigate();
   return (
     <Box w="100%">
       <Stack {...{ spacing }} flexDir="row">
         <HStack {...{ spacing }} spacing={10} flex={1}>
+          {console.log(date)}
           <SingleDatepicker
             eventName="date-input"
             date={date}
             onDateChange={setDate}
-            placeholder="Date venue"
+            placeholder="Date Range"
             maxW="281px"
           />
           <Select
             bg="black.300"
             color="white.100"
             maxW="210px"
+            fontSize={14}
             placeholder="All Events"
           >
             <option></option>
@@ -158,9 +160,9 @@ const EventsComponent = () => {
                         color="white.100"
                         key={index}
                       >
-                        <Td>
-                          <HStack spacing={10}>
-                            <Image alt="" w={"32px"} h={"32px"} src={image} />
+                        <Td py={0} h="57px">
+                          <HStack py={0} spacing={10}>
+                            <Image w="57px" h="57px" alt="" src={image} />
                             <Text className="gordita400" fontSize={16}>
                               {eventName}
                             </Text>
@@ -187,18 +189,24 @@ const EventsComponent = () => {
                           </Text>{" "}
                         </Td>
                         <Td>
-                          <HStack alignItems="center" spacing={24}>
+                          <HStack alignItems="flex-end" spacing={24}>
                             <VStack justifyContent="center" alignItems="center">
                               <Image alt="" src={edit}></Image>
-                              <Text>Edit</Text>
+                              <Text className="gordita400" fontSize={12}>
+                                Edit
+                              </Text>
                             </VStack>
                             <VStack justifyContent="center" alignItems="center">
                               <Image alt="" src={cancel}></Image>
-                              <Text>Cancel</Text>
+                              <Text className="gordita400" fontSize={12}>
+                                Cancel
+                              </Text>
                             </VStack>
                             <VStack justifyContent="center" alignItems="center">
                               <Image alt="" src={refund}></Image>
-                              <Text>Refund</Text>
+                              <Text className="gordita400" fontSize={12}>
+                                Refund
+                              </Text>
                             </VStack>
                           </HStack>
                         </Td>
@@ -254,21 +262,40 @@ const EventsComponent = () => {
                     <HStack
                       borderTop="1px solid #2D2D2D"
                       px={24}
+                      py={2}
                       alignItems="center"
                       justifyContent="space-between"
                       spacing={24}
                     >
-                      <VStack justifyContent="center" alignItems="center">
+                      <VStack
+                        spacing={1}
+                        justifyContent="center"
+                        alignItems="center"
+                      >
                         <Image alt="" src={edit}></Image>
-                        <Text>Edit</Text>
+                        <Text className="gordita400" fontSize={12}>
+                          Edit
+                        </Text>
                       </VStack>
-                      <VStack justifyContent="center" alignItems="center">
+                      <VStack
+                        spacing={1}
+                        justifyContent="center"
+                        alignItems="center"
+                      >
                         <Image alt="" src={cancel}></Image>
-                        <Text>Cancel</Text>
+                        <Text className="gordita400" fontSize={12}>
+                          Cancel
+                        </Text>
                       </VStack>
-                      <VStack justifyContent="center" alignItems="center">
+                      <VStack
+                        spacing={1}
+                        justifyContent="center"
+                        alignItems="center"
+                      >
                         <Image alt="" src={refund}></Image>
-                        <Text>Refund</Text>
+                        <Text className="gordita400" fontSize={12}>
+                          Refund
+                        </Text>
                       </VStack>
                     </HStack>
                   </Box>

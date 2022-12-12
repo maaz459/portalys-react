@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Text, VStack,Image } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, VStack, Image } from "@chakra-ui/react";
 import {
   DateBox,
   InputBox,
@@ -15,18 +15,25 @@ import {
 } from "../../../../static/assets/images/dashboard/sidebar";
 const ArtistLineup = ({ handleBlur, handleChange, values }) => {
   return (
-    <VStack w="100%">
+    <VStack spacing={56} w="100%">
       <VStack w="100%">
         <Text className="gordita700" fontSize={18} textAlign="left" w="100%">
           Best Track
         </Text>
-        <HStack alignItems="center" justifyContent="center" w="100%">
+        <HStack
+          alignItems="flex-end"
+          spacing={30}
+          flex={1}
+          justifyContent="flex-start"
+          w="100%"
+        >
           <InputBox
             values={values}
             handleBlur={handleBlur}
             handleChange={handleChange}
             placeholder="Enter track name"
             label="Track Name"
+            maxW="35%"
           />
           <InputBox
             values={values}
@@ -34,10 +41,13 @@ const ArtistLineup = ({ handleBlur, handleChange, values }) => {
             handleChange={handleChange}
             placeholder="Enter artist Name"
             label="Artist Name"
+            maxW="35%"
           />
-          <Image alt="" style={{ width: "25%" }} src={upload} />
-          <Box>
+          <Image alt="" src={upload} />
+          <Box maxW="10%" w="100%">
             <Button
+              w="100%"
+              h="56px"
               color="primary.100"
               bg="transparent"
               border="1px solid"
@@ -60,13 +70,20 @@ const ArtistLineup = ({ handleBlur, handleChange, values }) => {
         <Text className="gordita700" fontSize={18} textAlign="left" w="100%">
           Line Up
         </Text>
-        <HStack alignItems="center" justifyContent="center" w="100%">
+        <HStack
+          alignItems="flex-end"
+          spacing={30}
+          flex={1}
+          justifyContent="flex-start"
+          w="100%"
+        >
           <InputBox
             values={values}
             handleBlur={handleBlur}
             handleChange={handleChange}
             placeholder="Enter track name"
             label="Track Name"
+            maxW="35%"
           />
           <InputBox
             values={values}
@@ -74,10 +91,13 @@ const ArtistLineup = ({ handleBlur, handleChange, values }) => {
             handleChange={handleChange}
             placeholder="Enter artist Name"
             label="Artist Name"
+            maxW="35%"
           />
-          <Image alt="" style={{ width: "25%" }} src={upload} />
-          <Box>
+          <Image h='56px' alt="" src={upload} />
+          <Box maxW="10%" w="100%">
             <Button
+              w="100%"
+              h="56px"
               color="primary.100"
               bg="transparent"
               border="1px solid"

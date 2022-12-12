@@ -34,6 +34,9 @@ import refund from "./refund.svg";
 import location from "./location.svg";
 import up from "./up.svg";
 import down from "./down.svg";
+import pdf from "./pdf.svg";
+import xls from "./xls.svg";
+import exportSvg from "./export.svg";
 
 export {
   collectablesPrimary,
@@ -71,4 +74,7 @@ export {
   location,
   up,
   down,
+  pdf,
+  xls,
+  exportSvg,
 };

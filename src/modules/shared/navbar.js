@@ -44,9 +44,7 @@ import { useRecoilState } from "recoil";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import Password from "../pages/Password";
-import { useNavigate } from "react-router-dom";
-// import Torus from "@toruslabs/torus-embed";
-// import Web3 from "web3";
+import ForgotPassword from "../pages/ForgotPassword";
 const Navbar = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isLaptop = useMediaQuery("(max-width: 1320px)");
@@ -55,7 +53,7 @@ const Navbar = () => {
   const [_, setRegistrationModal] = useRecoilState(registration);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate();
+
   const organizerCheck = window.location.pathname.includes("organizer");
 
   const value = useColorModeValue(
@@ -71,6 +69,10 @@ const Navbar = () => {
         return <SignUp />;
       case RegistraionModalTypes.PASSWORD:
         return <Password />;
+      case RegistraionModalTypes.RESET_PASSWORD:
+        return <Password />;
+      case RegistraionModalTypes.FORGOT:
+        return <ForgotPassword />;
     }
   };
 

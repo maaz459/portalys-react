@@ -7,6 +7,7 @@ export const theme = {
       100: "#000000",
       200: "#252526",
       300: "#1C1C1C",
+      400: "#141414",
     },
     white: {
       100: "#ffffff",
@@ -17,6 +18,9 @@ export const theme = {
     },
     orange: {
       100: "#FF5C00",
+    },
+    purple: {
+      100: "#A6A0BB",
     },
   },
   breakpoints: {

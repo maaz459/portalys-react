@@ -7,10 +7,19 @@ const Routes = () => {
   return (
     <DomRoutes>
       <Route key="home" path="/" element={<Home />} />
-      <Route key="home" path="organizer" element={<Home />} />
+      <Route key="organizer" path="organizer" element={<Home />} />
+
       <Route key="dashboard" path="dashboard" element={<Dashboard />} />
-      <Route key="events" path="events" element={<Events />} />
-      <Route key="createEvent" path="events/create" element={<CreateEvents />} />
+      <Route key="events"  path="events" element={<Events />} />
+      <Route
+        key="createEvent"
+        path="events/create"
+        element={<CreateEvents />}
+      />
+      <Route
+        path="resetpassword"
+        element={<Home />}
+      />
     </DomRoutes>
   );
 };

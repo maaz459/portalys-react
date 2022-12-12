@@ -11,3 +11,10 @@ export const getUser = async (payload) => {
 export const googleLogin = async (payload) => {
   return axios.post("/api/google-oauth", payload);
 };
+
+export const forgotPassword = async (payload) => {
+  return axios.post("/api/forgot", payload);
+};
+export const resetPassword = async (payload) => {
+  return axios.post("/api/reset", payload);
+};

@@ -23,23 +23,27 @@ import {
   fetchUser,
   loginWithGoogle,
 } from "../../../utils/actions/registration";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { userRoles } from "../../../utils/constants";
 import { useGoogleLogin } from "@react-oauth/google";
-
+import { useCookies } from "react-cookie";
+import { saveToken } from "../../../utils/handleTokens";
 const initialValues = { email: "", password: "" };
 const Login = () => {
   const [_, setRegistrationModal] = useRecoilState(registration);
   const [u, setUser] = useRecoilState(user);
   const toast = useToast();
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["x-auth-token"]);
 
   const userRole = window.location.pathname.includes("organizer")
     ? userRoles.ORGANIZER
     : userRoles.ATTENDEE;
 
   const handleGoogleLogin = async (payload) => {
-    const user = await loginWithGoogle(payload);
+    const user = await loginWithGoogle({ ...payload, userRole });
+    saveToken(user.token, "x-auth-token", 60, setCookie);
+
     setUser((lp) => {
       return {
         ...lp,
@@ -56,6 +60,9 @@ const Login = () => {
         userRole: "",
       };
     });
+    if (userRole === userRoles.ORGANIZER) {
+      navigate("/dashboard");
+    }
   };
 
   const login = useGoogleLogin({
@@ -210,6 +217,23 @@ const Login = () => {
                   >
                     Continue with Email
                   </Button>
+                  <Text
+                    cursor="pointer"
+                    onClick={() => {
+                      setRegistrationModal((lp) => {
+                        return {
+                          ...lp,
+                          openModal: true,
+                          modalType: RegistraionModalTypes.FORGOT,
+                          userData: {},
+                        };
+                      });
+                    }}
+                    mt={24}
+                    color="#FF5C00"
+                  >
+                    Forgot password?
+                  </Text>
                 </Box>
                 <Box>
                   <HStack my={36} px={{ base: 0, md: 36 }}>

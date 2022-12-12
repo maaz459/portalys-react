@@ -12,49 +12,92 @@ import {
 } from "@chakra-ui/react";
 import { PasswordSchema } from "../../../utils/schema";
 import { Formik, Field, Form } from "formik";
-import { google } from "../../../static/assets/images";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import {
   RegistraionModalTypes,
   registration,
 } from "../../../recoil/atoms/registration";
 import { useRecoilState } from "recoil";
-import { addNewUser } from "../../../utils/actions/registration";
+import {
+  addNewUser,
+  changePassword,
+} from "../../../utils/actions/registration";
 const initialValues = { password: "", confirmPassword: "" };
-const ForgotPassword = () => {
+const Password = () => {
   const [_, setRegistrationModal] = useRecoilState(registration);
+  let [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const toast = useToast();
 
-  const handleSignup = async (values) => {
-    const payload = {
-      email: _.userData?.email,
-      password: values.password,
-      userRole: _.userRole,
-    };
-    const addUser = await addNewUser(payload);
-    if (!addUser.success) {
-      toast({
-        title: "Account Creation",
-        description: addUser.message,
-        status: "error",
-        isClosable: true,
-        duration: 4000,
-      });
+  const handlePasswordSet = async (values) => {
+    if (_.modalType === RegistraionModalTypes.RESET_PASSWORD) {
+      const token = searchParams.get("token");
+      const payload = {
+        token,
+        password: values.password,
+      };
+      const chngPassword = await changePassword(payload);
+      if (!chngPassword.success) {
+        toast({
+          title: "Reset Password",
+          description: chngPassword.message,
+          status: "error",
+          isClosable: true,
+          duration: 4000,
+        });
+      } else {
+        toast({
+          title: "Password Updated Successfully",
+          status: "success",
+          isClosable: true,
+          duration: 4000,
+          position: "bottom-right",
+        });
+        setRegistrationModal((lp) => {
+          return {
+            ...lp,
+            openModal: false,
+            modalType: "",
+            userData: {},
+            userRole: "",
+          };
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
     } else {
-      toast({
-        title: "Account Created Successfully",
-        status: "success",
-        isClosable: true,
-        duration: 1500,
-        position: "top-right",
-      });
-      setRegistrationModal((lp) => {
-        return {
-          ...lp,
-          openModal: true,
-          modalType: RegistraionModalTypes.LOGIN,
-          userData: {},
-        };
-      });
+      const payload = {
+        email: _.userData?.email,
+        password: values.password,
+        userRole: _.userRole,
+      };
+      const addUser = await addNewUser(payload);
+      if (!addUser.success) {
+        toast({
+          title: "Account Creation",
+          description: addUser.message,
+          status: "error",
+          isClosable: true,
+          duration: 4000,
+        });
+      } else {
+        toast({
+          title: "Account Created Successfully",
+          status: "success",
+          isClosable: true,
+          duration: 1500,
+          position: "top-right",
+        });
+        setRegistrationModal((lp) => {
+          return {
+            ...lp,
+            openModal: true,
+            modalType: RegistraionModalTypes.LOGIN,
+            userData: {},
+          };
+        });
+      }
     }
   };
 
@@ -68,7 +111,7 @@ const ForgotPassword = () => {
           initialValues={initialValues}
           validationSchema={PasswordSchema}
           onSubmit={async (values) => {
-            await handleSignup(values);
+            await handlePasswordSet(values);
           }}
         >
           {(formik) => {
@@ -181,4 +224,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Password;

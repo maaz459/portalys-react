@@ -1,7 +1,7 @@
 import Axios from "axios";
-
+import secret from "../../secrets.json";
 const axios = Axios.create({
-  baseURL: process.env.API_BASE_URL || "http://localhost:4000/",
+  baseURL: secret.apiBaseUrl || "http://localhost:4000/",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

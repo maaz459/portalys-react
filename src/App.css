@@ -94,3 +94,7 @@
 .poppins600 {
   font-family: "Poppins Medium";
 }
+
+.barClass {
+  width: 20px!important;
+}

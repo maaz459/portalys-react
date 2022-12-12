@@ -28,6 +28,16 @@ const headings = [
   "Promotion",
 ];
 
+const initialValues = {
+  eventName: "",
+  eventType: "",
+  date: "",
+  startTime: "",
+  endTime: "",
+  location: "",
+  description: "",
+};
+
 const CreateEvent = () => {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
@@ -82,7 +92,7 @@ const CreateEvent = () => {
         <Box color={textValue} w="100%" flex={7}>
           {" "}
           <Formik
-            initialValues={{}}
+            initialValues={initialValues}
             // validate={validate}
             onSubmit={(values) => console.log(values)}
           >

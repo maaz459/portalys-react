@@ -5,6 +5,7 @@ export const RegistraionModalTypes = {
   SIGNUP: "SIGNUP",
   FORGOT: "FORGOT",
   PASSWORD: "PASSWORD",
+  RESET_PASSWORD: "RESET_PASSWORD",
 };
 
 export const registration = atom({

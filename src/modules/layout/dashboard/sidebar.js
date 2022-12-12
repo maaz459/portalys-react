@@ -118,13 +118,13 @@ const Sidebar = ({ navbarHeight, sidebarWidth }) => {
                 darkImage: ordersDark,
                 link: "",
               },
-              {
-                name: "Collectables",
-                selectedImage: collectablesPrimary,
-                lightImage: collectablesLight,
-                darkImage: collectablesDark,
-                link: "",
-              },
+              // {
+              //   name: "Collectables",
+              //   selectedImage: collectablesPrimary,
+              //   lightImage: collectablesLight,
+              //   darkImage: collectablesDark,
+              //   link: "",
+              // },
               {
                 name: "Settings",
                 selectedImage: settingPrimary,
@@ -141,6 +141,7 @@ const Sidebar = ({ navbarHeight, sidebarWidth }) => {
             lightImage={logout}
             darkImage={logout}
             selectedImage={logout}
+            link="/"
           />
         </VStack>
         {/* <Drawer isOpen={isOpen} placement="left" onClose={onClose}>

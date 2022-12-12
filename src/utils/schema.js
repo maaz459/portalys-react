@@ -18,6 +18,13 @@ export const LoginSchema = Yup.object().shape({
     .min(8, "Least 8 characteres"),
 });
 
+export const forgotSchema = Yup.object().shape({
+  email: Yup.string()
+    .trim()
+    .email("Email address should be valid")
+    .required("Email is required"),
+});
+
 export const PasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
