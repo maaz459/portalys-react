@@ -19,14 +19,54 @@ import {
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userRoles } from "../../../utils/constants";
+import { useGoogleLogin } from "@react-oauth/google";
+import { saveToken } from "../../../utils/handleTokens";
+import { user } from "../../../recoil/atoms/user";
+import { loginWithGoogle } from "../../../utils/actions/registration";
+import { useCookies } from "react-cookie";
+
 const initialValues = { email: "", password: "", confirmPassword: "" };
 
 const SignUp = () => {
   const [_, setRegistrationModal] = useRecoilState(registration);
+  const [u, setUser] = useRecoilState(user);
+  const [cookies, setCookie] = useCookies(["x-auth-token"]);
+
   const navigate = useNavigate();
   const userRole = window.location.pathname.includes("organizer")
     ? userRoles.ORGANIZER
     : userRoles.ATTENDEE;
+
+  const signUpWithGoogle = useGoogleLogin({
+    onSuccess: (res) => handleGoogleLogin(res),
+    onError: (err) => console.log(err),
+    prompt: "select_account",
+  });
+
+  const handleGoogleLogin = async (payload) => {
+    const user = await loginWithGoogle({ ...payload, userRole });
+    saveToken(user.token, "x-auth-token", 60, setCookie);
+console.log('jfgyh')
+    setUser((lp) => {
+      return {
+        ...lp,
+        token: user.token,
+        userData: user.user,
+      };
+    });
+    setRegistrationModal((lp) => {
+      return {
+        ...lp,
+        openModal: false,
+        modalType: "",
+        userData: {},
+        userRole: "",
+      };
+    });
+    if (userRole === userRoles.ORGANIZER) {
+      navigate("/dashboard");
+    }
+  };
 
   return (
     <Box w="100%">
@@ -142,6 +182,7 @@ const SignUp = () => {
                     h="65px"
                     borderColor="primary.100"
                     border="1px solid"
+                    onClick={() => signUpWithGoogle()}
                   >
                     <Image
                       alt=""

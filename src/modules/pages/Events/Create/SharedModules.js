@@ -47,7 +47,7 @@ export const EventBar = ({
       justifyContent="space-between"
     >
       <Text>{heading}</Text>
-      <Text>{"STEP " + step + " OF 4"}</Text>
+      <Text>{"STEP " + step + " OF 5"}</Text>
     </HStack>
     <Flex justifyContent="flex-end" flex={1}>
       <Button

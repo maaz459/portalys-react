@@ -14,6 +14,7 @@ import TicktDetails from "./TicketDetails";
 import ArtistLineup from "./Artist";
 import { useNavigate } from "react-router-dom";
 import Promotion from "./Promotion";
+import Summary from "./Summary";
 const spacing = {
   gap: 0,
   spacing: 0,
@@ -26,6 +27,7 @@ const headings = [
   "Ticket Details",
   "Artist and Lineup",
   "Promotion",
+  "Summary",
 ];
 
 const initialValues = {
@@ -57,13 +59,15 @@ const CreateEvent = () => {
         return <ArtistLineup {...props} />;
       case 4:
         return <Promotion {...props} />;
+      case 5:
+        return <Summary {...props} />;
       default:
         return <BasicEvents {...props} />;
     }
   };
 
   const onStepChange = () => {
-    if (step > 3) {
+    if (step > 4) {
       setStep(1);
     } else setStep(step + 1);
   };
@@ -75,44 +79,49 @@ const CreateEvent = () => {
   };
 
   return (
-    <Box w="100%">
-      <Stack {...{ spacing }} flexDir="row"></Stack>
-      <EventBar
-        {...{
-          textValue,
-          step,
-          heading: headings[step],
-          onStepChange,
-          onGoBack,
-        }}
-      />
-      <HStack mt={56} w="100%">
-        <Box flex={1}></Box>
+    <Box
+      w="100%"
+      display="flex"
+      justifyContent={{ base: "flex-start", "3xl": "center" }}
+    >
+      <Box w="100%" maxW={{ base: "100%", lg: "95%", "3xl": "80%" }}>
+        <EventBar
+          {...{
+            textValue,
+            step,
+            heading: headings[step],
+            onStepChange,
+            onGoBack,
+          }}
+        />
+        <HStack mt={56} w="100%">
+          {step !== 5 && <Box flex={1}></Box>}
 
-        <Box color={textValue} w="100%" flex={7}>
-          {" "}
-          <Formik
-            initialValues={initialValues}
-            // validate={validate}
-            onSubmit={(values) => console.log(values)}
-          >
-            {(formik) => {
-              const {
-                values,
-                handleChange,
-                handleSubmit,
-                handleBlur,
-                resetForm,
-              } = formik;
-              return (
-                <VStack w="100%">
-                  <RenderForms {...{ values, handleBlur, handleChange }} />
-                </VStack>
-              );
-            }}
-          </Formik>
-        </Box>
-      </HStack>
+          <Box color={textValue} w="100%" flex={7}>
+            {" "}
+            <Formik
+              initialValues={initialValues}
+              // validate={validate}
+              onSubmit={(values) => console.log(values)}
+            >
+              {(formik) => {
+                const {
+                  values,
+                  handleChange,
+                  handleSubmit,
+                  handleBlur,
+                  resetForm,
+                } = formik;
+                return (
+                  <VStack w="100%">
+                    <RenderForms {...{ values, handleBlur, handleChange }} />
+                  </VStack>
+                );
+              }}
+            </Formik>
+          </Box>
+        </HStack>
+      </Box>
     </Box>
   );
 };

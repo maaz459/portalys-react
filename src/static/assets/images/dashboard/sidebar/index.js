@@ -37,6 +37,12 @@ import down from "./down.svg";
 import pdf from "./pdf.svg";
 import xls from "./xls.svg";
 import exportSvg from "./export.svg";
+import resource from "./Resources.png";
+import track1 from "./track1.png";
+import track2 from "./track2.png";
+import trailer from "./trailer.png";
+import lineup from "./lineup.png";
+import artist from "./artist.png";
 
 export {
   collectablesPrimary,
@@ -77,4 +83,10 @@ export {
   pdf,
   xls,
   exportSvg,
+  resource,
+  track1,
+  track2,
+  trailer,
+  lineup,
+  artist,
 };
