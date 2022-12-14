@@ -99,6 +99,9 @@ const Login = () => {
           userRole: "",
         };
       });
+      if (userRole === userRoles.ORGANIZER) {
+        navigate("/dashboard");
+      }
     }
   };
 
