@@ -21,6 +21,7 @@ const newTheme = extendTheme(theme);
 function App() {
   const [openSite, setOpenSite] = useState(false);
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const [cookies, setCookie] = useCookies(["site-password"]);
   console.log(cookies);
@@ -58,6 +59,11 @@ function App() {
                   color="black.100"
                   type="password"
                 />
+                {error && password !== secrets.sitePassword && (
+                  <Text color="red" className="gordita400" mb={10}>
+                    Incorrect Password
+                  </Text>
+                )}
                 <Box mt={12}>
                   <Button
                     _focus={{
@@ -76,6 +82,8 @@ function App() {
                         setCookie("site-password", password, {
                           path: "/",
                         });
+                      } else {
+                        setError(true);
                       }
                     }}
                   >
