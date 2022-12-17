@@ -68,18 +68,23 @@ const EventsComponent = () => {
     <Box w="100%">
       <Stack {...{ spacing }} flexDir="row">
         <HStack {...{ spacing }} spacing={10} flex={1}>
-          {console.log(date)}
           <SingleDatepicker
             eventName="date-input"
             date={date}
             onDateChange={setDate}
             placeholder="Date Range"
             maxW="281px"
+            color="white.100"
           />
           <Select
-            bg="black.300"
+            bg="black.400"
             color="white.100"
+            w="100%"
             maxW="210px"
+            h="56px"
+            borderRadius="8px"
+            border="none"
+            className="gordita400"
             fontSize={14}
             placeholder="All Events"
           >
