@@ -1,0 +1,16 @@
+.soccerhero{
+    padding: 5px 65px 65px 65px;
+    background-color: black !important;
+}
+.soccercards{
+    max-width: 430px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 1440px) {
+    .soccercards{
+        max-width: 370px;
+        width: 100%;
+    }
+    
+}
