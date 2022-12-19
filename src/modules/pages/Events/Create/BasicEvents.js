@@ -1,6 +1,20 @@
-import { HStack, VStack } from "@chakra-ui/react";
-import { DateBox, InputBox, SelectBox, TextBox } from "./SharedModules";
-const BasicEvents = ({ handleBlur, handleChange, values }) => {
+import {
+  HStack,
+  InputGroup,
+  VStack,
+  InputRightElement,
+  Input as InputComponent,
+} from "@chakra-ui/react";
+import {
+  DateBox,
+  InputBox,
+  SelectBox,
+  TextBox,
+  TimeBox,
+} from "./SharedModules";
+const BasicEvents = (props) => {
+  const { handleBlur, handleChange, values, setFieldValue } = props;
+
   return (
     <VStack spacing={56} w="100%">
       <HStack spacing={30} flex={1} justifyContent="flex-start" w="100%">
@@ -16,23 +30,24 @@ const BasicEvents = ({ handleBlur, handleChange, values }) => {
         <SelectBox
           values={values}
           handleBlur={handleBlur}
-          handleChange={handleChange}
+          handleChange={setFieldValue}
           placeholder="Select Type"
           label="Type"
           name="eventType"
           maxW="80%"
+          options={[{ label: "Type1", value: "type1" }]}
         />
       </HStack>
       <HStack spacing={30} justifyContent="space-between" w="100%">
         <DateBox
           values={values}
           handleBlur={handleBlur}
-          handleChange={handleChange}
+          handleChange={setFieldValue}
           placeholder="Select Date and Time"
           label="Date"
           name="date"
         />
-        <InputBox
+        <TimeBox
           values={values}
           handleBlur={handleBlur}
           handleChange={handleChange}
@@ -41,7 +56,7 @@ const BasicEvents = ({ handleBlur, handleChange, values }) => {
           maxW="100%"
           name="startTime"
         />
-        <InputBox
+        <TimeBox
           values={values}
           handleBlur={handleBlur}
           handleChange={handleChange}

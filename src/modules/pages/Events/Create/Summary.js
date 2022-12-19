@@ -25,7 +25,9 @@ import { AiFillHeart } from "react-icons/ai";
 import { BsHandThumbsUp } from "react-icons/bs";
 import MapComponent from "../../../shared/map";
 
-const Summary = ({ handleBlur, handleChange, values }) => {
+const Summary = (props) => {
+  const { handleBlur, handleChange, values } = props;
+
   return (
     <VStack alignItems="flex-start" w="100%">
       <Text className="gordita700" color="primary.100" fontSize={18}>

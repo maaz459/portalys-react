@@ -10,11 +10,17 @@ import {
   Textarea,
   Switch,
   Box,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { theme } from "../../../../styles/theme/base";
 import { SingleDatepicker } from "../../../shared/datepicker";
 import { BsArrowRight, BsChevronLeft } from "react-icons/bs";
+import { TimeIcon } from "@chakra-ui/icons";
+import { TimeBoxWrapper } from "../../../../styles/pages/dashboard";
+import isEmpty from "lodash/isEmpty";
+
 export const EventBar = ({
   textValue,
   step,
@@ -107,7 +113,7 @@ export const InputBox = ({ label, name, placeholder, maxW, ...rest }) => {
     </Box>
   );
 };
-export const TextBox = ({ label, placeholder, ...rest }) => {
+export const TextBox = ({ name, label, placeholder, ...rest }) => {
   const textValue = useColorModeValue(
     theme.colors.black[100],
     theme.colors.white[100]
@@ -123,9 +129,10 @@ export const TextBox = ({ label, placeholder, ...rest }) => {
         borderRadius="8px"
         w="100%"
         placeholder={placeholder}
-        value={values.email}
+        value={values[name]}
         onChange={handleChange}
         onBlur={handleBlur}
+        name={name}
         size="sm"
         minH="199px"
         color="purple.100"
@@ -137,7 +144,14 @@ export const TextBox = ({ label, placeholder, ...rest }) => {
   );
 };
 
-export const SelectBox = ({ label, placeholder, name, maxW, ...rest }) => {
+export const SelectBox = ({
+  label,
+  placeholder,
+  name,
+  maxW,
+  options,
+  ...rest
+}) => {
   const textValue = useColorModeValue(
     theme.colors.black[100],
     theme.colors.white[100]
@@ -163,11 +177,14 @@ export const SelectBox = ({ label, placeholder, name, maxW, ...rest }) => {
         borderRadius="8px"
         border="none"
         handleBlur={handleBlur}
-        handleChange={handleChange}
         value={values[name]}
         placeholder={placeholder}
+        onChange={(e) => handleChange(name, e.target.value)}
       >
-        <option></option>
+        {!isEmpty(options) &&
+          options.map(({ label, value }, index) => (
+            <option value={value}>{label}</option>
+          ))}
       </Select>
     </Box>
   );
@@ -194,15 +211,15 @@ export const DateBox = ({ name, label, placeholder, maxW, ...rest }) => {
       <SingleDatepicker
         color="purple.100"
         name={name}
-        date={date}
-        onDateChange={setDate}
+        date={values[name]}
+        onDateChange={(val) => handleChange(name, val)}
         placeholder={placeholder}
       />
     </Box>
   );
 };
 
-export const SwitchBox = ({ maxW, label, placeholder, ...rest }) => {
+export const SwitchBox = ({ name, maxW, label, placeholder, ...rest }) => {
   const textValue = useColorModeValue(
     theme.colors.black[100],
     theme.colors.white[100]
@@ -225,7 +242,64 @@ export const SwitchBox = ({ maxW, label, placeholder, ...rest }) => {
       >
         {label}
       </Text>
-      <Switch size="md" pl={56} />
+      <Switch
+        defaultChecked={values[name]}
+        onChange={(val) => handleChange(name, val.target.checked)}
+        size="md"
+        pl={56}
+      />
     </HStack>
+  );
+};
+
+export const TimeBox = ({ name, label, placeholder, maxW, color, ...rest }) => {
+  const [date, setDate] = useState();
+  const textValue = useColorModeValue(
+    theme.colors.black[100],
+    theme.colors.white[100]
+  );
+  const { values, handleBlur, handleChange } = rest;
+
+  const icon = <TimeIcon fontSize="sm" />;
+
+  return (
+    <TimeBoxWrapper>
+      <Box w={maxW || "100%"}>
+        <Text
+          fontSize={14}
+          mb="8px"
+          color={textValue}
+          className="heebo"
+          fontWeight={500}
+        >
+          {label}
+        </Text>
+
+        <InputGroup maxW="100%">
+          <Input
+            // id={id}
+            type="time"
+            bg="black.400"
+            h="56px"
+            autoComplete="off"
+            name={name}
+            color={color}
+            placeholder="Enter Time"
+            _placeholder={{
+              color,
+            }}
+            w="100%"
+            value={values[name]}
+            onChange={handleChange}
+          />
+          {/* <InputRightElement
+            color="gray.500"
+            cursor="pointer"
+            mt={2}
+            children={icon}
+          /> */}
+        </InputGroup>
+      </Box>
+    </TimeBoxWrapper>
   );
 };

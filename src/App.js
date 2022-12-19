@@ -24,7 +24,6 @@ function App() {
   const [error, setError] = useState(false);
 
   const [cookies, setCookie] = useCookies(["site-password"]);
-  console.log(cookies);
   return (
     <ChakraProvider theme={newTheme}>
       <GoogleOAuthProvider clientId={secrets.GoogleClientId}>

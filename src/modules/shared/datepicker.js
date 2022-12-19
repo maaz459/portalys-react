@@ -105,16 +105,16 @@ const SingleDatepickerCalendar = (props) => {
   }
 
   return (
-    <HStack className="datepicker-calendar">
+    <HStack w="100%" className="datepicker-calendar">
       {lodash_map(calendars, (calendar) => {
         return (
-          <VStack key={`${calendar.month}${calendar.year}`}>
+          <VStack w="100%" key={`${calendar.month}${calendar.year}`}>
             <HStack>
               <SingleDatepickerBackButtons
                 calendars={calendars}
                 getBackProps={getBackProps}
               />
-              <Heading size="sm" textAlign="center">
+              <Heading color="black.100" size="sm" textAlign="center">
                 {configs.monthNames[calendar.month]} {calendar.year}
               </Heading>
               <SingleDatepickerForwardButtons
@@ -219,6 +219,7 @@ export const SingleDatepicker = ({
         <InputGroup maxW={maxW}>
           <InputComponent
             id={id}
+            w="100%"
             bg="black.400"
             h="56px"
             autoComplete="off"
@@ -234,15 +235,22 @@ export const SingleDatepicker = ({
             value={!date ? "" : moment(date).format(configs.dateFormat)}
             onChange={(e) => e.target.value}
           />
-          <InputRightElement color="gray.500" children={icon} />
+          <InputRightElement
+            onClick={() => setPopoverOpen(!popoverOpen)}
+            color="gray.500"
+            cursor="pointer"
+            mt={2}
+            children={icon}
+          />
         </InputGroup>
       </PopoverTrigger>
-      <PopoverContent ref={ref}>
+      <PopoverContent w="100%" ref={ref}>
         <PopoverBody
           bg="white.200"
           padding={"10px 5px"}
           borderWidth={1}
           borderColor="blue.400"
+          w="100%"
         >
           <SingleDatepickerCalendar {...dayzedData} configs={configs} />
         </PopoverBody>

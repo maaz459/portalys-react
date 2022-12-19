@@ -38,6 +38,24 @@ const initialValues = {
   endTime: "",
   location: "",
   description: "",
+  ticketName: "",
+  ticketQuantity: "",
+  ticketType: "",
+  ticketPrice: "",
+  earlyBird: "",
+  earlyBirdEndingDate: "",
+  regular: "",
+  late: "",
+  asignCollectables: true,
+  allowTransfer: false,
+  allowResale: false,
+  minimumResale: "",
+  maximumResale: "",
+  lineUp: {},
+  track: {},
+  trailer: "",
+  coverPicture: "",
+  eventImage: "",
 };
 
 const CreateEvent = () => {
@@ -111,10 +129,13 @@ const CreateEvent = () => {
                   handleSubmit,
                   handleBlur,
                   resetForm,
+                  setFieldValue,
                 } = formik;
                 return (
                   <VStack w="100%">
-                    <RenderForms {...{ values, handleBlur, handleChange }} />
+                    <RenderForms
+                      {...{ values, handleBlur, handleChange, setFieldValue }}
+                    />
                   </VStack>
                 );
               }}
