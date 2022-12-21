@@ -8,6 +8,7 @@ import {
   Heading,
   chakra,
 } from "@chakra-ui/react";
+import "../../styles/portalys/portalys.css";
 import a from "../../static/assets/images/a.svg";
 import b from "../../static/assets/images/b.svg";
 import c from "../../static/assets/images/c.svg";
@@ -132,11 +133,11 @@ export default function AllTeam() {
     },
   ];
   return (
-    <Box paddingBottom="50px">
-      <Heading color="#FBFAFB" fontSize="35px" paddingTop="60px">
+    <Box paddingBottom="50px" className="teammembershero">
+      <Heading color="#FBFAFB" fontSize="35px" paddingTop="60px" className="teammemberheading">
         All Teams
       </Heading>
-      <Box display="flex" flexWrap="wrap"  gap="30px" justifyContent="space-between" paddingTop="60px">
+      <Box className="teammemberschild" display="flex" flexWrap="wrap"  gap="30px" justifyContent="space-between" paddingTop="60px">
         {team.map((item, index) => {
           return (
             <>

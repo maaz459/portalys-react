@@ -89,7 +89,7 @@ export default function Portalys1() {
       <Box className="soccerhero">
       <Box w="100%" position="relative" >
         <Image w="100%" src={bgimg} />
-        <Box display="flex" alignItems="center" justifyContent="space-between" px="50px" position="relative" top="-7rem">
+        <Box display="flex" alignItems="center" justifyContent="space-between" px="50px" position="relative" top="-7rem" className="ticketshero">
           <VStack display="flex" justify="left" alignItems="baseline">
             <Heading color="#FBFAFB" fontWeight="700" fontSize="36px">
               MLS Soccer Tickets
@@ -98,13 +98,13 @@ export default function Portalys1() {
               Home / Sports / MLS Soccer Tickets
             </Text>
           </VStack>
-          <HStack>
+          <HStack gap="12px" className="mlshero">
             <Image width="60px" src={srch} />
             <Box backgroundColor="#02F6AD" borderRadius="50px" padding="20px" gap="30px">
-              <Text display="flex" alignItems="center">
+              <Text display="flex" alignItems="center" gap="12px" justifyContent="space-between">
                 <chakra.span color="#00000" fontSize="14px" fontWeight="700">Popular MLS Games in |</chakra.span>
                 <Image src={flag} width="10px" height="14px" />
-                <Text display="flex" alignItems="center">
+                <Text display="flex" alignItems="center" gap="8px">
                <chakra.span color="#00000" fontSize="14px" fontWeight="700">
                France</chakra.span>   
                   <Image src={arrowd} width="13px" height="6px" />
@@ -114,7 +114,7 @@ export default function Portalys1() {
           </HStack>
         </Box>
       </Box>
-        <Box gap="20px" display="flex" justifyContent="center" flexWrap="wrap" marginTop="-20px">
+        <Box gap="20px" display="flex" justifyContent="center" flexWrap="wrap" marginTop="-20px" className="soccercardshero">
           {game.map((item, index) => {
             return (
               <Box key={index} className="soccercards" marginTop="20px">

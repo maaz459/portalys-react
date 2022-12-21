@@ -1,16 +1,81 @@
-.soccerhero{
-    padding: 5px 65px 65px 65px;
-    background-color: black !important;
+.soccerhero {
+  padding: 5px 65px 65px 65px;
+  background-color: black !important;
 }
-.soccercards{
-    max-width: 430px;
+.soccercards {
+  max-width: 430px;
+  width: 100%;
+}
+.promoinput{
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 7px !important;
+}
+.promoinput::placeholder{
+  padding-left: 10px;
+}
+.promoinput:focus{
+outline: none;
+}
+.intrestedbtn{
+  max-width: 210px;
+  width: 100%;
+}
+.intrestedbtn:focus{
+  background-color: #02F6AD !important;
+  color: #ffff !important;
+}
+@media only screen and (min-width: 1440px) {
+  .soccercardshero {
+    justify-content: space-around !important;
+    display: flex !important;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  .soccercards {
+    max-width: 370px;
     width: 100%;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .ticketshero {
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    top: -13rem !important;
+  }
+  .soccerhero {
+    padding: 5px 20px 65px 20px;
+  }
+  .soccercardshero {
+    margin-top: -124px !important;
+  }
+  .teammembershero {
+    padding: 0px 30px;
+  }
 }
 
-@media only screen and (max-width: 1440px) {
-    .soccercards{
-        max-width: 370px;
-        width: 100%;
-    }
-    
+@media only screen and (max-width: 768px) {
+  .teammemberschild,
+  .teammemberheading {
+    justify-content: center !important;
+    align-items: center;
+    text-align: center;
+  }
+  .ticketshero {
+    top: 2rem !important;
+  }
+  .soccercardshero {
+    margin-top: 54px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .mlshero {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+  .ticketshero{
+    padding: 0px !important;
+  }
 }
