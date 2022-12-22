@@ -23,7 +23,7 @@ import { SolflareAdapter } from "@web3auth/solflare-adapter";
 import { SlopeAdapter } from "@web3auth/slope-adapter";
 const newTheme = extendTheme(theme);
 
-const clientId = "BCXfOhyKcaMjuPu5i5UzNe27T4QSoJikT0mXifLzEe8gMnp0JBW0VhmRLc2jQ7jg7Si0zq7GfThrA89QrPa7HSE";
+const clientId = "BBhbmSbaMcjyqJ864MsQXmmVudb_g5godU5Ml_GWpCFUfGdxb40_TBmgUz79J82HiSJ2dmhDoChOVEAOs6kX73I";
 
 function App() {
   const [openSite, setOpenSite] = useState(false);
@@ -41,7 +41,7 @@ function App() {
           uiConfig: { modalZIndex: 10000 },
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
-            chainId: "0x2", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+            chainId: "0x1", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
             rpcTarget:
               "https://soft-necessary-patron.solana-devnet.discover.quiknode.pro/f68f102b8757e8c3b1d5161b9ec052bc8bbf123a/", // This is the public RPC we have added, please pass on your own endpoint while creating an app
           },
