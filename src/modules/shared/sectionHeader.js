@@ -1,20 +1,8 @@
-import {
-  HStack,
-  Stack,
-  Box,
-  Text,
-  Flex,
-  Select,
-  Image,
-} from "@chakra-ui/react";
-import {
-  carouselLeft,
-  carouselRight,
-  filters,
-  filtersDark,
-} from "../../static/assets/images";
+import { HStack, Stack, Box, Text, Flex, Select, Image } from "@chakra-ui/react";
+import { carouselLeft, carouselRight, filters, filtersDark } from "../../static/assets/images";
 import { HeaderSectionWrapper } from "../../styles/pages/home";
 import _isEmpty from "lodash/isEmpty";
+import { useNavigate } from "react-router-dom";
 const SectionHeader = ({
   isMobile,
   isTablet,
@@ -31,6 +19,7 @@ const SectionHeader = ({
   onCarouselPrev,
   maxW,
 }) => {
+  const navigate = useNavigate();
   return (
     <Flex justifyContent="center" w="100%" px={20}>
       <Box maxW={maxW} w="100%">
@@ -43,10 +32,7 @@ const SectionHeader = ({
             flexDir={{ base: "column", sm: "row" }}
           >
             <Stack spacing={0} gap={0} alignItems="center" flexDir="row">
-              <Text
-                className="gordita700"
-                fontSize={{ base: 22, md: 32, lg: 38 }}
-              >
+              <Text className="gordita700" fontSize={{ base: 22, md: 32, lg: 38 }}>
                 {heading}
               </Text>
               <HStack
@@ -57,11 +43,7 @@ const SectionHeader = ({
                 gap={0}
                 spacing={0}
               >
-                <Image
-                  alt=""
-                  style={{ width: xsmall ? "18px" : "28px" }}
-                  src={flag}
-                ></Image>
+                <Image alt="" style={{ width: xsmall ? "18px" : "28px" }} src={flag}></Image>
                 <Box pl={{ base: 10, lg: 16 }}>
                   <Select
                     placeholder={placeholder}
@@ -74,10 +56,7 @@ const SectionHeader = ({
                     className="headerSelect"
                     h="26px"
                   >
-                    {!_isEmpty(options) &&
-                      options.map((option, index) => (
-                        <option key={index}>{option.label}</option>
-                      ))}
+                    {!_isEmpty(options) && options.map((option, index) => <option key={index}>{option.label}</option>)}
                   </Select>
                 </Box>
               </HStack>
@@ -93,12 +72,7 @@ const SectionHeader = ({
             >
               <HStack alignItems="center">
                 {isfilter && (
-                  <Flex
-                    cursor="pointer"
-                    justifyContent="center"
-                    alignItems="center"
-                    gap="5px"
-                  >
+                  <Flex cursor="pointer" justifyContent="center" alignItems="center" gap="5px">
                     <Image
                       alt=""
                       style={{
@@ -120,6 +94,8 @@ const SectionHeader = ({
                 {isfilter && isEvents && <Text>|</Text>}
                 {isEvents && (
                   <Text
+                    cursor="pointer"
+                    onClick={() => navigate("/newevents")}
                     className="gordita600"
                     fontSize={{ base: 12, sm: 14, lg: 16 }}
                   >

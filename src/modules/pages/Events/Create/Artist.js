@@ -64,6 +64,7 @@ const ArtistLineup = (props) => {
             style={{ display: "none" }}
             id="trackImage"
             type="file"
+            accept=".jpg,.jpeg,.png"
             onChange={(e) => {
               setTrack({
                 ...track,
@@ -178,6 +179,7 @@ const ArtistLineup = (props) => {
             style={{ display: "none" }}
             id="lineupImage"
             type="file"
+            accept=".jpg,.jpeg,.png"
             onChange={(e) => {
               setLineUp({
                 ...lineup,

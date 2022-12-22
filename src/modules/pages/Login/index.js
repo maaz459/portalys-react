@@ -43,7 +43,7 @@ const Login = () => {
   const handleGoogleLogin = async (payload) => {
     const user = await loginWithGoogle({ ...payload, userRole });
     saveToken(user.token, "x-auth-token", 60, setCookie);
-
+    localStorage.setItem("user_d", JSON.stringify(user.user));
     setUser((lp) => {
       return {
         ...lp,
@@ -83,6 +83,8 @@ const Login = () => {
         position: "top-right",
       });
     } else {
+      localStorage.setItem("user_d", JSON.stringify(getUser.user));
+
       setUser((lp) => {
         return {
           ...lp,
