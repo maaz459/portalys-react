@@ -62,6 +62,7 @@ const TicktDetails = (props) => {
           label="Early Bird Ending Date"
           maxW="45%"
           name="earlyBirdEndingDate"
+          format="YYYY-MM-DD"
         />
       </HStack>
       <HStack spacing={30} flex={1} justifyContent="flex-start" w="100%">

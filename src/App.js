@@ -13,23 +13,195 @@ import Routes from "./routes";
 import { RecoilRoot } from "recoil";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import secrets from "./secrets.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Web3Auth } from "@web3auth/modal";
+import { SolanaWallet } from "@web3auth/solana-provider";
+import { SolanaWalletAdapter } from "@web3auth/torus-solana-adapter";
+import { CHAIN_NAMESPACES } from "@web3auth/base";
+import RPC from "./solanaRPC.ts";
+import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 
+// Plugins
+import { SolanaWalletConnectorPlugin } from "@web3auth/solana-wallet-connector-plugin";
+
+// Adapters
+import { SolflareAdapter } from "@web3auth/solflare-adapter";
+import { SlopeAdapter } from "@web3auth/slope-adapter";
 const newTheme = extendTheme(theme);
+
+const clientId =
+  "c1129ea2b2aebd5229bc728cc1ac9ae81c477a3224cbbe473a76185af9672690";
 
 function App() {
   const [openSite, setOpenSite] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-
+  const [web3auth, setWeb3auth] = useState(null);
+  const [provider, setProvider] = useState(null);
   const [cookies, setCookie] = useCookies(["site-password"]);
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const web3auth = new Web3Auth({
+          clientId,
+          chainConfig: {
+            chainNamespace: CHAIN_NAMESPACES.SOLANA,
+            chainId: "0x3", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+            rpcTarget:
+              "https://soft-necessary-patron.solana-devnet.discover.quiknode.pro/f68f102b8757e8c3b1d5161b9ec052bc8bbf123a/", // This is the public RPC we have added, please pass on your own endpoint while creating an app
+          },
+        });
+
+        // const openloginAdapter = new OpenloginAdapter({
+        //   adapterSettings: {
+        //     network: "development",
+        //     clientId,
+        //   },
+        // });
+        // web3auth.configureAdapter(openloginAdapter);
+
+        // adding solana wallet connector plugin
+
+        const torusPlugin = new SolanaWalletConnectorPlugin({
+          torusWalletOpts: { modalZIndex: 100 },
+          walletInitOptions: {
+            whiteLabel: {
+              name: "Whitelabel Demo",
+              theme: { isDark: true, colors: { torusBrand1: "#00a8ff" } },
+              logoDark: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
+              logoLight: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
+              topupHide: true,
+              defaultLanguage: "en",
+            },
+            enableLogging: true,
+          },
+        });
+        await web3auth.addPlugin(torusPlugin);
+
+        const solflareAdapter = new SolflareAdapter({
+          clientId,
+        });
+        web3auth.configureAdapter(solflareAdapter);
+
+        const slopeAdapter = new SlopeAdapter({
+          clientId,
+        });
+        web3auth.configureAdapter(slopeAdapter);
+
+        setWeb3auth(web3auth);
+        await web3auth.initModal();
+        if (web3auth.provider) {
+          setProvider(web3auth.provider);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    init();
+  }, []);
+
+  const login = async () => {
+    if (!web3auth) {
+      return "web3auth not initialized yet";
+    }
+    const web3authProvider = await web3auth.connect();
+    setProvider(web3authProvider);
+    return "Logged in Successfully!";
+  };
+
+  const authenticateUser = async () => {
+    if (!web3auth) {
+      return "web3auth not logged in";
+    }
+    const idToken = await web3auth.authenticateUser();
+    return idToken;
+  };
+
+  const getUserInfo = async () => {
+    if (!web3auth) {
+      return "web3auth not initialized yet";
+    }
+    const user = await web3auth.getUserInfo();
+    return user;
+  };
+
+  const logout = async () => {
+    if (!web3auth) {
+      return "web3auth not initialized yet";
+    }
+    await web3auth.logout();
+    setProvider(null)
+    return null;
+  };
+
+  const getAccounts = async () => {
+    if (!provider) {
+      return "provider not initialized yet";
+    }
+    const rpc = new RPC(provider);
+    const address = await rpc.getAccounts();
+    return address;
+  };
+
+  const getBalance = async () => {
+    if (!provider) {
+      return "provider not initialized yet";
+    }
+    const rpc = new RPC(provider);
+    const balance = await rpc.getBalance();
+    return balance;
+  };
+
+  const sendTransaction = async () => {
+    if (!provider) {
+      return "provider not initialized yet";
+    }
+    const rpc = new RPC(provider);
+    const receipt = await rpc.sendTransaction();
+    return receipt;
+  };
+
+  const signMessage = async () => {
+    if (!provider) {
+      return "provider not initialized yet";
+    }
+    const rpc = new RPC(provider);
+    const signedMessage = await rpc.signMessage();
+    return signedMessage;
+  };
+
+  const getPrivateKey = async () => {
+    if (!provider) {
+      return "provider not initialized yet";
+    }
+    const rpc = new RPC(provider);
+    const privateKey = await rpc.getPrivateKey();
+    return privateKey;
+  };
+
   return (
     <ChakraProvider theme={newTheme}>
       <GoogleOAuthProvider clientId={secrets.GoogleClientId}>
         <RecoilRoot>
           {openSite || (cookies && cookies["site-password"]) ? (
-            <Routes />
+            <Routes
+              {...{
+                authenticateUser,
+                getUserInfo,
+                logout,
+                getAccounts,
+                getBalance,
+                sendTransaction,
+                signMessage,
+                getPrivateKey,
+                login,
+                web3auth,
+                provider,
+              }}
+            />
           ) : (
             <Box
               h="100vh"

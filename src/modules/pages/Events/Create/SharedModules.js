@@ -20,6 +20,7 @@ import { BsArrowRight, BsChevronLeft } from "react-icons/bs";
 import { TimeIcon } from "@chakra-ui/icons";
 import { TimeBoxWrapper } from "../../../../styles/pages/dashboard";
 import isEmpty from "lodash/isEmpty";
+import moment from "moment";
 
 export const EventBar = ({
   textValue,
@@ -27,6 +28,8 @@ export const EventBar = ({
   heading,
   onStepChange,
   onGoBack,
+  endStep,
+  handleSubmit,
 }) => (
   <HStack justifyContent="space-between" spacing={10} flex={1}>
     <HStack
@@ -58,7 +61,7 @@ export const EventBar = ({
     <Flex justifyContent="flex-end" flex={1}>
       <Button
         className="gordita600"
-        onClick={onStepChange}
+        onClick={endStep ? handleSubmit : onStepChange}
         bg="primary.100"
         color="black.100"
         display="flex"
@@ -68,7 +71,7 @@ export const EventBar = ({
         fontSize={16}
         h="48px"
       >
-        Next Step
+        {endStep ? "Publish" : "Next Step"}
         <BsArrowRight />
       </Button>
     </Flex>
@@ -190,7 +193,14 @@ export const SelectBox = ({
   );
 };
 
-export const DateBox = ({ name, label, placeholder, maxW, ...rest }) => {
+export const DateBox = ({
+  name,
+  label,
+  placeholder,
+  maxW,
+  format,
+  ...rest
+}) => {
   const [date, setDate] = useState();
   const textValue = useColorModeValue(
     theme.colors.black[100],
@@ -212,7 +222,7 @@ export const DateBox = ({ name, label, placeholder, maxW, ...rest }) => {
         color="purple.100"
         name={name}
         date={values[name]}
-        onDateChange={(val) => handleChange(name, val)}
+        onDateChange={(val) => handleChange(name, moment(val).format(format))}
         placeholder={placeholder}
       />
     </Box>
@@ -252,7 +262,14 @@ export const SwitchBox = ({ name, maxW, label, placeholder, ...rest }) => {
   );
 };
 
-export const TimeBox = ({ name, label, placeholder, maxW, color, ...rest }) => {
+export const TimeBox = ({
+  name,
+  label,
+  placeholder,
+  maxW,
+  color = "purple.100",
+  ...rest
+}) => {
   const [date, setDate] = useState();
   const textValue = useColorModeValue(
     theme.colors.black[100],

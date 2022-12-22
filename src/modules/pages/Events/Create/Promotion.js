@@ -1,4 +1,12 @@
-import { Box, HStack, Text, VStack, Image, chakra } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Text,
+  VStack,
+  Image,
+  chakra,
+  useToast,
+} from "@chakra-ui/react";
 import {
   exportSvg,
   upload2,
@@ -6,7 +14,7 @@ import {
 import { DateBox, InputBox, SelectBox, TextBox } from "./SharedModules";
 const Promotion = (props) => {
   const { handleBlur, handleChange, values, setFieldValue } = props;
-  console.log(values);
+  const toast = useToast();
   return (
     <VStack alignItems="flex-start" w="100%">
       <Text className="gordita700" fontSize={18}>
@@ -17,11 +25,23 @@ const Promotion = (props) => {
           style={{ display: "none" }}
           id="trailerImage"
           type="file"
+          accept=".mp4,.avi,.flv,.mkv,.webm"
           onChange={(e) => {
-            setFieldValue("trailer", {
-              video: e.target.files[0],
-              videoToDisplay: URL.createObjectURL(e.target.files[0]),
-            });
+            if (e.target.files[0].size > 20000000) {
+              toast({
+                title: "File not uploaded",
+                description: "File size must be less than 20mb",
+                status: "error",
+                isClosable: true,
+                duration: 4000,
+                position: "bottom",
+              });
+              this.value = "";
+            } else
+              setFieldValue("trailer", {
+                video: e.target.files[0],
+                videoToDisplay: URL.createObjectURL(e.target.files[0]),
+              });
           }}
         ></input>
         <label htmlFor="trailerImage">
@@ -49,6 +69,7 @@ const Promotion = (props) => {
           style={{ display: "none" }}
           id="coverPicture"
           type="file"
+          accept=".jpg,.jpeg,.png"
           onChange={(e) => {
             setFieldValue("coverPicture", {
               image: e.target.files[0],
@@ -95,6 +116,7 @@ const Promotion = (props) => {
                 style={{ display: "none" }}
                 id="eventImage"
                 type="file"
+                accept=".jpg,.jpeg,.png"
                 onChange={(e) => {
                   setFieldValue("eventImage", {
                     image: e.target.files[0],

@@ -45,11 +45,14 @@ import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import Password from "../pages/Password";
 import ForgotPassword from "../pages/ForgotPassword";
-const Navbar = () => {
+import { useEffect, useState } from "react";
+import { isEmpty } from "lodash";
+const Navbar = ({ authenticateUser, getUserInfo, logout, login, provider }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isLaptop = useMediaQuery("(max-width: 1320px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
   const xsmall = useMediaQuery("(max-width: 520px)");
+  const [btnText, setBtnText] = useState(false);
   const [_, setRegistrationModal] = useRecoilState(registration);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
@@ -60,7 +63,6 @@ const Navbar = () => {
     theme.colors.white[100],
     theme.colors.black[100]
   );
-
   const renderModal = () => {
     switch (_.modalType) {
       case RegistraionModalTypes.LOGIN:
@@ -75,6 +77,14 @@ const Navbar = () => {
         return <ForgotPassword />;
     }
   };
+
+  useEffect(() => {
+    if (provider !== null) {
+      setBtnText(true);
+    } else {
+      setBtnText(false);
+    }
+  }, [provider]);
 
   return (
     <NavbarWrapper background={colorMode === "light" ? value : "transparent"}>
@@ -193,16 +203,27 @@ const Navbar = () => {
                 m={0}
                 w="141px"
                 h="48px"
+                _focus={{
+                  bg: "primary.100",
+                }}
+                _hover={{
+                  bg: "primary.100",
+                }}
+                _active={{
+                  bg: "primary.100",
+                }}
                 onClick={async () => {
-                  // const torus = new Torus({});
-                  // await torus.init({
-                  //   enableLogging: false,
-                  // });
-                  // console.log(torus);
-                  // await torus.login();
+                  try {
+                    const userInfo = await getUserInfo();
+                    if (userInfo) {
+                      await logout();
+                    }
+                  } catch (err) {
+                    await login();
+                  }
                 }}
               >
-                Connect Wallet
+                {btnText ? "Wallet Connected" : "Connect Wallet"}
               </CBtn>
             </Box>
           </HStack>
@@ -325,8 +346,27 @@ const Navbar = () => {
                   m={0}
                   w="121px"
                   h="38px"
+                  _focus={{
+                    bg: "primary.100",
+                  }}
+                  _hover={{
+                    bg: "primary.100",
+                  }}
+                  _active={{
+                    bg: "primary.100",
+                  }}
+                  onClick={async () => {
+                    try {
+                      const userInfo = await getUserInfo();
+                      if (userInfo) {
+                        await logout();
+                      }
+                    } catch (err) {
+                      await login();
+                    }
+                  }}
                 >
-                  Connect Wallet
+                  {btnText ? "Wallet Connected" : "Connect Wallet"}
                 </CBtn>
               </Box>
             </HStack>

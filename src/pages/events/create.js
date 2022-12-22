@@ -1,9 +1,9 @@
 import DashboardLayout from "../../modules/layout/dashboard";
 import CreateEvent from "../../modules/pages/Events/Create/index";
-const CreateEvents = () => {
+const CreateEvents = (props) => {
   return (
     <DashboardLayout dashboardName="Events">
-      <CreateEvent />;
+      <CreateEvent {...props} />;
     </DashboardLayout>
   );
 };
