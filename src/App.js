@@ -3,7 +3,6 @@ import { Box, Button, ChakraProvider, color, Input, Text } from "@chakra-ui/reac
 import { extendTheme } from "@chakra-ui/react";
 import { theme } from "./styles/theme/base";
 import Routes from "./routes";
-import { RecoilRoot } from "recoil";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import secrets from "./secrets.json";
 import { useEffect, useState } from "react";
@@ -14,13 +13,15 @@ import { SolanaWalletAdapter } from "@web3auth/torus-solana-adapter";
 import { CHAIN_NAMESPACES } from "@web3auth/base";
 import RPC from "./solanaRPC.ts";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
-
+import { useRecoilState } from "recoil";
 // Plugins
 import { SolanaWalletConnectorPlugin } from "@web3auth/solana-wallet-connector-plugin";
 
 // Adapters
 import { SolflareAdapter } from "@web3auth/solflare-adapter";
 import { SlopeAdapter } from "@web3auth/slope-adapter";
+import { fetchUserData } from "./utils/actions/registration";
+import { user } from "./recoil/atoms/user";
 const newTheme = extendTheme(theme);
 
 const clientId = "BBhbmSbaMcjyqJ864MsQXmmVudb_g5godU5Ml_GWpCFUfGdxb40_TBmgUz79J82HiSJ2dmhDoChOVEAOs6kX73I";
@@ -32,13 +33,14 @@ function App() {
   const [web3auth, setWeb3auth] = useState(null);
   const [provider, setProvider] = useState(null);
   const [cookies, setCookie] = useCookies(["site-password"]);
+  const [_, setUser] = useRecoilState(user);
 
   useEffect(() => {
     const init = async () => {
       try {
         const web3auth = new Web3Auth({
           clientId,
-          uiConfig: { modalZIndex: 10000 },
+          uiConfig: { modalZIndex: 10000000 },
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
             chainId: "0x1", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
@@ -59,7 +61,7 @@ function App() {
         // adding solana wallet connector plugin
 
         const torusPlugin = new SolanaWalletConnectorPlugin({
-          torusWalletOpts: { modalZIndex: 10000 },
+          torusWalletOpts: { modalZIndex: 10000000 },
           walletInitOptions: {
             whiteLabel: {
               name: "Whitelabel Demo",
@@ -95,6 +97,42 @@ function App() {
     };
 
     init();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("x-auth-token");
+    const getUser = async () => {
+      if (token) {
+        await fetchUserData(token)
+          .then((user) => {
+            setUser((lp) => {
+              return {
+                ...lp,
+                token,
+                userData: { ...user },
+              };
+            });
+          })
+          .catch((err) => {
+            setUser((lp) => {
+              return {
+                ...lp,
+                token: "",
+                userData: null,
+              };
+            });
+          });
+      } else {
+        setUser((lp) => {
+          return {
+            ...lp,
+            token: "",
+            userData: null,
+          };
+        });
+      }
+    };
+    getUser();
   }, []);
 
   const login = async () => {
@@ -177,82 +215,80 @@ function App() {
   };
 
   return (
-    <ChakraProvider theme={newTheme}>
+    <ChakraProvider portalZIndex={40} theme={newTheme}>
       <GoogleOAuthProvider clientId={secrets.GoogleClientId}>
-        <RecoilRoot>
-          {openSite || (cookies && cookies["site-password"]) ? (
-            <Routes
-              {...{
-                authenticateUser,
-                getUserInfo,
-                logout,
-                getAccounts,
-                getBalance,
-                sendTransaction,
-                signMessage,
-                getPrivateKey,
-                login,
-                web3auth,
-                provider,
-              }}
-            />
-          ) : (
-            <Box h="100vh" bg="white.100" display="flex" alignItems="center" justifyContent="center">
-              <Box w="100%" maxW="350px">
-                <Text color="black.100" className="gordita400" mb={10}>
-                  Password
+        {openSite || (cookies && cookies["site-password"]) ? (
+          <Routes
+            {...{
+              authenticateUser,
+              getUserInfo,
+              logout,
+              getAccounts,
+              getBalance,
+              sendTransaction,
+              signMessage,
+              getPrivateKey,
+              login,
+              web3auth,
+              provider,
+            }}
+          />
+        ) : (
+          <Box h="100vh" bg="white.100" display="flex" alignItems="center" justifyContent="center">
+            <Box w="100%" maxW="350px">
+              <Text color="black.100" className="gordita400" mb={10}>
+                Password
+              </Text>
+              <Input
+                className="gordita400"
+                _placeholder={{
+                  fontSize: 14,
+                  color: "black.100",
+                  opacity: 0.7,
+                }}
+                placeholder="Site Password"
+                w="100%"
+                border="1px solid"
+                borderColor="black.200"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                color="black.100"
+                type="password"
+              />
+              {error && password !== secrets.sitePassword && (
+                <Text color="red" className="gordita400" mb={10}>
+                  Incorrect Password
                 </Text>
-                <Input
-                  className="gordita400"
-                  _placeholder={{
-                    fontSize: 14,
-                    color: "black.100",
-                    opacity: 0.7,
+              )}
+              <Box mt={12}>
+                <Button
+                  _focus={{
+                    bg: "primary.100",
                   }}
-                  placeholder="Site Password"
+                  _hover={{
+                    bg: "primary.100",
+                  }}
+                  className="gordita400"
+                  p={0}
+                  bg="primary.100"
                   w="100%"
-                  border="1px solid"
-                  borderColor="black.200"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  color="black.100"
-                  type="password"
-                />
-                {error && password !== secrets.sitePassword && (
-                  <Text color="red" className="gordita400" mb={10}>
-                    Incorrect Password
-                  </Text>
-                )}
-                <Box mt={12}>
-                  <Button
-                    _focus={{
-                      bg: "primary.100",
-                    }}
-                    _hover={{
-                      bg: "primary.100",
-                    }}
-                    className="gordita400"
-                    p={0}
-                    bg="primary.100"
-                    w="100%"
-                    onClick={() => {
-                      if (password === secrets.sitePassword) {
-                        setOpenSite(true);
-                        setCookie("site-password", password, {
-                          path: "/",
-                        });
-                      } else {
-                        setError(true);
-                      }
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </Box>
+                  onClick={() => {
+                    if (password === secrets.sitePassword) {
+                      setOpenSite(true);
+                      setCookie("site-password", password, {
+                        path: "/",
+                      });
+                    } else {
+                      setError(true);
+                    }
+                  }}
+                >
+                  Submit
+                </Button>
               </Box>
             </Box>
-          )}
-        </RecoilRoot>
+          </Box>
+        )}
       </GoogleOAuthProvider>
     </ChakraProvider>
   );

@@ -96,5 +96,9 @@
 }
 
 .barClass {
-  width: 20px!important;
+  width: 20px !important;
+}
+
+.swiper {
+  z-index: 0 !important;
 }

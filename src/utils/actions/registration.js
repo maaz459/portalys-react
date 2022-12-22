@@ -5,6 +5,7 @@ import {
   googleLogin,
   forgotPassword,
   resetPassword,
+  fetchUserData as getUserData,
 } from "../api/registration";
 export const addNewUser = async (payload) => {
   try {
@@ -57,6 +58,18 @@ export const sendForgotEmail = async (payload) => {
 export const changePassword = async (payload) => {
   try {
     const res = await resetPassword(payload);
+    const data = res.data;
+    return {
+      ...data,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchUserData = async (token) => {
+  try {
+    const res = await getUserData(token);
     const data = res.data;
     return {
       ...data,

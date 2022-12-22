@@ -1,28 +1,11 @@
-import {
-  Box,
-  Button,
-  Divider,
-  HStack,
-  Text,
-  VStack,
-  Input,
-  chakra,
-  useToast,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, Text, VStack, Input, chakra, useToast, Image } from "@chakra-ui/react";
 import { LoginSchema } from "../../../utils/schema";
 import { Formik, Field, Form } from "formik";
 import { google } from "../../../static/assets/images";
-import {
-  RegistraionModalTypes,
-  registration,
-} from "../../../recoil/atoms/registration";
+import { RegistraionModalTypes, registration } from "../../../recoil/atoms/registration";
 import { user } from "../../../recoil/atoms/user";
 import { useRecoilState } from "recoil";
-import {
-  fetchUser,
-  loginWithGoogle,
-} from "../../../utils/actions/registration";
+import { fetchUser, loginWithGoogle } from "../../../utils/actions/registration";
 import { Navigate, useNavigate } from "react-router-dom";
 import { userRoles } from "../../../utils/constants";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -36,14 +19,14 @@ const Login = () => {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["x-auth-token"]);
 
-  const userRole = window.location.pathname.includes("organizer")
-    ? userRoles.ORGANIZER
-    : userRoles.ATTENDEE;
+  const userRole = window.location.pathname.includes("organizer") ? userRoles.ORGANIZER : userRoles.ATTENDEE;
 
   const handleGoogleLogin = async (payload) => {
     const user = await loginWithGoogle({ ...payload, userRole });
     saveToken(user.token, "x-auth-token", 60, setCookie);
     localStorage.setItem("user_d", JSON.stringify(user.user));
+    localStorage.setItem("x-auth-token", user.token);
+
     setUser((lp) => {
       return {
         ...lp,
@@ -60,9 +43,6 @@ const Login = () => {
         userRole: "",
       };
     });
-    if (userRole === userRoles.ORGANIZER) {
-      navigate("/dashboard");
-    }
   };
 
   const login = useGoogleLogin({
@@ -84,6 +64,7 @@ const Login = () => {
       });
     } else {
       localStorage.setItem("user_d", JSON.stringify(getUser.user));
+      localStorage.setItem("x-auth-token", getUser.token);
 
       setUser((lp) => {
         return {
@@ -101,9 +82,6 @@ const Login = () => {
           userRole: "",
         };
       });
-      if (userRole === userRoles.ORGANIZER) {
-        navigate("/dashboard");
-      }
     }
   };
 
@@ -151,21 +129,12 @@ const Login = () => {
                     )}
                   />
                   {errors.email && touched.email && (
-                    <Text
-                      color="red"
-                      className="heebo"
-                      fontWeight={400}
-                      fontSize={14}
-                    >
+                    <Text color="red" className="heebo" fontWeight={400} fontSize={14}>
                       {errors.email}
                     </Text>
                   )}
                 </VStack>
-                <VStack
-                  mt={16}
-                  px={{ base: 0, md: 36 }}
-                  alignItems="flex-start"
-                >
+                <VStack mt={16} px={{ base: 0, md: 36 }} alignItems="flex-start">
                   <Text className="heebo" fontWeight={600} fontSize={14}>
                     Password{" "}
                   </Text>
@@ -190,12 +159,7 @@ const Login = () => {
                     )}
                   />
                   {errors.password && touched.password && (
-                    <Text
-                      color="red"
-                      className="heebo"
-                      fontWeight={400}
-                      fontSize={14}
-                    >
+                    <Text color="red" className="heebo" fontWeight={400} fontSize={14}>
                       {errors.password}
                     </Text>
                   )}
@@ -270,12 +234,7 @@ const Login = () => {
                     border="1px solid"
                     onClick={() => login()}
                   >
-                    <Image
-                      alt=""
-                      src={google}
-                      style={{ marginRight: "10px" }}
-                    />{" "}
-                    Sign in with Google
+                    <Image alt="" src={google} style={{ marginRight: "10px" }} /> Sign in with Google
                   </Button>
                 </Box>
                 <Box px={{ base: 0, md: 36 }} mt={24} w="100%">
@@ -292,14 +251,7 @@ const Login = () => {
                     Sign in with TORUS{" "}
                   </Button>
                 </Box>
-                <Box
-                  className="gordita400"
-                  fontSize={16}
-                  px={{ base: 0, md: 36 }}
-                  mt={24}
-                  w="100%"
-                  pb={56}
-                >
+                <Box className="gordita400" fontSize={16} px={{ base: 0, md: 36 }} mt={24} w="100%" pb={56}>
                   Don't have an account?
                   <chakra.span
                     color="orange.100"
