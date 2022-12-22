@@ -38,10 +38,11 @@ function App() {
       try {
         const web3auth = new Web3Auth({
           clientId,
+          uiConfig: { modalZIndex: 10000 },
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
-            chainId: "0x2", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
-            rpcTarget: "https://api.testnet.solana.com", // This is the public RPC we have added, please pass on your own endpoint while creating an app
+            chainId: "0x3", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+            rpcTarget: "https://api.devnet.solana.com", // This is the public RPC we have added, please pass on your own endpoint while creating an app
           },
         });
 
@@ -56,7 +57,7 @@ function App() {
         // adding solana wallet connector plugin
 
         const torusPlugin = new SolanaWalletConnectorPlugin({
-          torusWalletOpts: { modalZIndex: 100 },
+          torusWalletOpts: { modalZIndex: 10000 },
           walletInitOptions: {
             whiteLabel: {
               name: "Whitelabel Demo",
