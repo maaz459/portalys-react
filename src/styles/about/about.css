@@ -1,0 +1,31 @@
+.slick-prev:before, .slick-next:before {
+    color: #FFFF !important;
+  }
+  .slick-prev:before{
+    color: #FFFF !important;
+  
+  }
+.slick-next{
+    right: 40px !important;
+    bottom: 3rem !important;
+    top: 90% !important;
+    width: 30px !important;
+    background-color: #ffff;
+  }
+  .slick-prev{
+    right: 4rem !important;
+    width: 30px !important;
+    bottom: 3rem !important;
+    top: 90% !important;
+    z-index: 1 !important;
+    left: auto !important;
+    background-color: #ffff;
+  }
+  .slick-slide img {
+  opacity: 0.9 !important;
+}
+.managementcard{
+    justify-content: space-around;
+    display: flex;
+    padding: 60px 60px 70px 60px;
+}

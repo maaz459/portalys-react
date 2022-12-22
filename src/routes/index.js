@@ -5,6 +5,7 @@ import Events from "../pages/events/index";
 import CreateEvents from "../pages/events/create";
 import Portalys1 from "../pages/portalys/portalys1";
 import Portalys2 from "../pages/portalys/portalys2";
+import About from "../pages/portalys/about";
 const Routes = () => {
   return (
     <DomRoutes>
@@ -30,6 +31,10 @@ const Routes = () => {
       <Route
         path="resetpassword"
         element={<Home />}
+      />
+         <Route
+        path="about"
+        element={<About />}
       />
         
     </DomRoutes>

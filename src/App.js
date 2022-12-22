@@ -15,6 +15,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import secrets from "./secrets.json";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const newTheme = extendTheme(theme);
 
