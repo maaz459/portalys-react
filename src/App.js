@@ -1,12 +1,5 @@
 import "./App.css";
-import {
-  Box,
-  Button,
-  ChakraProvider,
-  color,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, ChakraProvider, color, Input, Text } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { theme } from "./styles/theme/base";
 import Routes from "./routes";
@@ -30,8 +23,7 @@ import { SolflareAdapter } from "@web3auth/solflare-adapter";
 import { SlopeAdapter } from "@web3auth/slope-adapter";
 const newTheme = extendTheme(theme);
 
-const clientId =
-  "c1129ea2b2aebd5229bc728cc1ac9ae81c477a3224cbbe473a76185af9672690";
+const clientId = "BCXfOhyKcaMjuPu5i5UzNe27T4QSoJikT0mXifLzEe8gMnp0JBW0VhmRLc2jQ7jg7Si0zq7GfThrA89QrPa7HSE";
 
 function App() {
   const [openSite, setOpenSite] = useState(false);
@@ -48,7 +40,7 @@ function App() {
           clientId,
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
-            chainId: "0x3", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+            chainId: "0x2", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
             rpcTarget:
               "https://soft-necessary-patron.solana-devnet.discover.quiknode.pro/f68f102b8757e8c3b1d5161b9ec052bc8bbf123a/", // This is the public RPC we have added, please pass on your own endpoint while creating an app
           },
@@ -133,7 +125,7 @@ function App() {
       return "web3auth not initialized yet";
     }
     await web3auth.logout();
-    setProvider(null)
+    setProvider(null);
     return null;
   };
 
@@ -203,13 +195,7 @@ function App() {
               }}
             />
           ) : (
-            <Box
-              h="100vh"
-              bg="white.100"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
+            <Box h="100vh" bg="white.100" display="flex" alignItems="center" justifyContent="center">
               <Box w="100%" maxW="350px">
                 <Text color="black.100" className="gordita400" mb={10}>
                   Password
