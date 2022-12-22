@@ -278,25 +278,73 @@ const Navbar = ({ authenticateUser, getUserInfo, logout, login, provider }) => {
               </HStack>
             </HStack>
             <HStack mt={20}>
-              <CBtn
-                onClick={() => {
-                  setRegistrationModal((lp) => {
-                    return {
-                      ...lp,
-                      openModal: true,
-                      modalType: RegistraionModalTypes.SIGNUP,
-                      userRole: organizerCheck ? userRoles.ATTENDEE : userRoles.ORGANIZER,
-                    };
-                  });
-                }}
-                bg="primary.100"
-                borderRadius="50px"
-              >
-                <HStack gap={0}>
-                  <Image alt="" style={{ width: "18px", height: "18px" }} src={menuIcon}></Image>
-                  <Image alt="" style={{ width: "32px", height: "32px" }} src={userIcon}></Image>
-                </HStack>
-              </CBtn>
+              {organizerCheck && _U?.token ? (
+                <Popover>
+                  <PopoverTrigger>
+                    <CBtn bg="primary.100" borderRadius="50px">
+                      <HStack gap={0}>
+                        <Image alt="" style={{ width: "18px", height: "18px" }} src={menuIcon}></Image>
+                        <Image alt="" style={{ width: "32px", height: "32px" }} src={userIcon}></Image>
+                      </HStack>
+                    </CBtn>
+                  </PopoverTrigger>
+                  <Portal>
+                    <PopoverContent maxW="200px" className="gordita600" color="black.300" p={0} m={0} bg="white.100">
+                      <PopoverBody p={0} m={0}>
+                        <Text
+                          onClick={() => navigate("/dashboard")}
+                          cursor="pointer"
+                          colorScheme="blue"
+                          p={4}
+                          _hover={{ bg: "primary.100" }}
+                        >
+                          Dashboard
+                        </Text>
+                        <Text
+                          onClick={() => {
+                            setUser((lp) => {
+                              return {
+                                ...lp,
+                                token: "",
+                                userData: null,
+                              };
+                            });
+                            localStorage.removeItem("user_d");
+                            localStorage.removeItem("x-auth-token");
+                          }}
+                          cursor="pointer"
+                          colorScheme="blue"
+                          p={4}
+                          _hover={{ bg: "primary.100" }}
+                        >
+                          Logout
+                        </Text>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Portal>
+                </Popover>
+              ) : (
+                <CBtn
+                  onClick={() => {
+                    setRegistrationModal((lp) => {
+                      return {
+                        ...lp,
+                        openModal: true,
+                        modalType: RegistraionModalTypes.SIGNUP,
+                        userRole: organizerCheck ? userRoles.ATTENDEE : userRoles.ORGANIZER,
+                      };
+                    });
+                  }}
+                  bg="primary.100"
+                  borderRadius="50px"
+                >
+                  <HStack gap={0}>
+                    <Image alt="" style={{ width: "18px", height: "18px" }} src={menuIcon}></Image>
+                    <Image alt="" style={{ width: "32px", height: "32px" }} src={userIcon}></Image>
+                  </HStack>
+                </CBtn>
+              )}
+
               <Box>
                 <CBtn
                   bg="primary.100"
