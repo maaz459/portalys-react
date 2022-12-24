@@ -9,6 +9,8 @@ import {
   chakra,
   HStack,
   Button,
+  Input,
+  grid,
 } from "@chakra-ui/react";
 import "../../styles/portalys/portalys.css";
 import Slider from "react-slick";
@@ -26,6 +28,12 @@ import verify from "../../static/assets/images/verify.svg";
 import exper from "../../static/assets/images/exper.svg";
 import full from "../../static/assets/images/full.svg";
 import profession from "../../static/assets/images/profession.svg";
+import calenderImg from "../../static/assets/images/calendar.svg";
+import disk1 from "../../static/assets/images/disk1.svg";
+import disk2 from "../../static/assets/images/disk2.svg";
+import disk3 from "../../static/assets/images/disk3.svg";
+import disk4 from "../../static/assets/images/disk4.svg";
+import light1 from "../../static/assets/images/lights2.svg";
 
 import "../../styles/about/about.css";
 
@@ -280,8 +288,16 @@ export default function About() {
       {/* // */}
       <HStack padding="60px" gap="20px">
         <Box>
-          <Heading fontSize="50px" fontWeight="700" color="#02F6AD">Online Ticket Sales & Reservation</Heading>
-          <Text fontSize="15px" fontWeight="400" color="#FFFFFF" marginTop="25px">
+          <Heading fontSize="50px" fontWeight="700" color="#02F6AD">
+            Online Ticket Sales & Reservation
+          </Heading>
+          <Text
+            fontSize="15px"
+            fontWeight="400"
+            color="#FFFFFF"
+            marginTop="25px"
+            paddingRight="80px"
+          >
             Sell your event tickets with online payment methods or offline
             reservation system. More than 100 payment gateways ready to use.
           </Text>
@@ -291,8 +307,102 @@ export default function About() {
         </Box>
       </HStack>
       {/* // */}
-      <HStack padding="60px" gap="20px">
+      <HStack
+        padding="60px"
+        gap="20px"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-evenly"
+      >
+        <Box>
+          <Image src={calenderImg} width="100%" />
+        </Box>
+        <Box textAlign="left">
+          <Heading fontSize="50px" fontWeight="700" color="#FFFFFF">
+            Events <chakra.span color="#02F6AD">Calendar</chakra.span>
+          </Heading>
+        </Box>
+      </HStack>
+      {/* // */}
+      <Box paddingTop="60px">
+        <Box>
+          <Heading
+            fontSize="50px"
+            textAlign="center"
+            fontWeight="700"
+            color="#FFFFFF"
+          >
+            Events <chakra.span color="#02F6AD">GALLERY</chakra.span>
+          </Heading>
+        </Box>
+        <HStack
+          padding="50px"
+          gap="20px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap="15px"
+            width="100%"
+          >
+            <Image className="diskimg" src={disk1} />
+            <Image src={disk2} className="diskimg" />
+            <Image src={disk3} className="diskimg" />
+            <Image src={disk4} className="diskimg" />
+          </Box>
+        </HStack>
+      </Box>
+      {/* // */}
+      <HStack
+        padding="60px"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-evenly"
+        gap="15px"
+        paddingTop="90px"
+      >
+        {/* 1 */}
 
+        <VStack width="50%">
+          <Box textAlign="left" display="grid" alignItems="baseline">
+            <Heading color="#FFFFFF" fontWeight="700" fontSize="34px">
+              Sign Up Our Newsletter
+            </Heading>
+            <Text
+              color="#FFFFFF"
+              fontWeight="400"
+              fontSize="15px"
+              paddingTop="15px"
+            >
+              Lorem ipsum dolor sit amet, consectetuelit.
+            </Text>
+          </Box>
+          <HStack paddingTop="25px">
+            {" "}
+            <Input
+              type="text"
+              placeholder="Email"
+              padding="20px 40px"
+              background="#FFFFFF"
+            />
+            <Button
+              background="#02F6AD"
+              borderRadius="5px"
+              boxShadow=" 0px 2px 4px rgba(0, 0, 0, 0.25)"
+              color="#FFFFFF"
+              padding="21px 40px"
+            >
+              Subscribe
+            </Button>
+          </HStack>
+        </VStack>
+        <HStack width="50%">
+          <Image src={light1} width="100%" />
+        </HStack>
       </HStack>
     </Box>
   );
