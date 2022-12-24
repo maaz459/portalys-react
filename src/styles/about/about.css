@@ -34,3 +34,101 @@
   width: 100%;
   object-fit: contain;
 }
+@media only screen and (max-width: 1440px){
+  .diskimg{
+    max-width: 300px;
+    width: 100%;
+ 
+  } 
+}
+
+@media only screen and (max-width: 1300px){
+  .diskimg{
+    max-width: 260px;
+    width: 100%;
+ 
+  } 
+}
+
+
+@media only screen and (max-width: 1200px){
+  .managementcard{
+    flex-wrap: wrap;
+    padding: 40px 40px 60px 40px;
+    gap: 30px;
+  }
+  .controlhero{
+    width: 80% !important;
+  }
+  .diskimghero{
+    flex-wrap: wrap;
+  }
+  .ticketshero,.ticketsheroend{
+    flex-direction: column-reverse !important;
+    display: flex !important;
+    gap: 50px !important;
+  }
+  .publicimghero{
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 991px){
+  .mobileimgshero, .searchhero{
+    flex-wrap: wrap ;
+    gap: 30px;
+  }
+  .searchhero{
+    gap: 50px !important;
+    flex-direction: column !important;
+  }
+  .singerimg{
+    height: 440px !important;
+  }
+  .publicimghero{
+    flex-wrap: wrap;
+    width: 100% !important;
+  }
+ .searchherotwo, .searchheroone, .singerimg, .controlhero, .light1hero{
+  width: 80% !important;
+ }
+}
+@media only screen and (max-width: 768px){
+  .wolveshero{
+    top: 12% !important;
+    left: 39px !important;
+  }
+  .wolvesheader{
+    font-size: 25px !important;
+  }
+  .consecteturhero{
+    padding: 40px 40px !important;
+  }
+  .diskimg {
+    max-width: 445px;
+    width: 100%;
+} 
+.mobileimgshero{
+  padding: 0px 50px ;
+}
+.mobileimg{
+  width: 100%;
+}
+.ticketshero{
+  padding: 0px 40px 60px 40px !important;
+}
+.ticketsheroend{
+  padding: 0px 0px 60px 0px !important;
+
+}
+}
+@media only screen and (max-width: 500px){
+  .wolvesheader{
+    width: 300px !important;
+  }
+  .ametheader, .designheader {
+    font-size: 25px !important;
+  }
+  .diskimgparent{
+    padding: 0px !important;
+  }
+}

@@ -100,8 +100,8 @@ export default function About() {
             />
           </div>
         </Slider>
-        <Box position="absolute" top="38%" left="80px">
-          <Heading fontSize="35px" fontWeight="800" width="500px">
+        <Box position="absolute" top="38%" left="80px" className="wolveshero">
+          <Heading fontSize="35px" fontWeight="800" width="500px" className="wolvesheader">
             <chakra.span color="#02F6AD">ABOUT THE CLUB &nbsp; </chakra.span>
             <chakra.span color="white">
               WELCOME TO THE HOME OF WOLVES FC
@@ -115,9 +115,10 @@ export default function About() {
         justifyContent="center"
         alignItems="center"
         padding="120px"
+        className="consecteturhero"
       >
         <Box maxWidth="700px" width="100%" textAlign="center">
-          <Heading fontSize="31px" fontWeight="700" color="#ffff">
+          <Heading fontSize="31px" fontWeight="700" color="#ffff" className="ametheader">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
             massa, sed porta dui.
           </Heading>
@@ -160,7 +161,7 @@ export default function About() {
       </HStack>
       {/* // */}
       <Box textAlign="center" paddingTop="60px" paddingBottom="60px">
-        <Heading fontSize="35px" fontWeight="700">
+        <Heading fontSize="35px" fontWeight="700" className="designheader">
           <chakra.span color="#FFFFFF">The design can </chakra.span>
           <chakra.span color="#02F6AD">change the world. </chakra.span>
         </Heading>
@@ -175,14 +176,14 @@ export default function About() {
         <Text marginTop="25px" color="#FFFFFF" fontSize="15px">
           Lorem ipsum dolor sit amet, consectetuelit.
         </Text>
-        <HStack justifyContent="space-evenly" marginTop="50px">
-          <Image src={mobile} width="290px" />
-          <Image src={mobile} width="290px" />
-          <Image src={mobile} width="290px" />
+        <HStack justifyContent="space-evenly" marginTop="50px" className="mobileimgshero">
+          <Image className="mobileimg" src={mobile} width="290px" />
+          <Image className="mobileimg" src={mobile} width="290px" />
+          <Image className="mobileimg" src={mobile} width="290px" />
         </HStack>
-        <HStack textAlign="left" justifyContent="space-evenly" marginTop="50px">
-          <Box src={mobile} width="290px">
-            <Heading fontSize="35px" fontWeight="700">
+        <HStack textAlign="left" justifyContent="space-evenly" marginTop="50px" className="searchhero">
+          <Box src={mobile} width="290px" className="searchheroone">
+            <Heading fontSize="35px" fontWeight="700" className="designheader">
               <chakra.span color="#FFFFFF">Advanced&nbsp;</chakra.span>
               <chakra.span color="#02F6AD">Event Search System </chakra.span>
             </Heading>
@@ -191,7 +192,7 @@ export default function About() {
               event search tool. Advanced and modern event filtering options.
             </Text>
           </Box>
-          <Image src={writer} width="320px" />
+          <Image src={writer} width="320px" searchherotwo />
         </HStack>
       </Box>
       {/* // */}
@@ -201,13 +202,14 @@ export default function About() {
         justifyContent="space-around"
         paddingTop="60px"
         paddingBottom="60px"
+        className="ticketsheroend"
       >
-        <HStack gap="15px" width="50%">
-          <Image src={public1} width="400px" />
-          <Image src={singer} width="250px" height="440px" />
+        <HStack gap="15px" width="50%" className="publicimghero">
+          <Image src={public1} width="400px" className="searchherotwo" />
+          <Image src={singer} width="250px" height="440px" className="singerimg" />
         </HStack>
-        <Box width="40%">
-          <Heading fontSize="50px" fontWeight="700" color="#02F6AD">
+        <Box width="40%" className="controlhero">
+          <Heading fontSize="50px" fontWeight="700" color="#02F6AD" className="designheader">
             Take Control of Your Tickets
           </Heading>
           <Text
@@ -286,9 +288,9 @@ export default function About() {
         </Box>
       </HStack>
       {/* // */}
-      <HStack padding="60px" gap="20px">
+      <HStack padding="60px" gap="20px" className="ticketshero">
         <Box>
-          <Heading fontSize="50px" fontWeight="700" color="#02F6AD">
+          <Heading fontSize="50px" fontWeight="700" color="#02F6AD" className="designheader">
             Online Ticket Sales & Reservation
           </Heading>
           <Text
@@ -313,24 +315,26 @@ export default function About() {
         display="flex"
         alignItems="center"
         justifyContent="space-evenly"
+        className="ticketshero"
       >
         <Box>
           <Image src={calenderImg} width="100%" />
         </Box>
         <Box textAlign="left">
-          <Heading fontSize="50px" fontWeight="700" color="#FFFFFF">
+          <Heading fontSize="50px" fontWeight="700" color="#FFFFFF" className="designheader">
             Events <chakra.span color="#02F6AD">Calendar</chakra.span>
           </Heading>
         </Box>
       </HStack>
       {/* // */}
-      <Box paddingTop="60px">
+      <Box paddingTop="60px" className="ticketshero">
         <Box>
           <Heading
             fontSize="50px"
             textAlign="center"
             fontWeight="700"
             color="#FFFFFF"
+            className="designheader"
           >
             Events <chakra.span color="#02F6AD">GALLERY</chakra.span>
           </Heading>
@@ -341,6 +345,7 @@ export default function About() {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          className="diskimgparent"
         >
           <Box
             display="flex"
@@ -348,6 +353,7 @@ export default function About() {
             justifyContent="center"
             gap="15px"
             width="100%"
+            className="diskimghero"
           >
             <Image className="diskimg" src={disk1} />
             <Image src={disk2} className="diskimg" />
@@ -364,12 +370,13 @@ export default function About() {
         justifyContent="space-evenly"
         gap="15px"
         paddingTop="90px"
+        className="ticketsheroend"
       >
         {/* 1 */}
 
-        <VStack width="50%">
-          <Box textAlign="left" display="grid" alignItems="baseline">
-            <Heading color="#FFFFFF" fontWeight="700" fontSize="34px">
+        <VStack width="50%" className="light1hero">
+          <Box textAlign="left" display="grid" alignItems="baseline" >
+            <Heading color="#FFFFFF" fontWeight="700" fontSize="34px" className="designheader">
               Sign Up Our Newsletter
             </Heading>
             <Text
@@ -400,8 +407,8 @@ export default function About() {
             </Button>
           </HStack>
         </VStack>
-        <HStack width="50%">
-          <Image src={light1} width="100%" />
+        <HStack width="50%" className="light1hero">
+          <Image className="mobileimg" src={light1} width="100%" />
         </HStack>
       </HStack>
     </Box>
