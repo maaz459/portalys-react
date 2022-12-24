@@ -6,6 +6,9 @@
   max-width: 430px;
   width: 100%;
 }
+.checkheadershow{
+display: none;
+}
 .promoinput{
   width: 100%;
   border-radius: 20px;
@@ -45,6 +48,9 @@ outline: none;
     gap: 30px;
     top: -13rem !important;
   }
+  .preservehero{
+    gap: 30px;
+  }
   .soccerhero {
     padding: 5px 20px 65px 20px;
   }
@@ -57,14 +63,42 @@ outline: none;
 }
 
 @media only screen and (max-width: 768px) {
+  .intrestedbtnhero{
+    justify-content: center !important;
+    gap: 30px ;
+  }
+  .darkcard{
+    width: 100% !important;
+  }
+  .darkcard1{
+    width: 100% !important;
+    padding-top: 50px;
+  }
+  .checkheader{
+    display: none;
+  }
+  .checkheadershow{
+    display: block;
+    padding-bottom: 20px;
+  }
+  .regularcards{
+    flex-direction: column;
+    justify-content: center;
+  }
+  .birdcard{
+    padding-top: 75px;
+  }
   .teammemberschild,
   .teammemberheading {
     justify-content: center !important;
     align-items: center;
     text-align: center;
   }
-  .ticketshero {
+
+  .preservehero{
     top: 2rem !important;
+    justify-content: center !important;
+    display: flex;
   }
   .soccercardshero {
     margin-top: 54px !important;
@@ -78,4 +112,20 @@ outline: none;
   .ticketshero{
     padding: 0px !important;
   }
+  .preservehero{
+    padding: 0px !important;
+
+  }
+  .preserveheading{
+    font-size: 28px !important;
+  }
+  .trackcards{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px !important;
+  }
+ .organizedcard{
+  flex-wrap: wrap !important;
+  gap: 25px !important;
+ }
 }
