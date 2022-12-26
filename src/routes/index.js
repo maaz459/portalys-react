@@ -9,6 +9,7 @@ import Seat from "../pages/booking/seat";
 import Detail from "../pages/booking/detail";
 import Payment from "../pages/booking/detail";
 import Tickets from "../pages/tickets";
+import About from "../pages/portalys/about";
 const Routes = (props) => {
   return (
     <DomRoutes>
