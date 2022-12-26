@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Box, Text, VStack, Image, Progress as LinearProgress, Heading, chakra, HStack } from "@chakra-ui/react";
 import cartoon from "../../static/assets/images/cartoon.svg";
-import bet from "../../static/assets/images/game.svg";
 import goal from "../../static/assets/images/goal.svg";
 import keeper from "../../static/assets/images/keeper.svg";
 import "../../styles/portalys/portalys.css";
 import lock from "../../static/assets/images/lock.svg";
-import bgimg from "../../static/assets/images/bgimg.svg";
 import srch from "../../static/assets/images/srch.svg";
 import flag from "../../static/assets/images/flag.svg";
 import arrowd from "../../static/assets/images/arrd.svg";
+import { game as bet, bgimg } from "../../static/assets/images";
 import AllTeam from "./allteam";
 import { useNavigate } from "react-router-dom";
 export default function Portalys1() {

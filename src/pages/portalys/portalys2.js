@@ -13,10 +13,9 @@ import {
 import "../../styles/portalys/portalys.css";
 import location from "../../static/assets/images/location.svg";
 import bgimg from "../../static/assets/images/bg2.png";
-import track from "../../static/assets/images/1trk.svg";
 import track2 from "../../static/assets/images/2trk.svg";
 import men from "../../static/assets/images/men.svg";
-import map from "../../static/assets/images/map.svg";
+import { map,ltrk as track  } from "../../static/assets/images";
 import loc from "../../static/assets/images/loc.svg";
 import infra from "../../static/assets/images/infra.svg";
 import thumb from "../../static/assets/images/thumb.svg";
@@ -77,20 +76,9 @@ export default function Portalys2() {
         </Box>
       </Box>
       {/* // */}
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        gap="50px"
-        className="birdcard"
-      >
+      <Box display="flex" alignItems="center" justifyContent="space-between" gap="50px" className="birdcard">
         <Box w="60%" className="birdhero">
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            width="50%"
-          >
+          <Box display="flex" alignItems="center" justifyContent="space-between" width="50%">
             <Text color="#FFFFFF" fontSize="25px">
               Tickets
             </Text>
@@ -122,13 +110,7 @@ export default function Portalys2() {
         </Box>
       </Box>
       <Box display="flex" paddingTop="30px" gap="50px" className="regularcards">
-        <Box
-          display="block"
-          width="60%"
-          alignItems="center"
-          justifyContent="space-between"
-          className="darkcard"
-        >
+        <Box display="block" width="60%" alignItems="center" justifyContent="space-between" className="darkcard">
           <VStack
             padding="20px"
             display="grid"
@@ -271,12 +253,7 @@ export default function Portalys2() {
                 $ 14.80
               </Text>
             </HStack>
-            <HStack
-              display="flex"
-              justifyContent="space-between"
-              marginTop="30px"
-              className="intrestedbtnhero"
-            >
+            <HStack display="flex" justifyContent="space-between" marginTop="30px" className="intrestedbtnhero">
               <Button
                 className="intrestedbtn"
                 fontWeight="700"
@@ -394,12 +371,7 @@ export default function Portalys2() {
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Organized by
           </Heading>
-          <HStack
-            marginTop="35px"
-            display="flex"
-            justifyContent="space-between"
-            className="organizedcard"
-          >
+          <HStack marginTop="35px" display="flex" justifyContent="space-between" className="organizedcard">
             <Image width="120px" src={infra} />
             <Text color="#02F6AD" fontSize="25px" fontWeight="700">
               infra
@@ -416,14 +388,7 @@ export default function Portalys2() {
                 2,6k Likes
               </chakra.span>
             </Box>
-            <Button
-              fontSize="15px"
-              color="#00000"
-              borderRadius="30px"
-              bg="#FFFF"
-              outline="none"
-              padding="4px 25px"
-            >
+            <Button fontSize="15px" color="#00000" borderRadius="30px" bg="#FFFF" outline="none" padding="4px 25px">
               Follow
             </Button>
           </HStack>
