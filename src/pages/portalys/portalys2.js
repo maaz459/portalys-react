@@ -57,10 +57,10 @@ export default function Portalys2() {
           px="40px"
           position="relative"
           top="-9rem"
-          className="ticketshero"
+          className="preservehero"
         >
           <VStack display="flex" justify="left" alignItems="baseline">
-            <Heading color="#FBFAFB" fontWeight="700" fontSize="36px">
+            <Heading color="#FBFAFB" fontWeight="700" fontSize="36px" className="preserveheading">
               The Preserve Waitlist
             </Heading>
             <Text fontSize="22px" color="#02F6AD" marginTop="13px" fontWeight="500">
@@ -77,9 +77,20 @@ export default function Portalys2() {
         </Box>
       </Box>
       {/* // */}
-      <Box display="flex" alignItems="center" justifyContent="space-between" gap="50px">
-        <Box w="60%">
-          <Box display="flex" alignItems="center" justifyContent="space-between" width="50%">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        gap="50px"
+        className="birdcard"
+      >
+        <Box w="60%" className="birdhero">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            width="50%"
+          >
             <Text color="#FFFFFF" fontSize="25px">
               Tickets
             </Text>
@@ -105,13 +116,19 @@ export default function Portalys2() {
           </Box>
         </Box>
         <Box Box w="40%">
-          <Text color="#FFFFFF" fontSize="25px">
+          <Text color="#FFFFFF" fontSize="25px" className="checkheader">
             Checkout
           </Text>
         </Box>
       </Box>
-      <Box display="flex" paddingTop="30px" gap="50px">
-        <Box display="block" width="60%" alignItems="center" justifyContent="space-between">
+      <Box display="flex" paddingTop="30px" gap="50px" className="regularcards">
+        <Box
+          display="block"
+          width="60%"
+          alignItems="center"
+          justifyContent="space-between"
+          className="darkcard"
+        >
           <VStack
             padding="20px"
             display="grid"
@@ -157,7 +174,10 @@ export default function Portalys2() {
             </chakra.span>
           </VStack>
         </Box>
-        <Box width="40%">
+        <Box width="40%" className="darkcard">
+          <Text color="#FFFFFF" fontSize="25px" className="checkheadershow">
+            Checkout
+          </Text>
           <HStack
             display="flex"
             backgroundColor="#1A1A1A"
@@ -206,8 +226,8 @@ export default function Portalys2() {
         </Box>
       </Box>
       {/* // */}
-      <Box gap="50px" display="flex">
-        <Box w="60%">
+      <Box gap="50px" display="flex" className="regularcards">
+        <Box w="60%" className="darkcard">
           <Box w="100%" marginTop="80px">
             <hr />
           </Box>
@@ -229,7 +249,7 @@ export default function Portalys2() {
             </chakra.sapn>
           </Box>
         </Box>
-        <Box w="40%">
+        <Box w="40%" className="darkcard">
           <Box w="100%" marginTop="-30px">
             <chakra.span fontSize="12px" color="#9A9A9A">
               Have a promo code ?
@@ -251,7 +271,12 @@ export default function Portalys2() {
                 $ 14.80
               </Text>
             </HStack>
-            <HStack display="flex" justifyContent="space-between" marginTop="30px">
+            <HStack
+              display="flex"
+              justifyContent="space-between"
+              marginTop="30px"
+              className="intrestedbtnhero"
+            >
               <Button
                 className="intrestedbtn"
                 fontWeight="700"
@@ -285,15 +310,15 @@ export default function Portalys2() {
       </Box>
       {/* / */}
       <Box>
-        <Box width="60%">
+        <Box width="60%" className="darkcard1">
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Best tracks
           </Heading>
           <HStack>
-            <HStack gap="8px" marginTop="25px">
+            <HStack gap="8px" marginTop="25px" className="trackcards">
               {tracks.map((item, id) => {
                 return (
-                  <Box key={id} textAlign="center">
+                  <Box key={id} textAlign="center" className="trackcardshero">
                     <Image src={item.img} />
                     <Text color="#FFFFFF" fontSize="15px" marginTop="12px">
                       {item.title}
@@ -312,7 +337,7 @@ export default function Portalys2() {
       </Box>
       {/*  */}
       <Box marginTop="100px">
-        <Box w="60%">
+        <Box w="60%" className="darkcard">
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Trailer
           </Heading>
@@ -331,7 +356,7 @@ export default function Portalys2() {
       </Box>
       {/* /// */}
       <Box marginTop="100px">
-        <Box w="60%">
+        <Box w="60%" className="darkcard">
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Line up
           </Heading>
@@ -341,7 +366,7 @@ export default function Portalys2() {
       </Box>
       {/* // */}
       <Box marginTop="100px">
-        <Box w="60%">
+        <Box w="60%" className="darkcard">
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Location
           </Heading>
@@ -365,11 +390,16 @@ export default function Portalys2() {
       </Box>
       {/* // */}
       <Box marginTop="90px" paddingBottom="70px">
-        <Box w="60%">
+        <Box w="60%" className="darkcard">
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Organized by
           </Heading>
-          <HStack marginTop="35px" display="flex" justifyContent="space-between">
+          <HStack
+            marginTop="35px"
+            display="flex"
+            justifyContent="space-between"
+            className="organizedcard"
+          >
             <Image width="120px" src={infra} />
             <Text color="#02F6AD" fontSize="25px" fontWeight="700">
               infra
@@ -386,7 +416,14 @@ export default function Portalys2() {
                 2,6k Likes
               </chakra.span>
             </Box>
-            <Button fontSize="15px" color="#00000" borderRadius="30px" bg="#FFFF" outline="none" padding="4px 25px">
+            <Button
+              fontSize="15px"
+              color="#00000"
+              borderRadius="30px"
+              bg="#FFFF"
+              outline="none"
+              padding="4px 25px"
+            >
               Follow
             </Button>
           </HStack>

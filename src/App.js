@@ -16,6 +16,8 @@ import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { useRecoilState } from "recoil";
 // Plugins
 import { SolanaWalletConnectorPlugin } from "@web3auth/solana-wallet-connector-plugin";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Adapters
 import { SolflareAdapter } from "@web3auth/solflare-adapter";
