@@ -23,9 +23,6 @@ import {
   PopoverTrigger,
   Portal,
   PopoverContent,
-  PopoverArrow,
-  PopoverHeader,
-  PopoverCloseButton,
   PopoverBody,
   PopoverFooter,
   Text,
@@ -61,6 +58,7 @@ const Navbar = ({ authenticateUser, getUserInfo, logout, login, provider }) => {
   const [btnText, setBtnText] = useState(false);
   const [_, setRegistrationModal] = useRecoilState(registration);
   const [_U, setUser] = useRecoilState(user);
+  const [navbar, setNavbar] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
@@ -92,160 +90,170 @@ const Navbar = ({ authenticateUser, getUserInfo, logout, login, provider }) => {
   }, [provider]);
 
   return (
-    <NavbarWrapper background={colorMode === "light" ? value : "transparent"}>
-      <Box maxW="1662px" bg={colorMode === "light" ? value : "transparent"} h="100%" w="100%" px={xsmall ? 10 : 20}>
-        <HStack justifyContent="space-between" h="100%">
-          <HStack h="100%">
-            <Image alt="" src={colorMode === "light" ? DarkLogo : LightLogo}></Image>
-            <HStack className="gordita600" display={isTablet ? "none" : "flex"} pl="40px">
-              {navLinks.map(({ link, text }, index) => {
-                return (
-                  <Stack direction={"row"} key={index}>
-                    <Link className="navLink" href={link}>
-                      <Typography isMobile={isLaptop} variant="text">
-                        {text}
-                      </Typography>
-                    </Link>
-                    {index < 3 && <Typography>|</Typography>}
-                  </Stack>
-                );
-              })}
-            </HStack>
-          </HStack>
-          <HStack display={isTablet ? "none" : "flex"} h="100%">
-            <HStack gap={"20px"} pl="40px">
-              <HStack spacing={1}>
-                <Link className="navLink" href={organizerCheck ? "/" : "/organizer"}>
-                  <Typography className="gordita600" isMobile={isLaptop} variant="text">
-                    I'm {organizerCheck ? "a User" : "an Organizer"}
-                  </Typography>
-                </Link>
-                <Image alt="" src={colorMode === "light" ? darkOrganizeIcon : lightOrganizeIcon}></Image>
+    <NavbarWrapper background={colorMode === "light" ? "value" : "transparent"}>
+      <Box
+        maxH="71px"
+        w="100%"
+        h="100%"
+        pos="fixed"
+        bg={value}
+        display="flex"
+        justifyContent="center"
+      >
+        <Box h="100%" maxW="1662px" w="100%" px={xsmall ? 10 : 20}>
+          <HStack justifyContent="space-between" h="100%">
+            <HStack h="100%">
+              <Image alt="" src={colorMode === "light" ? DarkLogo : LightLogo}></Image>
+              <HStack className="gordita600" display={isTablet ? "none" : "flex"} pl="40px">
+                {navLinks.map(({ link, text }, index) => {
+                  return (
+                    <Stack direction={"row"} key={index}>
+                      <Link className="navLink" href={link}>
+                        <Typography isMobile={isLaptop} variant="text">
+                          {text}
+                        </Typography>
+                      </Link>
+                      {index < 3 && <Typography>|</Typography>}
+                    </Stack>
+                  );
+                })}
               </HStack>
-              {organizerCheck && _U?.token ? (
-                <Popover>
-                  <PopoverTrigger>
-                    <CBtn borderRadius="50px" bg="primary.100" size="xs" m={0} w="98px" h="46px">
-                      <HStack gap={0}>
-                        <Image alt="" style={{ width: "20px", height: "20px" }} src={menuIcon}></Image>
-                        <Image alt="" style={{ width: "36px", height: "36px" }} src={userIcon}></Image>
-                      </HStack>
-                    </CBtn>
-                  </PopoverTrigger>
-                  <Portal>
-                    <PopoverContent maxW="200px" className="gordita600" color="black.300" p={0} m={0} bg="white.100">
-                      <PopoverBody p={0} m={0}>
-                        <Text
-                          onClick={() => navigate("/dashboard")}
-                          cursor="pointer"
-                          colorScheme="blue"
-                          p={4}
-                          _hover={{ bg: "primary.100" }}
-                        >
-                          Dashboard
-                        </Text>
-                        <Text
-                          onClick={() => {
-                            setUser((lp) => {
-                              return {
-                                ...lp,
-                                token: "",
-                                userData: null,
-                              };
-                            });
-                            localStorage.removeItem("user_d");
-                            localStorage.removeItem("x-auth-token");
-                          }}
-                          cursor="pointer"
-                          colorScheme="blue"
-                          p={4}
-                          _hover={{ bg: "primary.100" }}
-                        >
-                          Logout
-                        </Text>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Portal>
-                </Popover>
-              ) : (
+            </HStack>
+            <HStack display={isTablet ? "none" : "flex"} h="100%">
+              <HStack gap={"20px"} pl="40px">
+                <HStack spacing={1}>
+                  <Link className="navLink" href={organizerCheck ? "/" : "/organizer"}>
+                    <Typography className="gordita600" isMobile={isLaptop} variant="text">
+                      I'm {organizerCheck ? "a User" : "an Organizer"}
+                    </Typography>
+                  </Link>
+                  <Image alt="" src={colorMode === "light" ? darkOrganizeIcon : lightOrganizeIcon}></Image>
+                </HStack>
+                {organizerCheck && _U?.token ? (
+                  <Popover>
+                    <PopoverTrigger>
+                      <CBtn borderRadius="50px" bg="primary.100" size="xs" m={0} w="98px" h="46px">
+                        <HStack gap={0}>
+                          <Image alt="" style={{ width: "20px", height: "20px" }} src={menuIcon}></Image>
+                          <Image alt="" style={{ width: "36px", height: "36px" }} src={userIcon}></Image>
+                        </HStack>
+                      </CBtn>
+                    </PopoverTrigger>
+                    <Portal>
+                      <PopoverContent maxW="200px" className="gordita600" color="black.300" p={0} m={0} bg="white.100">
+                        <PopoverBody p={0} m={0}>
+                          <Text
+                            onClick={() => navigate("/dashboard")}
+                            cursor="pointer"
+                            colorScheme="blue"
+                            p={4}
+                            _hover={{ bg: "primary.100" }}
+                          >
+                            Dashboard
+                          </Text>
+                          <Text
+                            onClick={() => {
+                              setUser((lp) => {
+                                return {
+                                  ...lp,
+                                  token: "",
+                                  userData: null,
+                                };
+                              });
+                              localStorage.removeItem("user_d");
+                              localStorage.removeItem("x-auth-token");
+                            }}
+                            cursor="pointer"
+                            colorScheme="blue"
+                            p={4}
+                            _hover={{ bg: "primary.100" }}
+                          >
+                            Logout
+                          </Text>
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Portal>
+                  </Popover>
+                ) : (
+                  <CBtn
+                    borderRadius="50px"
+                    bg="primary.100"
+                    size="xs"
+                    m={0}
+                    w="98px"
+                    h="46px"
+                    onClick={() => {
+                      setRegistrationModal((lp) => {
+                        return {
+                          ...lp,
+                          openModal: true,
+                          modalType: RegistraionModalTypes.SIGNUP,
+                        };
+                      });
+                    }}
+                  >
+                    <HStack gap={0}>
+                      <Image alt="" style={{ width: "20px", height: "20px" }} src={menuIcon}></Image>
+                      <Image alt="" style={{ width: "36px", height: "36px" }} src={userIcon}></Image>
+                    </HStack>
+                  </CBtn>
+                )}
+              </HStack>
+              <Box>
                 <CBtn
-                  borderRadius="50px"
-                  bg="primary.100"
-                  size="xs"
+                  bg={colorMode === "light" ? "primary.100" : "white.100"}
+                  borderRadius="100%"
+                  w={isMobile ? "" : "46px"}
+                  h={isMobile ? "" : "46px"}
+                  p={isMobile ? 2 : 0}
                   m={0}
-                  w="98px"
-                  h="46px"
                   onClick={() => {
-                    setRegistrationModal((lp) => {
-                      return {
-                        ...lp,
-                        openModal: true,
-                        modalType: RegistraionModalTypes.SIGNUP,
-                      };
-                    });
+                    onClose();
+                    toggleColorMode();
                   }}
                 >
-                  <HStack gap={0}>
-                    <Image alt="" style={{ width: "20px", height: "20px" }} src={menuIcon}></Image>
-                    <Image alt="" style={{ width: "36px", height: "36px" }} src={userIcon}></Image>
-                  </HStack>
+                  <Image alt="" style={{ width: "24px", height: "24px" }} src={colorModeImage}></Image>
                 </CBtn>
-              )}
-            </HStack>
-            <Box>
-              <CBtn
-                bg={colorMode === "light" ? "primary.100" : "white.100"}
-                borderRadius="100%"
-                w={isMobile ? "" : "46px"}
-                h={isMobile ? "" : "46px"}
-                p={isMobile ? 2 : 0}
-                m={0}
-                onClick={() => {
-                  onClose();
-                  toggleColorMode();
-                }}
-              >
-                <Image alt="" style={{ width: "24px", height: "24px" }} src={colorModeImage}></Image>
-              </CBtn>
-            </Box>
-            <Box>
-              <CBtn
-                bg="primary.100"
-                borderRadius="100px"
-                size="xs"
-                fontSize={{ base: 14, md: 16 }}
-                className="poppinsBold"
-                m={0}
-                w="141px"
-                h="48px"
-                _focus={{
-                  bg: "primary.100",
-                }}
-                _hover={{
-                  bg: "primary.100",
-                }}
-                _active={{
-                  bg: "primary.100",
-                }}
-                onClick={async () => {
-                  try {
-                    const userInfo = await getUserInfo();
-                    if (userInfo) {
-                      await logout();
+              </Box>
+              <Box>
+                <CBtn
+                  bg="primary.100"
+                  borderRadius="100px"
+                  size="xs"
+                  fontSize={{ base: 14, md: 16 }}
+                  className="poppinsBold"
+                  m={0}
+                  w="141px"
+                  h="48px"
+                  _focus={{
+                    bg: "primary.100",
+                  }}
+                  _hover={{
+                    bg: "primary.100",
+                  }}
+                  _active={{
+                    bg: "primary.100",
+                  }}
+                  onClick={async () => {
+                    try {
+                      const userInfo = await getUserInfo();
+                      if (userInfo) {
+                        await logout();
+                      }
+                    } catch (err) {
+                      await login();
                     }
-                  } catch (err) {
-                    await login();
-                  }
-                }}
-              >
-                {btnText ? "Wallet Connected" : "Connect Wallet"}
-              </CBtn>
+                  }}
+                >
+                  {btnText ? "Wallet Connected" : "Connect Wallet"}
+                </CBtn>
+              </Box>
+            </HStack>
+            <Box display={isTablet ? "block" : "none"} cursor="pointer" onClick={onOpen}>
+              <Image alt="" src={colorMode === "light" ? menuIcon : menuIconLight}></Image>
             </Box>
           </HStack>
-          <Box display={isTablet ? "block" : "none"} cursor="pointer" onClick={onOpen}>
-            <Image alt="" src={colorMode === "light" ? menuIcon : menuIconLight}></Image>
-          </Box>
-        </HStack>
+        </Box>
       </Box>
       <Drawer isOpen={isOpen} placement="top" onClose={onClose}>
         <DrawerOverlay />

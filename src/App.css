@@ -102,3 +102,13 @@
 .swiper {
   z-index: 0 !important;
 }
+
+.chakra-checkbox__control {
+  width: 17px !important;
+  height: 17px !important;
+  border-radius: 100% !important;
+}
+
+.chakra-checkbox__label {
+  margin-top: 5px !important;
+}

@@ -24,7 +24,8 @@ import { fetchUserData } from "./utils/actions/registration";
 import { user } from "./recoil/atoms/user";
 const newTheme = extendTheme(theme);
 
-const clientId = "BBhbmSbaMcjyqJ864MsQXmmVudb_g5godU5Ml_GWpCFUfGdxb40_TBmgUz79J82HiSJ2dmhDoChOVEAOs6kX73I";
+// const clientId = "BBhbmSbaMcjyqJ864MsQXmmVudb_g5godU5Ml_GWpCFUfGdxb40_TBmgUz79J82HiSJ2dmhDoChOVEAOs6kX73I";
+const clientId = "BCXfOhyKcaMjuPu5i5UzNe27T4QSoJikT0mXifLzEe8gMnp0JBW0VhmRLc2jQ7jg7Si0zq7GfThrA89QrPa7HSE";
 
 function App() {
   const [openSite, setOpenSite] = useState(false);
@@ -43,9 +44,10 @@ function App() {
           uiConfig: { modalZIndex: 10000000 },
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
-            chainId: "0x1", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
-            rpcTarget:
-              "https://soft-necessary-patron.solana-devnet.discover.quiknode.pro/f68f102b8757e8c3b1d5161b9ec052bc8bbf123a/", // This is the public RPC we have added, please pass on your own endpoint while creating an app
+            chainId: "0x3", // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+            rpcTarget: "https://api.devnet.solana.com",
+            // rpcTarget:
+            //   "https://soft-necessary-patron.solana-devnet.discover.quiknode.pro/f68f102b8757e8c3b1d5161b9ec052bc8bbf123a/", // This is the public RPC we have added, please pass on your own endpoint while creating an app
           },
         });
 
@@ -71,7 +73,7 @@ function App() {
               topupHide: true,
               defaultLanguage: "en",
             },
-            network: "testnet",
+            network: "devnet",
           },
         });
         await web3auth.addPlugin(torusPlugin);
@@ -214,6 +216,15 @@ function App() {
     return privateKey;
   };
 
+  const paySolFee = async (receiverWallet, lamports) => {
+    if (!provider) {
+      return "provider not initialized yet";
+    }
+    const rpc = new RPC(provider);
+    const receipt = await rpc.paySolFee(receiverWallet, lamports);
+    return receipt;
+  };
+
   return (
     <ChakraProvider portalZIndex={40} theme={newTheme}>
       <GoogleOAuthProvider clientId={secrets.GoogleClientId}>
@@ -231,6 +242,7 @@ function App() {
               login,
               web3auth,
               provider,
+              paySolFee,
             }}
           />
         ) : (

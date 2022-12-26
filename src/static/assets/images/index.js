@@ -73,6 +73,11 @@ import dance from "./dance.png";
 import google from "./google.svg";
 import portalysGreen from "./portalysGreen.svg";
 
+import seatUnSelected from "./seatUnselect.png";
+import seatSelected from "./seatSelected.png";
+import qrcode from "./qrcode.png";
+import eye from "./eye.png";
+
 export {
   fbLight,
   fbDark,
@@ -139,4 +144,8 @@ export {
   dance,
   google,
   portalysGreen,
+  seatUnSelected,
+  seatSelected,
+  qrcode,
+  eye,
 };

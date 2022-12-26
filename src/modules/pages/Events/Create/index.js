@@ -1,12 +1,4 @@
-import {
-  Box,
-  HStack,
-  Stack,
-  useColorModeValue,
-  VStack,
-  useToast,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, HStack, Stack, useColorModeValue, VStack, useToast, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { theme } from "../../../../styles/theme/base";
 import { Formik } from "formik";
@@ -24,20 +16,15 @@ import { useRecoilState } from "recoil";
 import { postEvent } from "../../../../utils/actions/event";
 import secrets from "../../../../secrets.json";
 import { user } from "../../../../recoil/atoms/user";
+import { calculateFee, getSolanaPrice, toUSD } from "../../../../utils/crypto";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 const spacing = {
   gap: 0,
   spacing: 0,
   w: "100%",
 };
 
-const headings = [
-  "",
-  "Event Basics",
-  "Ticket Details",
-  "Artist and Lineup",
-  "Promotion",
-  "Summary",
-];
+const headings = ["", "Event Basics", "Ticket Details", "Artist and Lineup", "Promotion", "Summary"];
 
 const initialValues = {
   eventName: "",
@@ -80,17 +67,56 @@ const CreateEvent = ({
   login,
   web3auth,
   provider,
+  paySolFee,
 }) => {
   const [step, setStep] = useState(1);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
   const [_, setUser] = useRecoilState(user);
+  const [fees, setFees] = useState(0.0);
+  const [supply, setSupply] = useState(1);
+  const [SOLPRICE, setSOLPRICE] = useState(0.0);
 
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+  // useEffect(() => {
+  //   const init = async () => {
+  //     const solanaPrice = await getSolanaPrice();
+  //     setSOLPRICE(solanaPrice);
+  //   };
+  //   init();
+  // }, []);
+
+  // useEffect(() => {
+  //   const dollars = toUSD(price, SOLPRICE);
+  //   setDollars(dollars);
+  // }, [price]);
+
+  // //min price solana
+  // useEffect(() => {
+  //   const minDollars = toUSD(minPrice, SOLPRICE);
+  //   setMinDollars(minDollars);
+  // }, [minPrice]);
+
+  // //max price solana
+  // useEffect(() => {
+  //   const maxDollars = toUSD(maxPrice, SOLPRICE);
+  //   setMaxDollars(maxDollars);
+  // }, [maxPrice]);
+
+  // useEffect(() => {
+  //   const total = supply * dollars;
+  //   setTotalRevenue(total);
+  // }, [supply, dollars]);
+
+  // useEffect(() => {
+  //   const calculateTotalFee = () => {
+  //     const solana_fee = calculateFee(file, supply, SOLPRICE);
+  //     setFees(solana_fee);
+  //   };
+  //   calculateTotalFee();
+  // }, [supply, file]); // ADD change on FileSize
+
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
 
   const hanldleCreateEvent = async (values) => {
     if (provider === null) {
@@ -141,32 +167,55 @@ const CreateEvent = ({
       const user = JSON.parse(localStorage.getItem("user_d"));
       formData.append("organizerId", user?.userId);
       try {
-        await postEvent(formData)
-          .then((ne) => {
-            setLoader(false);
-            if (ne.status) {
-              toast({
-                title: "Event Created Succesfully",
-                status: "success",
-                isClosable: true,
-                duration: 4000,
-                position: "bottom",
-              });
-              navigate(-1);
-            } else {
-              toast({
-                title: "Event Creation",
-                description: ne?.message,
-                status: "error",
-                isClosable: true,
-                duration: 4000,
-                position: "bottom",
-              });
-            }
-          })
-          .catch((err) => {
-            console.log({ err });
+        const supply = Number(values?.ticketQuantity);
+        const solanaPrice = await getSolanaPrice();
+        const dollars = toUSD(Number(values?.regular), solanaPrice);
+        // const minDollars = toUSD(Number(values?.earlyBird), solanaPrice);
+        // const maxDollars = toUSD(Number(values?.late), solanaPrice);
+        // const total = supply * dollars;
+
+        const solana_fee = calculateFee(values?.eventImage?.image?.size, supply, solanaPrice);
+        const LamportsFee = solana_fee * LAMPORTS_PER_SOL;
+        const receiverPublicKey = "BNfYrWMU46SssCLTEY8TSpJk3swRbJYXE7TSNPYhtTtx"; // TODO: env var
+       console.log({LamportsFee})
+        formData.append('fee',LamportsFee?.toFixed(0))
+        const payment = await paySolFee(receiverPublicKey, LamportsFee?.toFixed(0));
+        if (payment.code || payment.data) {
+          toast({
+            title: "Fee Error",
+            description: payment?.data?.data?.logs[1] ? payment.data.data.logs[1] : payment.message,
+            status: "error",
+            duration: 4000,
+            isClosable: true,
           });
+        } else {
+          await postEvent(formData)
+            .then((ne) => {
+              setLoader(false);
+              if (ne.status) {
+                toast({
+                  title: "Event Created Succesfully",
+                  status: "success",
+                  isClosable: true,
+                  duration: 4000,
+                  position: "bottom",
+                });
+                navigate(-1);
+              } else {
+                toast({
+                  title: "Event Creation",
+                  description: ne?.message,
+                  status: "error",
+                  isClosable: true,
+                  duration: 4000,
+                  position: "bottom",
+                });
+              }
+            })
+            .catch((err) => {
+              console.log({ err });
+            });
+        }
       } catch (err) {
         setLoader(false);
         toast({
@@ -214,26 +263,14 @@ const CreateEvent = ({
           <Spinner color="primary.100" size="xl" />
         </Box>
       )}
-      <Box
-        w="100%"
-        opacity={loader ? 0.5 : 1}
-        display="flex"
-        justifyContent={{ base: "flex-start", "3xl": "center" }}
-      >
+      <Box w="100%" opacity={loader ? 0.5 : 1} display="flex" justifyContent={{ base: "flex-start", "3xl": "center" }}>
         <Formik
           initialValues={initialValues}
           // validate={validate}
           onSubmit={(values) => hanldleCreateEvent(values)}
         >
           {(formik) => {
-            const {
-              values,
-              handleChange,
-              handleSubmit,
-              handleBlur,
-              resetForm,
-              setFieldValue,
-            } = formik;
+            const { values, handleChange, handleSubmit, handleBlur, resetForm, setFieldValue } = formik;
             return (
               <Box w="100%" maxW={{ base: "100%", lg: "95%", "3xl": "80%" }}>
                 <EventBar
@@ -253,9 +290,7 @@ const CreateEvent = ({
                   <Box color={textValue} w="100%" flex={7}>
                     {" "}
                     <VStack w="100%">
-                      <RenderForms
-                        {...{ values, handleBlur, handleChange, setFieldValue }}
-                      />
+                      <RenderForms {...{ values, handleBlur, handleChange, setFieldValue }} />
                     </VStack>
                   </Box>
                 </HStack>

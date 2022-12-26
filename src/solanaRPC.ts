@@ -1,10 +1,4 @@
-import {
-  Connection,
-  LAMPORTS_PER_SOL,
-  PublicKey,
-  SystemProgram,
-  Transaction,
-} from "@solana/web3.js";
+import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { CustomChainConfig, SafeEventEmitterProvider } from "@web3auth/base";
 import { SolanaWallet } from "@web3auth/solana-provider";
 
@@ -79,9 +73,7 @@ export default class SolanaRpc {
         feePayer: new PublicKey(accounts[0]),
       }).add(TransactionInstruction);
 
-      const { signature } = await solanaWallet.signAndSendTransaction(
-        transaction
-      );
+      const { signature } = await solanaWallet.signAndSendTransaction(transaction);
 
       return signature;
     } catch (error) {
@@ -122,5 +114,39 @@ export default class SolanaRpc {
     });
 
     return privateKey as string;
+  };
+
+  paySolFee = async (receiverWallet: string, lamports: number): Promise<string> => {
+    try {
+      const solanaWallet = new SolanaWallet(this.provider);
+
+      const accounts = await solanaWallet.requestAccounts();
+
+      const connectionConfig = await solanaWallet.request<CustomChainConfig>({
+        method: "solana_provider_config",
+        params: [],
+      });
+      const connection = new Connection(connectionConfig.rpcTarget);
+
+      const block = await connection.getLatestBlockhash("finalized");
+      const payerPubKey = new PublicKey(accounts[0]);
+      const receiverPubKey = new PublicKey(receiverWallet);
+
+      const TransactionInstruction = SystemProgram.transfer({
+        fromPubkey: payerPubKey,
+        toPubkey: receiverPubKey,
+        lamports,
+      });
+      const transaction = new Transaction({
+        blockhash: block.blockhash,
+        lastValidBlockHeight: block.lastValidBlockHeight,
+        feePayer: payerPubKey,
+      }).add(TransactionInstruction);
+
+      const { signature } = await solanaWallet.signAndSendTransaction(transaction);
+      return signature;
+    } catch (error) {
+      return error as string;
+    }
   };
 }
