@@ -10,6 +10,7 @@ import Detail from "../pages/booking/detail";
 import Payment from "../pages/booking/detail";
 import Tickets from "../pages/tickets";
 import About from "../pages/portalys/about";
+import Faq from "../pages/portalys/faq";
 const Routes = (props) => {
   return (
     <DomRoutes>
@@ -24,7 +25,7 @@ const Routes = (props) => {
       <Route key="bookingDetail" path="booking/detail" element={<Detail {...props} />} />
       <Route key="tickets" path="mytickets" element={<Tickets {...props} />} />
       <Route path="about" element={<About />} />
-
+      <Route path="faq" element={<Faq />} />
       <Route path="resetpassword" element={<Home />} />
     </DomRoutes>
   );

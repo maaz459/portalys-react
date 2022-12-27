@@ -1,0 +1,26 @@
+.faqhero{
+    padding: 50px 90px 120px 90px;
+    background-color: black;
+}
+
+@media only screen and (max-width: 1200px) {
+    .faqhero{
+        padding: 0px 70px 90px 70px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .faqhero{
+        padding: 0px 50px 70px 50px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .faqhero{
+        padding: 0px 25px 70px 25px;
+    }
+    .faqheader{
+        padding: 40px 0px !important;
+    }
+    .mainboxfaq{
+        padding: 5px !important;
+    }
+}
