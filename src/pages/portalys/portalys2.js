@@ -13,15 +13,14 @@ import {
 import "../../styles/portalys/portalys.css";
 import location from "../../static/assets/images/location.svg";
 import bgimg from "../../static/assets/images/bg2.png";
-import track from "../../static/assets/images/1trk.svg";
 import track2 from "../../static/assets/images/2trk.svg";
 import men from "../../static/assets/images/men.svg";
-import map from "../../static/assets/images/map.svg";
+import { map,ltrk as track  } from "../../static/assets/images";
 import loc from "../../static/assets/images/loc.svg";
 import infra from "../../static/assets/images/infra.svg";
 import thumb from "../../static/assets/images/thumb.svg";
 import hrt from "../../static/assets/images/hrt.svg";
-
+import { useNavigate } from "react-router-dom";
 export default function Portalys2() {
   const tracks = [
     {
@@ -45,6 +44,7 @@ export default function Portalys2() {
       para: "Tombak Healer",
     },
   ];
+  const navigate = useNavigate();
   return (
     <Box className="soccerhero">
       <Box w="100%">
@@ -62,12 +62,7 @@ export default function Portalys2() {
             <Heading color="#FBFAFB" fontWeight="700" fontSize="36px" className="preserveheading">
               The Preserve Waitlist
             </Heading>
-            <Text
-              fontSize="22px"
-              color="#02F6AD"
-              marginTop="13px"
-              fontWeight="500"
-            >
+            <Text fontSize="22px" color="#02F6AD" marginTop="13px" fontWeight="500">
               Sat 5 nov | 10:00pm
             </Text>
             <Box display="flex" alignItems="center" gap="10px">
@@ -81,20 +76,9 @@ export default function Portalys2() {
         </Box>
       </Box>
       {/* // */}
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        gap="50px"
-        className="birdcard"
-      >
+      <Box display="flex" alignItems="center" justifyContent="space-between" gap="50px" className="birdcard">
         <Box w="60%" className="birdhero">
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            width="50%"
-          >
+          <Box display="flex" alignItems="center" justifyContent="space-between" width="50%">
             <Text color="#FFFFFF" fontSize="25px">
               Tickets
             </Text>
@@ -126,13 +110,7 @@ export default function Portalys2() {
         </Box>
       </Box>
       <Box display="flex" paddingTop="30px" gap="50px" className="regularcards">
-        <Box
-          display="block"
-          width="60%"
-          alignItems="center"
-          justifyContent="space-between"
-          className="darkcard"
-        >
+        <Box display="block" width="60%" alignItems="center" justifyContent="space-between" className="darkcard">
           <VStack
             padding="20px"
             display="grid"
@@ -197,12 +175,7 @@ export default function Portalys2() {
                 $ 14.80
               </chakra.span>
             </VStack>
-            <HStack
-              padding="10px 20px"
-              display="flex"
-              gap="20px"
-              alignItems="center"
-            >
+            <HStack padding="10px 20px" display="flex" gap="20px" alignItems="center">
               <chakra.span
                 backgroundColor="#02F6AD"
                 padding="10px"
@@ -241,29 +214,16 @@ export default function Portalys2() {
             <hr />
           </Box>
           <Box>
-            <Heading
-              as="h4"
-              size="md"
-              marginTop="50px"
-              color="#FFFFFF"
-              fontSize="25px"
-            >
+            <Heading as="h4" size="md" marginTop="50px" color="#FFFFFF" fontSize="25px">
               Description
             </Heading>
             <Text color="#FFFFFF" fontSize="15px" marginTop="25px">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, orem Ipsum is simply dummy text of the
-              printing and typesetting industry.
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s, orem Ipsum is simply dummy text of the printing and
+              typesetting industry.
             </Text>
-            <Text
-              color="#FFFFFF"
-              fontSize="15px"
-              marginTop="20px"
-              paddingBottom="50px"
-            >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been delivered.
+            <Text color="#FFFFFF" fontSize="15px" marginTop="20px" paddingBottom="50px">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been delivered.
             </Text>
             <chakra.sapn color="#02F6AD" fontSize="15px">
               {" "}
@@ -276,17 +236,8 @@ export default function Portalys2() {
             <chakra.span fontSize="12px" color="#9A9A9A">
               Have a promo code ?
             </chakra.span>
-            <input
-              type=""
-              placeholder="Add Promo Code here"
-              borderRadius="30px"
-              className="promoinput"
-            />
-            <HStack
-              display="flex"
-              justifyContent="space-between"
-              marginTop="12px"
-            >
+            <input type="" placeholder="Add Promo Code here" borderRadius="30px" className="promoinput" />
+            <HStack display="flex" justifyContent="space-between" marginTop="12px">
               <Text color="#FFFFFF" fontSize="15px">
                 Services Fees
               </Text>
@@ -294,11 +245,7 @@ export default function Portalys2() {
                 $ 5.80
               </Text>
             </HStack>
-            <HStack
-              display="flex"
-              justifyContent="space-between"
-              marginTop="10px"
-            >
+            <HStack display="flex" justifyContent="space-between" marginTop="10px">
               <Text color="#FFFFFF" fontWeight="700" fontSize="22px">
                 Total
               </Text>
@@ -306,12 +253,7 @@ export default function Portalys2() {
                 $ 14.80
               </Text>
             </HStack>
-            <HStack
-              display="flex"
-              justifyContent="space-between"
-              marginTop="30px"
-              className="intrestedbtnhero"
-            >
+            <HStack display="flex" justifyContent="space-between" marginTop="30px" className="intrestedbtnhero">
               <Button
                 className="intrestedbtn"
                 fontWeight="700"
@@ -335,6 +277,7 @@ export default function Portalys2() {
                 bg="#ffff"
                 borderRadius="40px"
                 outline="none"
+                onClick={() => navigate("/booking/seat")}
               >
                 NOW FROM 18$
               </Button>
@@ -358,11 +301,7 @@ export default function Portalys2() {
                       {item.title}
                     </Text>
 
-                    <chakra.span
-                      color="#FFFFFF"
-                      fontSize="13px"
-                      marginTop="6px"
-                    >
+                    <chakra.span color="#FFFFFF" fontSize="13px" marginTop="6px">
                       {item.para}
                     </chakra.span>
                   </Box>
@@ -408,12 +347,7 @@ export default function Portalys2() {
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Location
           </Heading>
-          <Box
-            marginTop="25px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
+          <Box marginTop="25px" display="flex" justifyContent="space-between" alignItems="center">
             <HStack gap="15px">
               <Image src={loc} width="16px" />
               <Text fontSize="15px" fontWeight="700" color="#ffff">
@@ -437,12 +371,7 @@ export default function Portalys2() {
           <Heading as="h4" size="md" color="#FFFFFF" fontSize="25px">
             Organized by
           </Heading>
-          <HStack
-            marginTop="35px"
-            display="flex"
-            justifyContent="space-between"
-            className="organizedcard"
-          >
+          <HStack marginTop="35px" display="flex" justifyContent="space-between" className="organizedcard">
             <Image width="120px" src={infra} />
             <Text color="#02F6AD" fontSize="25px" fontWeight="700">
               infra
@@ -459,14 +388,7 @@ export default function Portalys2() {
                 2,6k Likes
               </chakra.span>
             </Box>
-            <Button
-              fontSize="15px"
-              color="#00000"
-              borderRadius="30px"
-              bg="#FFFF"
-              outline="none"
-              padding="4px 25px"
-            >
+            <Button fontSize="15px" color="#00000" borderRadius="30px" bg="#FFFF" outline="none" padding="4px 25px">
               Follow
             </Button>
           </HStack>

@@ -8,7 +8,7 @@ import {
 } from "../recoil/atoms/registration";
 import { useRecoilState } from "recoil";
 
-const Home = () => {
+const Home = (props) => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [_, setRegistrationModal] = useRecoilState(registration);
 
@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout {...props}>
       <HomePage />
     </Layout>
   );

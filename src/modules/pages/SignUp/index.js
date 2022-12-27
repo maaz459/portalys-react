@@ -1,21 +1,8 @@
-import {
-  Box,
-  Button,
-  Divider,
-  HStack,
-  Text,
-  VStack,
-  Input,
-  chakra,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, Text, VStack, Input, chakra, Image } from "@chakra-ui/react";
 import { SignUpSchema } from "../../../utils/schema";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { google } from "../../../static/assets/images";
-import {
-  RegistraionModalTypes,
-  registration,
-} from "../../../recoil/atoms/registration";
+import { RegistraionModalTypes, registration } from "../../../recoil/atoms/registration";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userRoles } from "../../../utils/constants";
@@ -33,9 +20,7 @@ const SignUp = () => {
   const [cookies, setCookie] = useCookies(["x-auth-token"]);
 
   const navigate = useNavigate();
-  const userRole = window.location.pathname.includes("organizer")
-    ? userRoles.ORGANIZER
-    : userRoles.ATTENDEE;
+  const userRole = window.location.pathname.includes("organizer") ? userRoles.ORGANIZER : userRoles.ATTENDEE;
 
   const signUpWithGoogle = useGoogleLogin({
     onSuccess: (res) => handleGoogleLogin(res),
@@ -46,7 +31,8 @@ const SignUp = () => {
   const handleGoogleLogin = async (payload) => {
     const user = await loginWithGoogle({ ...payload, userRole });
     saveToken(user.token, "x-auth-token", 60, setCookie);
-console.log('jfgyh')
+    localStorage.setItem("user_d", JSON.stringify(user.user));
+    localStorage.setItem("x-auth-token", user.token);
     setUser((lp) => {
       return {
         ...lp,
@@ -63,9 +49,6 @@ console.log('jfgyh')
         userRole: "",
       };
     });
-    if (userRole === userRoles.ORGANIZER) {
-      navigate("/dashboard");
-    }
   };
 
   return (
@@ -120,12 +103,7 @@ console.log('jfgyh')
                     )}
                   />
                   {errors.email && touched.email && (
-                    <Text
-                      color="red"
-                      className="heebo"
-                      fontWeight={400}
-                      fontSize={14}
-                    >
+                    <Text color="red" className="heebo" fontWeight={400} fontSize={14}>
                       {errors.email}
                     </Text>
                   )}
@@ -184,12 +162,7 @@ console.log('jfgyh')
                     border="1px solid"
                     onClick={() => signUpWithGoogle()}
                   >
-                    <Image
-                      alt=""
-                      src={google}
-                      style={{ marginRight: "10px" }}
-                    />{" "}
-                    Sign up with Google
+                    <Image alt="" src={google} style={{ marginRight: "10px" }} /> Sign up with Google
                   </Button>
                 </Box>
                 <Box px={{ base: 0, md: 36 }} mt={24} w="100%">
@@ -205,14 +178,7 @@ console.log('jfgyh')
                     Sign up with TORUS{" "}
                   </Button>
                 </Box>
-                <Box
-                  className="gordita400"
-                  fontSize={16}
-                  px={{ base: 0, md: 36 }}
-                  mt={24}
-                  w="100%"
-                  pb={56}
-                >
+                <Box className="gordita400" fontSize={16} px={{ base: 0, md: 36 }} mt={24} w="100%" pb={56}>
                   Have an account already?
                   <chakra.span
                     color="orange.100"

@@ -18,3 +18,11 @@ export const forgotPassword = async (payload) => {
 export const resetPassword = async (payload) => {
   return axios.post("/api/reset", payload);
 };
+
+export const fetchUserData = async (token) => {
+  return axios.get("/api/me", {
+    headers: {
+      "x-auth-token": "Bearer " + token,
+    },
+  });
+};

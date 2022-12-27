@@ -19,7 +19,7 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SingleDatepicker } from "../../shared/datepicker";
 import {
   cancel,
@@ -32,6 +32,11 @@ import {
   refund,
 } from "../../../static/assets/images/dashboard/sidebar";
 import { useNavigate } from "react-router-dom";
+import dance from "../../../static/assets/images/dance.png";
+import { getEvents } from "../../../utils/actions/event";
+import { user } from "../../../recoil/atoms/user";
+import { useRecoilState } from "recoil";
+import { isEmpty } from "lodash";
 const spacing = {
   gap: 0,
   spacing: 0,
@@ -41,29 +46,60 @@ const spacing = {
 const SingleEvent = {
   image: event,
   eventName: "Joker (VIP) Ticket",
-  date: "24 Dec, 2022",
+  startDate: "24 Dec, 2022",
   startTime: "15:00",
   venue: "Licester Squre",
   status: "Live",
   location: "Kia Forum, Inglewood, CA",
 };
 
-const events = [
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-  SingleEvent,
-];
+const events = [SingleEvent];
 
 const EventsComponent = () => {
   const [date, setDate] = useState(null);
+  const [evnt, setEvnt] = useState([]);
+  const [data, setData] = useState([]);
+  const [_, setUser] = useRecoilState(user);
+
   const [displayType, setDisplayType] = useState("table");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user_d"));
+        const val = await getEvents(user.userId);
+        if (!isEmpty(val)) {
+          const newEvents = [];
+          Object.values(val).forEach((et) => {
+            newEvents.push({ ...et });
+          });
+          setData(newEvents);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    init();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setEvnt((val) => [
+        {
+          image: dance,
+          eventName: "My New Event",
+          startDate: "24 Dec, 2022",
+          startTime: "01:49",
+          venue: "Lahore",
+          status: "Live",
+          location: "Lahore",
+        },
+      ]);
+    }, 2000);
+  }, []);
+
   return (
     <Box w="100%">
       <Stack {...{ spacing }} flexDir="row">
@@ -153,9 +189,17 @@ const EventsComponent = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {events.map(
+                {data?.map(
                   (
-                    { date, status, eventName, startTime, venue, image },
+                    {
+                      startDate,
+                      status,
+                      eventName,
+                      startTime,
+                      venue,
+                      eventImage,
+                      location,
+                    },
                     index
                   ) => {
                     return (
@@ -167,7 +211,7 @@ const EventsComponent = () => {
                       >
                         <Td py={0} h="57px">
                           <HStack py={0} spacing={10}>
-                            <Image w="57px" h="57px" alt="" src={image} />
+                            <Image w="57px" h="57px" alt="" src={eventImage} />
                             <Text className="gordita400" fontSize={16}>
                               {eventName}
                             </Text>
@@ -175,7 +219,7 @@ const EventsComponent = () => {
                         </Td>
                         <Td>
                           <Text fontSize={14} className="gordita400">
-                            {date}
+                            {startDate}
                           </Text>
                         </Td>
                         <Td>
@@ -185,12 +229,12 @@ const EventsComponent = () => {
                         </Td>
                         <Td>
                           <Text fontSize={14} className="gordita400">
-                            {venue}
+                            {location}
                           </Text>{" "}
                         </Td>
                         <Td>
                           <Text fontSize={14} className="gordita400">
-                            {status}
+                            Live
                           </Text>{" "}
                         </Td>
                         <Td>
@@ -226,7 +270,15 @@ const EventsComponent = () => {
           <Flex wrap="wrap" gap={1} justifyContent="space-between">
             {events.map(
               (
-                { date, status, eventName, startTime, venue, image, location },
+                {
+                  startDate,
+                  status,
+                  eventName,
+                  startTime,
+                  venue,
+                  image,
+                  location,
+                },
                 index
               ) => {
                 return (
@@ -255,7 +307,7 @@ const EventsComponent = () => {
                         fontSize={14}
                         color="primary.100"
                       >
-                        {date + "|" + startTime}
+                        {startDate + "|" + startTime}
                       </Text>
                       <HStack>
                         <Image alt="" src={locImage} />

@@ -45,7 +45,8 @@ const BasicEvents = (props) => {
           handleChange={setFieldValue}
           placeholder="Select Date and Time"
           label="Date"
-          name="date"
+          name="startDate"
+          format="YYYY-MM-DD"
         />
         <TimeBox
           values={values}
@@ -55,6 +56,18 @@ const BasicEvents = (props) => {
           label="Start Time"
           maxW="100%"
           name="startTime"
+        />
+      </HStack>
+
+      <HStack spacing={30} justifyContent="space-between" w="100%">
+        <DateBox
+          values={values}
+          handleBlur={handleBlur}
+          handleChange={setFieldValue}
+          placeholder="Select Date and Time"
+          label="Date"
+          name="endDate"
+          format="YYYY-MM-DD"
         />
         <TimeBox
           values={values}
