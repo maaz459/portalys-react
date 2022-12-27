@@ -6,6 +6,7 @@ import CreateEvents from "../pages/events/create";
 import Portalys1 from "../pages/portalys/portalys1";
 import Portalys2 from "../pages/portalys/portalys2";
 import About from "../pages/portalys/about";
+import Faq from "../pages/portalys/faq";
 const Routes = () => {
   return (
     <DomRoutes>
@@ -35,6 +36,10 @@ const Routes = () => {
          <Route
         path="about"
         element={<About />}
+      />
+      <Route
+        path="faq"
+        element={<Faq />}
       />
         
     </DomRoutes>
