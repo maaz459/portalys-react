@@ -91,6 +91,11 @@ import bgimg from "./bgimg.svg";
 import writer from "./writer.svg";
 import profession from "./profession.svg";
 
+import hero1 from "./hero1.png";
+import hero3 from "./hero3.png";
+import hero4 from "./hero4.png";
+import hero5 from "./hero5.png";
+
 export {
   fbLight,
   fbDark,
@@ -173,4 +178,8 @@ export {
   disk4,
   writer,
   profession,
+  hero1,
+  hero3,
+  hero4,
+  hero5,
 };
