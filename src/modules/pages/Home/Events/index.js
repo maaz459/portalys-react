@@ -1,12 +1,4 @@
-import {
-  Box,
-  HStack,
-  Text,
-  VStack,
-  chakra,
-  useColorModeValue,
-  Image,
-} from "@chakra-ui/react";
+import { Box, HStack, Text, VStack, chakra, useColorModeValue, Image } from "@chakra-ui/react";
 import SectionHeader from "../../../shared/sectionHeader";
 import { france, caro1, jazz } from "../../../../static/assets/images";
 import { useRef, useState } from "react";
@@ -14,12 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import _isEmpty from "lodash/isEmpty";
 import { Icon } from "@chakra-ui/react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Events = ({ isMobile, isTablet, xsmall, colorMode, events, maxW }) => {
   const swiperRef = useRef();
   const [activeIndex, setActiveIndex] = useState(0);
   const [likeIndex, setLikeIndex] = useState(-1);
-
+  const navigate = useNavigate();
   const value = useColorModeValue("black.100", "white.200");
   return (
     <Box w="100%">
@@ -41,22 +34,13 @@ const Events = ({ isMobile, isTablet, xsmall, colorMode, events, maxW }) => {
             maxW,
           }}
         />
-        <Box
-          px={{ base: 20, sm: 36, md: 20 }}
-          pl={{ lg: 44 }}
-          w="100%"
-          justifyContent="center"
-          display="flex"
-          mt={60}
-        >
+        <Box px={{ base: 20, sm: 36, md: 20 }} pl={{ lg: 44 }} w="100%" justifyContent="center" display="flex" mt={60}>
           <Box w="100%" maxW="1700">
             <HStack w="100%">
               <Swiper
                 spaceBetween={24}
                 slidesPerView={isMobile ? 1 : 3.2}
-                onSlideChange={() =>
-                  setActiveIndex(swiperRef.current.activeIndex)
-                }
+                onSlideChange={() => setActiveIndex(swiperRef.current.activeIndex)}
                 onBeforeInit={(swiper) => {
                   swiperRef.current = swiper;
                 }}
@@ -64,11 +48,19 @@ const Events = ({ isMobile, isTablet, xsmall, colorMode, events, maxW }) => {
                 {!_isEmpty(events) &&
                   events.map(
                     (
-                      { image, heading, organizer, date, time, categories },
+                      {
+                        eventImage: image,
+                        eventName: heading,
+                        organizer,
+                        startDate: date,
+                        startTime: time,
+                        categories,
+                        uuid,
+                      },
                       index
                     ) => (
                       <SwiperSlide key={index}>
-                        <Box w="100%">
+                        <Box onClick={() => navigate("/newevents/" + uuid)} cursor="pointer" w="100%">
                           <VStack w="100%">
                             <Box w="100%" pos="relative">
                               {likeIndex === index ? (
@@ -94,11 +86,7 @@ const Events = ({ isMobile, isTablet, xsmall, colorMode, events, maxW }) => {
                                   cursor="pointer"
                                 />
                               )}
-                              <Image
-                                alt=""
-                                style={{ width: "100%" }}
-                                src={image}
-                              ></Image>
+                              <Image alt="" style={{ width: "100%" }} src={image}></Image>
                             </Box>
                             <VStack
                               alignItems={{ base: "center", sm: "flex-start" }}
@@ -140,20 +128,13 @@ const Events = ({ isMobile, isTablet, xsmall, colorMode, events, maxW }) => {
                                 pt={16}
                               >
                                 <Image src={jazz} alt=""></Image>
-                                <Text
-                                  fontSize={{ base: 14, md: 16, "3xl": 16 }}
-                                  className="gordita600"
-                                >
-                                  {organizer}
+                                <Text fontSize={{ base: 14, md: 16, "3xl": 16 }} className="gordita600">
+                                  Organizer
                                 </Text>
                               </HStack>
                               {/* Category */}
-                              <HStack
-                                w="100%"
-                                alignContent="flex-start"
-                                pt={16}
-                              >
-                                {categories.map((cat, index) => (
+                              <HStack w="100%" alignContent="flex-start" pt={16}>
+                                {["Industry", "Techno", "Bass"].map((cat, index) => (
                                   <Box
                                     borderRadius="25px"
                                     border="1px"

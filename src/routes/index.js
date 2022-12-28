@@ -59,7 +59,7 @@ const Routes = (props) => {
       <Route key="home" path="/" element={<Home {...props} />} />
       <Route key="organizer" path="organizer" element={<Home {...props} />} />
       <Route key="newevents" path="newevents" element={<Portalys1 />} />
-      <Route key="eventdetail" path="eventdetail" element={<Portalys2 />} />
+      <Route key="eventdetail" path="newevents/:id" element={<Portalys2 />} />
       <Route key="dashboard" path="dashboard" element={<Dashboard {...props} />} />
       <Route key="events" path="events" element={<Events {...props} />} />
       <Route key="createEvent" path="events/create" element={<CreateEvents {...props} />} />
