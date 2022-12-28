@@ -1,14 +1,4 @@
-import {
-  Box,
-  HStack,
-  useColorMode,
-  useColorModeValue,
-  Stack,
-  VStack,
-  Button,
-  Image,
-  Link,
-} from "@chakra-ui/react";
+import { Box, HStack, useColorMode, useColorModeValue, Stack, VStack, Button, Image, Link } from "@chakra-ui/react";
 import { theme } from "../../styles/theme/base";
 import { FooterWrapper } from "../../styles/layout/footer";
 import Typography from "./typography";
@@ -30,10 +20,7 @@ const Footer = () => {
   const xsmall = useMediaQuery("(max-width: 490px)");
 
   const { colorMode } = useColorMode();
-  const value = useColorModeValue(
-    theme.colors.white[100],
-    theme.colors.black[100]
-  );
+  const value = useColorModeValue(theme.colors.white[100], theme.colors.black[100]);
 
   return (
     <FooterWrapper background={value}>
@@ -47,11 +34,7 @@ const Footer = () => {
           h="100%"
         >
           <VStack w={isMobile ? "100%" : ""} h="100%">
-            <Image
-              alt=""
-              style={{ width: "205px" }}
-              src={colorMode === "light" ? DarkLogo : LightLogo}
-            ></Image>
+            <Image alt="" style={{ width: "205px" }} src={colorMode === "light" ? DarkLogo : LightLogo}></Image>
             {!isMobile && (
               <Typography color="white.200" pt="65" variant="footerText">
                 © 2022 | All Rights Reserved.
@@ -92,9 +75,9 @@ const Footer = () => {
               {[
                 { text: "Refund Policy", link: "/" },
                 { text: "My Account", link: "/" },
-                { text: "Help/FAQ", link: "/" },
+                { text: "Help/FAQ", link: "/faq" },
                 { text: "Security", link: "/" },
-                { text: "Our Vision", link: "/" },
+                { text: "Our Vision", link: "/about" },
               ].map(({ link, text }, index) => {
                 return (
                   <Link key={index} href={link}>
@@ -128,11 +111,7 @@ const Footer = () => {
               ].map(({ link, text, icon }, index) => {
                 return (
                   <HStack key={index}>
-                    <Image
-                      alt=""
-                      style={{ width: "20px", height: "20px" }}
-                      src={icon}
-                    ></Image>
+                    <Image alt="" style={{ width: "20px", height: "20px" }} src={icon}></Image>
                     <Link key={index} href={link}>
                       <Typography isMobile={isTablet} variant="footerText">
                         {text}
@@ -145,12 +124,7 @@ const Footer = () => {
           </Stack>
           {isMobile && (
             <Box w="100%" display="flex" justifyContent="center">
-              <Typography
-                textAlign="center"
-                color="white.200"
-                py={8}
-                variant="footerText"
-              >
+              <Typography textAlign="center" color="white.200" py={8} variant="footerText">
                 © 2022 | All Rights Reserved.
               </Typography>
             </Box>
@@ -161,20 +135,8 @@ const Footer = () => {
             justifyContent={isMobile ? "flex-end" : ""}
             h="100%"
           >
-            <Button
-              bg="primary.100"
-              w="46px"
-              h="46px"
-              px="15px"
-              py="16px"
-              borderRadius="75%"
-              size="xs"
-            >
-              <Image
-                alt=""
-                style={{ width: "14px", height: "16px" }}
-                src={topIcon}
-              ></Image>
+            <Button bg="primary.100" w="46px" h="46px" px="15px" py="16px" borderRadius="75%" size="xs">
+              <Image alt="" style={{ width: "14px", height: "16px" }} src={topIcon}></Image>
             </Button>
           </Stack>
         </Stack>

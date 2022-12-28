@@ -9,3 +9,11 @@ export const addEvent = async (payload) => {
 export const fetchEvent = async (params) => {
   return axios.get("/api/events/organizer/" + params);
 };
+
+export const fetchAllEvent = async () => {
+  return axios.get("/api/events/");
+};
+
+export const fetchEventByUUID = async (id) => {
+  return axios.get("/api/events/" + id);
+};

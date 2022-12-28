@@ -1,12 +1,4 @@
-import {
-  useColorMode,
-  Stack,
-  Box,
-  Text,
-  Flex,
-  VStack,
-  Image,
-} from "@chakra-ui/react";
+import { useColorMode, Stack, Box, Text, Flex, VStack, Image } from "@chakra-ui/react";
 import { useMediaQuery } from "../../../utils/useMediaQuery";
 import SearchSection from "./Search";
 import Events from "./Events";
@@ -46,42 +38,9 @@ import FAQs from "./FAQs";
 import { HomeWrapper } from "../../../styles/pages/home";
 import Button from "../../shared/button";
 import Features from "./Features";
-import { useEffect } from "react";
-const events = [
-  {
-    image: caro1,
-    heading: "Automatic Invite Raresh, Ion Ludwig Eomatic Writing",
-    organizer: "Masetor Jazz",
-    date: "Sun, 15 dec, 2022",
-    time: "12:00pm",
-    categories: ["Industry", "Techno", "Bass"],
-  },
-  {
-    image: caro2,
-    heading: "Automatic Invite Raresh, Ion Ludwig Eomatic Writing",
-    organizer: "Masetor Jazz",
-    date: "Sun, 15 dec, 2022",
-    time: "12:00pm",
-    categories: ["Industry", "Techno", "Bass"],
-  },
-  {
-    image: caro3,
-    heading: "Automatic Invite Raresh, Ion Ludwig Eomatic Writing",
-    organizer: "Masetor Jazz",
-    date: "Sun, 15 dec, 2022",
-    time: "12:00pm",
-    categories: ["Industry", "Techno", "Bass"],
-  },
-  {
-    image: caro2,
-    heading: "Automatic Invite Raresh, Ion Ludwig Eomatic Writing",
-    organizer: "Masetor Jazz",
-    date: "Sun, 15 dec, 2022",
-    time: "12:00pm",
-    categories: ["Industry", "Techno", "Bass"],
-  },
-];
-
+import { useEffect, useState } from "react";
+import { getAllEvents } from "../../../utils/actions/event";
+import isEmpty from "lodash/isEmpty";
 const festivals = [
   {
     image: fest1,
@@ -115,20 +74,34 @@ const HomePage = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const xsmall = useMediaQuery("(max-width: 520px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
+  const [events, setEvents] = useState([]);
   const maxW = "1662px";
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const val = await getAllEvents();
+        if (!isEmpty(val)) {
+          const newEvents = [];
+          Object.values(val).forEach((et) => {
+            newEvents.push({ ...et });
+          });
+          setEvents(newEvents);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    init();
+  }, []);
 
   return (
     <HomeWrapper>
       <Stack alignItems="center" justifyContent="center" w="100%" spacing={0}>
         <SearchSection {...{ isMobile, xsmall, isTablet, maxW }} />
         <Events {...{ isMobile, xsmall, isTablet, colorMode, events, maxW }} />
-        <Box
-          alignItems="center"
-          display="flex"
-          flexDir="column"
-          w="100%"
-          pt={{ base: 71, sm: 100 }}
-        >
+        <Box alignItems="center" display="flex" flexDir="column" w="100%" pt={{ base: 71, sm: 100 }}>
           <SectionHeader
             heading="Explore Cities in"
             flag={france}
@@ -139,18 +112,13 @@ const HomePage = () => {
             <Image alt="" style={{ width: "100%" }} src={map}></Image>
           </Box>
         </Box>
-        <Festivals
-          {...{ isMobile, xsmall, isTablet, colorMode, festivals, maxW }}
-        />
-        <Tickets
-          {...{ colorMode, isMobile, isTablet, xsmall, maxW: "1900px" }}
-        />
+        <Festivals {...{ isMobile, xsmall, isTablet, colorMode, festivals, maxW }} />
+        <Tickets {...{ colorMode, isMobile, isTablet, xsmall, maxW: "1900px" }} />
         <Features
           {...{
             features: [
               {
-                image:
-                  colorMode === "light" ? interestingDark : interestingLight,
+                image: colorMode === "light" ? interestingDark : interestingLight,
               },
               {
                 image: colorMode === "light" ? djDark : djLight,
@@ -171,11 +139,7 @@ const HomePage = () => {
         />
         <Box w="100%" display="flex" justifyContent="center">
           <Box maxW="1662px" w="100%" pos="relative" mt={108} px={10}>
-            <Image
-              alt=""
-              style={{ padding: "20px", width: "100%", height: "100%" }}
-              src={djBg}
-            />
+            <Image alt="" style={{ padding: "20px", width: "100%", height: "100%" }} src={djBg} />
             <Image
               alt=""
               style={{
@@ -191,11 +155,7 @@ const HomePage = () => {
         </Box>
         <Box maxW={maxW}>
           <Box mt={100}>
-            <Text
-              className="gordita700"
-              fontSize={{ base: 22, md: 32, lg: 38 }}
-              textAlign="center"
-            >
+            <Text className="gordita700" fontSize={{ base: 22, md: 32, lg: 38 }} textAlign="center">
               Creating event tickets, reimagined{" "}
             </Text>{" "}
           </Box>
@@ -232,11 +192,7 @@ const HomePage = () => {
             w="100%"
             overflow="hidden"
           >
-            <Image
-              alt=""
-              src={organizerBg}
-              style={{ position: "absolute", zIndex: -2, right: 0, top: 0 }}
-            ></Image>
+            <Image alt="" src={organizerBg} style={{ position: "absolute", zIndex: -2, right: 0, top: 0 }}></Image>
             <Image
               alt=""
               src={organizerMask}
@@ -247,10 +203,7 @@ const HomePage = () => {
                 width: "100%",
               }}
             ></Image>
-            <Text
-              fontSize={{ base: 20, md: 32, lg: 56 }}
-              className="gordita700 organizerText"
-            >
+            <Text fontSize={{ base: 20, md: 32, lg: 56 }} className="gordita700 organizerText">
               Become an Organizer
             </Text>
             <Text
@@ -259,8 +212,7 @@ const HomePage = () => {
               className="gordita400"
               maxW={{ base: "325px", sm: "100%" }}
             >
-              Create your first event and sell tickets on biggest 2+ billion
-              users plaftorm
+              Create your first event and sell tickets on biggest 2+ billion users plaftorm
             </Text>
             <Box mt={30}>
               <Button borderRadius="50px">Become A Host</Button>
@@ -294,10 +246,7 @@ const HomePage = () => {
                 </Text>
               </VStack>
             </Box>
-            <Box
-              mt={{ base: 60, md: 0 }}
-              flexBasis={{ base: "100%", md: "50%" }}
-            >
+            <Box mt={{ base: 60, md: 0 }} flexBasis={{ base: "100%", md: "50%" }}>
               <Image style={{ width: "100%" }} src={dance} />
             </Box>
           </Flex>

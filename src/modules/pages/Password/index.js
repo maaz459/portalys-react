@@ -133,7 +133,7 @@ const Password = () => {
                         {...field}
                         border="1px solid"
                         borderColor="rgba(0,0,0,0.3)"
-                        type="text"
+                        type="password"
                         color="black.100"
                         _placeholder={{
                           color: "black.100",
@@ -172,7 +172,7 @@ const Password = () => {
                         {...field}
                         border="1px solid"
                         borderColor="rgba(0,0,0,0.3)"
-                        type="text"
+                        type="password"
                         color="black.100"
                         _placeholder={{
                           color: "black.100",

@@ -91,19 +91,16 @@ const Navbar = ({ authenticateUser, getUserInfo, logout, login, provider }) => {
 
   return (
     <NavbarWrapper background={colorMode === "light" ? "value" : "transparent"}>
-      <Box
-        maxH="71px"
-        w="100%"
-        h="100%"
-        pos="fixed"
-        bg={value}
-        display="flex"
-        justifyContent="center"
-      >
+      <Box maxH="71px" w="100%" h="100%" pos="fixed" bg={value} display="flex" justifyContent="center">
         <Box h="100%" maxW="1662px" w="100%" px={xsmall ? 10 : 20}>
           <HStack justifyContent="space-between" h="100%">
             <HStack h="100%">
-              <Image alt="" src={colorMode === "light" ? DarkLogo : LightLogo}></Image>
+              <Image
+                cursor="pointer"
+                onClick={() => navigate("/")}
+                alt=""
+                src={colorMode === "light" ? DarkLogo : LightLogo}
+              ></Image>
               <HStack className="gordita600" display={isTablet ? "none" : "flex"} pl="40px">
                 {navLinks.map(({ link, text }, index) => {
                   return (
