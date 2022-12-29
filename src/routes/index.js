@@ -7,6 +7,7 @@ import Portalys1 from "../pages/portalys/portalys1";
 import Portalys2 from "../pages/portalys/portalys2";
 import About from "../pages/portalys/about";
 import Faq from "../pages/portalys/faq";
+import Profile from "../pages/profile/profile";
 const Routes = () => {
   return (
     <DomRoutes>
@@ -40,6 +41,10 @@ const Routes = () => {
       <Route
         path="faq"
         element={<Faq />}
+      />
+      <Route
+        path="profile"
+        element={<Profile />}
       />
         
     </DomRoutes>
