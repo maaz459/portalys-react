@@ -1,22 +1,9 @@
-import React from "react";
 import {
-  Box,
-  Text,
-  VStack,
-  Image,
-  Progress as LinearProgress,
-  Heading,
-  chakra,
-  HStack,
-  Button,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
+  Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Heading
 } from "@chakra-ui/react";
-import "../../styles/faq/faq.css";
+import React from "react";
 import Layout from "../../modules/layout/layout";
+import "../../styles/faq/faq.css";
 export default function Faq() {
   const data = [
     {
