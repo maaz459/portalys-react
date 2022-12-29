@@ -1,25 +1,15 @@
-import { React, useState } from "react";
 import {
-  Box,
-  Text,
-  VStack,
-  Image,
-  Progress as LinearProgress,
-  Heading,
-  chakra,
-  HStack,
-  Button,
-  Divider,
-  Input,
+  Box, Button, chakra, Divider, Image, Input, Text
 } from "@chakra-ui/react";
-import setting from "../../static/assets/images/setting.svg";
-import square from "../../static/assets/images/square.svg";
-import order from "../../static/assets/images/order.svg";
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
 import calendar1 from "../../static/assets/images/calendar1.svg";
+import facebook from "../../static/assets/images/fb.svg";
 import leftarr from "../../static/assets/images/leftarrow.svg";
 import men from "../../static/assets/images/man.svg";
-import facebook from "../../static/assets/images/fb.svg";
-import { Link } from "react-router-dom";
+import order from "../../static/assets/images/order.svg";
+import setting from "../../static/assets/images/setting.svg";
+import square from "../../static/assets/images/square.svg";
 
 export default function Profile() {
   const [show, setShow] = useState(1);
