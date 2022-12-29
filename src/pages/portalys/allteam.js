@@ -1,14 +1,7 @@
-import React from "react";
 import {
-  Box,
-  Text,
-  VStack,
-  Image,
-  Progress as LinearProgress,
-  Heading,
-  chakra,
+  Box, Heading, Image, Text
 } from "@chakra-ui/react";
-import "../../styles/portalys/portalys.css";
+import React from "react";
 import a from "../../static/assets/images/a.svg";
 import b from "../../static/assets/images/b.svg";
 import c from "../../static/assets/images/c.svg";
@@ -27,11 +20,7 @@ import o from "../../static/assets/images/o.svg";
 import p from "../../static/assets/images/p.svg";
 import q from "../../static/assets/images/q.svg";
 import r from "../../static/assets/images/r.svg";
-import s from "../../static/assets/images/s.svg";
-import t from "../../static/assets/images/t.svg";
-import u from "../../static/assets/images/u.svg";
-import v from "../../static/assets/images/v.svg";
-import w from "../../static/assets/images/w.svg";
+import "../../styles/portalys/portalys.css";
 
 export default function AllTeam() {
   const team = [
