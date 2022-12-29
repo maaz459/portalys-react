@@ -37,14 +37,9 @@ export default function Profile() {
   };
   return (
     <Box background="black">
-      <Box
-        width="100%"
-        paddingTop="15px"
-        display="flex"
-        gap="30px"
-      >
+      <Box width="100%" paddingTop="15px" display="flex" gap="30px">
         {/* sidebar */}
-        <Box width="23%" background="#1C1C1C"  display="grid">
+        <Box width="23%" background="#1C1C1C" display="grid">
           <Box padding="25px 20px" display="block" gap="30px">
             <Box
               gap="12px"
@@ -121,120 +116,150 @@ export default function Profile() {
         </Box>
 
         {/* form */}
-        <Box width="75%" background="black" paddingBottom="150px" >
+        <Box width="75%" background="black" paddingBottom="150px">
           <Divider color="white" height="5px" />
-       
-            <Box display="flex" gap="30px" marginTop="30px">
-              <Box
-                width="30%"
-                background=" linear-gradient(180deg, #1A1A1A 0%, rgba(26, 26, 26, 0) 100%)"
-                borderRadius="6px"
-                padding="30px 50px"
-                display="flex"
-                justifyContent="start"
-                flexDirection="column"
-                alignItems="center"
+
+          <Box display="flex" gap="30px" marginTop="30px">
+            <Box
+              width="30%"
+              background=" linear-gradient(180deg, #1A1A1A 0%, rgba(26, 26, 26, 0) 100%)"
+              borderRadius="6px"
+              padding="30px 50px"
+              display="flex"
+              justifyContent="start"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Image width="170px" src={men} />
+              <Button
+                color="#FFFFFF"
+                fontSize="14px"
+                border="0.5px dashed #303030"
+                borderRadius="4px"
+                background="#141414"
+                padding="4px 15px"
+                marginTop="20px"
+                width="110px"
               >
-                <Image width="170px" src={men} />
-                <Button
-                  color="#FFFFFF"
-                  fontSize="14px"
-                  border="0.5px dashed #303030"
-                  borderRadius="4px"
-                  background="#141414"
-                  padding="4px 15px"
-                  marginTop="20px"
-                  width="110px"
-                >
-                  Choose file
-                </Button>
-                <Text fontSize="14px" color="#FFFFFF" marginTop="20px">
-                Upload File 
+                Choose file
+              </Button>
+              <Text fontSize="14px" color="#FFFFFF" marginTop="20px">
+                Upload File
+              </Text>
+              <chakra.span
+                textAlign="center"
+                color="#353535"
+                fontSize="12px"
+                marginTop="10px"
+              >
+                "JPG, GIF or PNG Max size of 800K"
+              </chakra.span>
+            </Box>
+
+            <Box width="67%" paddingRight="65px">
+              <Box>
+                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">
+                  First name{" "}
                 </Text>
-                <chakra.span textAlign="center" color="#353535" fontSize="12px" marginTop="10px">"JPG, GIF or PNG Max size of 800K"</chakra.span>
-
+                <Input placeholder="large size" size="lg" marginTop="8px" />
               </Box>
-             
+              <Box marginTop="18px">
+                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">
+                  Last name{" "}
+                </Text>
+                <Input placeholder="Type last name" size="lg" marginTop="8px" />
+              </Box>
 
+              <Box marginTop="18px">
+                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">
+                  Email{" "}
+                </Text>
+                <Input placeholder="Type email" size="lg" marginTop="8px" />
+              </Box>
 
+              <Box marginTop="18px">
+                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">
+                  Website{" "}
+                </Text>
+                <Input placeholder="Enter website" size="lg" marginTop="8px" />
+              </Box>
+              <Box
+                marginTop="55px"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                borderBottom="1px dashed gray"
+                paddingBottom="12px"
+              >
+                <Text fontSize="16px" color="#FFFFFF" fontWeight="500">
+                  Social media or link{" "}
+                </Text>
+                <Button
+                  className="addnew"
+                  fontSize="14px"
+                  border="1px solid #02F6AD"
+                  color="#02F6AD"
+                  borderRadius="100px"
+                  padding="0px 20px"
+                  background="black"
+                >
+                  Add New
+                </Button>
+              </Box>
 
-
-
-
-
-
-
-
-
-
-              <Box width="67%" paddingRight="65px" >
-                <Box>
-                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">First name </Text>
-              <Input placeholder="large size" size="lg" marginTop="8px"  />
+              <Box
+                display="flex"
+                alignItems="center"
+                gap="30px"
+                marginTop="35px"
+              >
+                <Box display="flex" alignItems="center" gap="15px">
+                  <Image
+                    width="45px"
+                    src={facebook}
+                    background="white"
+                    borderRadius="100px"
+                  />
+                  <Link>
+                    <Text color="#FFFFFF">www.facebook.com/Anjumch325 </Text>{" "}
+                  </Link>
                 </Box>
-                <Box marginTop="18px">
-                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">Last name </Text>
-              <Input placeholder="Type last name" size="lg" marginTop="8px"  />
+                <Button
+                  background="transparent"
+                  color="#FF4B55"
+                  fontSize="12px"
+                >
+                  Remove
+                </Button>
+              </Box>
+
+              <Box
+                display="flex"
+                alignItems="center"
+                gap="30px"
+                marginTop="20px"
+              >
+                <Box display="flex" alignItems="center" gap="15px">
+                  <Image
+                    width="45px"
+                    src={facebook}
+                    background="white"
+                    borderRadius="100px"
+                  />
+                  <Link>
+                    <Text color="#FFFFFF">www.facebook.com/Anjumch325 </Text>{" "}
+                  </Link>
                 </Box>
-
-                <Box marginTop="18px">
-                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">Email </Text>
-              <Input placeholder="Type email" size="lg" marginTop="8px"  />
-                </Box>
-
-                <Box marginTop="18px">
-                <Text fontSize="14px" color="#FFFFFF" fontWeight="500">Website </Text>
-              <Input placeholder="Enter website" size="lg" marginTop="8px"  />
-                </Box>
-<Box marginTop="55px" display="flex" alignItems="center" justifyContent="space-between" borderBottom="1px dashed gray" paddingBottom="12px">
-  <Text fontSize="16px" color="#FFFFFF" fontWeight="500">Social media or link  </Text>
-  <Button className="addnew" fontSize="14px" border="1px solid #02F6AD" color="#02F6AD" borderRadius="100px" padding="0px 20px" background="black">
-  Add New
-  </Button>
-</Box>
-
-<Box display="flex" alignItems="center" gap="30px" marginTop="35px">
-<Box display="flex" alignItems="center" gap="15px">
-<Image width="45px" src={facebook} background="white" borderRadius="100px" />
-<Link><Text color="#FFFFFF">
-www.facebook.com/Anjumch325  </Text> </Link>
-</Box>
-<Button background="transparent" color="#FF4B55" fontSize="12px">
-Remove
-</Button>
-</Box>
-
-<Box display="flex" alignItems="center" gap="30px" marginTop="20px">
-<Box display="flex" alignItems="center" gap="15px">
-<Image width="45px" src={facebook} background="white" borderRadius="100px" />
-<Link><Text color="#FFFFFF">
-www.facebook.com/Anjumch325  </Text> </Link>
-</Box>
-<Button background="transparent" color="#FF4B55" fontSize="12px">
-Remove
-</Button>
-</Box>
-
-
-
-
-
-
-
-
-
-
-
+                <Button
+                  background="transparent"
+                  color="#FF4B55"
+                  fontSize="12px"
+                >
+                  Remove
+                </Button>
+              </Box>
             </Box>
-            </Box>
-
-
-
-
-
-
-           
-        
+          </Box>
         </Box>
       </Box>
     </Box>

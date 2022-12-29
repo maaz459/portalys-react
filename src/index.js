@@ -10,6 +10,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { RecoilRoot } from "recoil";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -17,14 +19,12 @@ root.render(
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0, viewport-fit=cover"
     />
-    <link
-      async
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
+    <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <BrowserRouter>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -6,7 +6,7 @@ import Navbar from "../shared/navbar";
 import Footer from "../shared/footer";
 import { theme } from "../../styles/theme/base";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...rest }) => {
   const value = useColorModeValue(
     theme.colors.white[100],
     theme.colors.black[100]
@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
   return (
     <MainWrapper background={value}>
       <Header>
-        <Navbar />
+        <Navbar {...rest} />
       </Header>
       <Child id="main">{children}</Child>
       <Footer />

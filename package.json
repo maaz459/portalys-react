@@ -3,15 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/icons": "^2.0.12",
     "@chakra-ui/react": "^2.4.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@googlemaps/react-wrapper": "^1.1.35",
     "@react-oauth/google": "^0.5.1",
+    "@solana/web3.js": "^1.70.3",
+    "@solflare-wallet/sdk": "^1.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@toruslabs/solana-embed": "^0.3.2",
+    "@toruslabs/torus-embed": "^1.38.3",
+    "@walletconnect/client": "^1.8.0",
+    "@web3auth/base": "^4.0.0",
+    "@web3auth/modal": "^4.0.0",
+    "@web3auth/openlogin-adapter": "^4.0.0",
+    "@web3auth/slope-adapter": "^4.0.0",
+    "@web3auth/solana-provider": "^4.0.0",
+    "@web3auth/solana-wallet-connector-plugin": "^4.0.0",
+    "@web3auth/solflare-adapter": "^4.0.0",
+    "@web3auth/torus-solana-adapter": "^4.0.0",
     "axios": "^1.2.1",
     "dayzed": "^3.2.3",
     "eslint": "8.27.0",
@@ -39,10 +53,10 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "deploy": "serve -s build"
   },
   "browserslist": {
@@ -56,5 +70,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0"
   }
 }

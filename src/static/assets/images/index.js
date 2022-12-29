@@ -73,6 +73,24 @@ import dance from "./dance.png";
 import google from "./google.svg";
 import portalysGreen from "./portalysGreen.svg";
 
+import seatUnSelected from "./seatUnselect.png";
+import seatSelected from "./seatSelected.png";
+import qrcode from "./qrcode.png";
+import eye from "./eye.png";
+import game from "./game.svg";
+import ltrk from "./1trk.svg";
+import disk1 from "./disk1.svg";
+import lights2 from "./lights2.svg";
+import mbl from "./mbl.svg";
+import disk3 from "./disk3.svg";
+import disk2 from "./disk2.svg";
+import disk4 from "./disk4.svg";
+
+import publicImage from "./public.svg";
+import bgimg from "./bgimg.svg";
+import writer from "./writer.svg";
+import profession from "./profession.svg";
+
 export {
   fbLight,
   fbDark,
@@ -139,4 +157,20 @@ export {
   dance,
   google,
   portalysGreen,
+  seatUnSelected,
+  seatSelected,
+  qrcode,
+  eye,
+  game,
+  ltrk,
+  disk1,
+  lights2,
+  mbl,
+  disk3,
+  publicImage,
+  bgimg,
+  disk2,
+  disk4,
+  writer,
+  profession,
 };
