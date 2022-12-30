@@ -1,43 +1,29 @@
-import { React, useState } from "react";
 import {
-  Box,
-  Text,
-  VStack,
-  Image,
-  Progress as LinearProgress,
-  Heading,
-  chakra,
-  HStack,
-  Button,
-  Input,
-  grid,
+  Box, Button, chakra, Heading, HStack, Image, Input, Text,
+  VStack
 } from "@chakra-ui/react";
-import "../../styles/portalys/portalys.css";
+import { React } from "react";
 import Slider from "react-slick";
-import thumb from "../../static/assets/images/sld1.svg";
-import marker from "../../static/assets/images/marker.svg";
-import calender from "../../static/assets/images/calender.svg";
+import {
+  disk1, disk2, disk3, disk4,
+  lights2 as light1,
+  mbl as mobile, profession, publicImage as public1,
+  writer
+} from "../../static/assets/images";
 import box from "../../static/assets/images/box.svg";
-import home from "../../static/assets/images/home.svg";
 import boxline from "../../static/assets/images/boxline.svg";
-import singer from "../../static/assets/images/singer.svg";
-import verify from "../../static/assets/images/verify.svg";
+import calenderImg from "../../static/assets/images/calendar.svg";
+import calender from "../../static/assets/images/calender.svg";
 import exper from "../../static/assets/images/exper.svg";
 import full from "../../static/assets/images/full.svg";
-import calenderImg from "../../static/assets/images/calendar.svg";
-import {
-  disk1,
-  disk3,
-  disk2,
-  disk4,
-  lights2 as light1,
-  mbl as mobile,
-  publicImage as public1,
-  writer,
-  profession,
-} from "../../static/assets/images";
+import home from "../../static/assets/images/home.svg";
+import marker from "../../static/assets/images/marker.svg";
+import singer from "../../static/assets/images/singer.svg";
+import thumb from "../../static/assets/images/sld1.svg";
+import verify from "../../static/assets/images/verify.svg";
 import "../../styles/about/about.css";
 import Layout from "../../modules/layout/layout";
+import "../../styles/portalys/portalys.css";
 
 export default function About() {
   const management = [

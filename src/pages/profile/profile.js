@@ -1,39 +1,20 @@
-import { React, useState } from "react";
 import {
-  Box,
-  Text,
-  VStack,
-  Image,
-  Progress as LinearProgress,
-  Heading,
-  chakra,
-  HStack,
-  Button,
-  Divider,
-  Input,
+  Box, Button, chakra, Divider, Image, Input, Text
 } from "@chakra-ui/react";
-import setting from "../../static/assets/images/setting.svg";
-import square from "../../static/assets/images/square.svg";
-import order from "../../static/assets/images/order.svg";
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
 import calendar1 from "../../static/assets/images/calendar1.svg";
+import facebook from "../../static/assets/images/fb.svg";
 import leftarr from "../../static/assets/images/leftarrow.svg";
 import men from "../../static/assets/images/man.svg";
-import facebook from "../../static/assets/images/fb.svg";
-import { Link } from "react-router-dom";
+import order from "../../static/assets/images/order.svg";
+import setting from "../../static/assets/images/setting.svg";
+import square from "../../static/assets/images/square.svg";
 
 export default function Profile() {
   const [show, setShow] = useState(1);
-  const handleShow1 = () => {
-    setShow(1);
-  };
-  const handleShow2 = () => {
-    setShow(2);
-  };
-  const handleShow3 = () => {
-    setShow(3);
-  };
-  const handleShow4 = () => {
-    setShow(4);
+  const handleShow = (showId) => {
+    setShow(showId);
   };
   return (
     <Box background="black">
@@ -43,7 +24,7 @@ export default function Profile() {
           <Box padding="25px 20px" display="block" gap="30px">
             <Box
               gap="12px"
-              onClick={handleShow1}
+              onClick={() => handleShow(1)}
               marginTop="35px"
               alignItems="center"
               display="flex"
@@ -56,7 +37,7 @@ export default function Profile() {
             </Box>
             <Box
               gap="12px"
-              onClick={handleShow2}
+              onClick={() => handleShow(2)}
               marginTop="35px"
               alignItems="center"
               display="flex"
@@ -69,7 +50,7 @@ export default function Profile() {
             </Box>
             <Box
               gap="12px"
-              onClick={handleShow3}
+              onClick={() => handleShow(3)}
               marginTop="35px"
               alignItems="center"
               display="flex"
@@ -81,7 +62,7 @@ export default function Profile() {
               </Text>
             </Box>
             <Box
-              onClick={handleShow4}
+              onClick={() => handleShow(4)}
               gap="12px"
               marginTop="35px"
               alignItems="center"
@@ -101,7 +82,7 @@ export default function Profile() {
           <Box padding="25px 20px" display="flex" alignItems="end">
             <Box
               gap="12px"
-              onClick={handleShow1}
+              onClick={() => handleShow(1)}
               marginTop="35px"
               alignItems="center"
               display="flex"
