@@ -18,6 +18,7 @@ import {
   TableContainer,
   Text,
   Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { SingleDatepicker } from "../../shared/datepicker";
@@ -37,6 +38,7 @@ import { getEvents } from "../../../utils/actions/event";
 import { user } from "../../../recoil/atoms/user";
 import { useRecoilState } from "recoil";
 import { isEmpty } from "lodash";
+
 const spacing = {
   gap: 0,
   spacing: 0,
@@ -57,10 +59,8 @@ const events = [SingleEvent];
 
 const EventsComponent = () => {
   const [date, setDate] = useState(null);
-  const [evnt, setEvnt] = useState([]);
   const [data, setData] = useState([]);
-  const [_, setUser] = useRecoilState(user);
-
+  const colorValue = useColorModeValue("black.100", "gray.100");
   const [displayType, setDisplayType] = useState("table");
   const navigate = useNavigate();
 
@@ -82,22 +82,6 @@ const EventsComponent = () => {
     };
 
     init();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setEvnt((val) => [
-        {
-          image: dance,
-          eventName: "My New Event",
-          startDate: "24 Dec, 2022",
-          startTime: "01:49",
-          venue: "Lahore",
-          status: "Live",
-          location: "Lahore",
-        },
-      ]);
-    }, 2000);
   }, []);
 
   return (
@@ -154,7 +138,7 @@ const EventsComponent = () => {
                 <Tr>
                   {["Event eventName", "Date", "Start Time", "Event Venue", "Status"].map((column, index) => {
                     return (
-                      <Th textTransform="capitalize" key={index} fontSize={16} color="gray.100">
+                      <Th textTransform="capitalize" key={index} fontSize={16} color={colorValue}>
                         {column}
                       </Th>
                     );
@@ -232,7 +216,7 @@ const EventsComponent = () => {
                       pos="absolute"
                       right={10}
                       bottom={-20}
-                      color='black.100'
+                      color="black.100"
                     >
                       LIVE
                     </Box>
