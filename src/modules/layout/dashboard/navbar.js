@@ -29,10 +29,7 @@ import Typography from "../../shared/typography";
 import { navLinks } from "../../../utils/constants";
 import { useMediaQuery } from "../../../utils/useMediaQuery";
 import { colorMode as colorModeImage } from "../../../static/assets/images";
-import {
-  RegistraionModalTypes,
-  registration,
-} from "../../../recoil/atoms/registration";
+import { RegistraionModalTypes, registration } from "../../../recoil/atoms/registration";
 import { useRecoilState } from "recoil";
 const Navbar = ({ navbarHeight, dashboardName }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -42,19 +39,13 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
   const [_, setRegistrationModal] = useRecoilState(registration);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const value = useColorModeValue(
-    theme.colors.white[100],
-    theme.colors.black[100]
-  );
+  const value = useColorModeValue(theme.colors.white[100], theme.colors.black[100]);
 
   return (
     <>
-      <Box pos="fixed" bg={value} h={navbarHeight} w="100%" px={33}>
+      <Box pos="fixed" bg={value} zIndex={100} h={navbarHeight} w="100%" px={33}>
         <HStack justifyContent="space-between" h="100%">
-          <Image
-            alt=""
-            src={colorMode === "light" ? DarkLogo : LightLogo}
-          ></Image>
+          <Image alt="" src={colorMode === "light" ? DarkLogo : LightLogo}></Image>
           <HStack
             display={isTablet ? "none" : "flex"}
             flex={{ base: 2, md: 4, lg: 3, "3xl": 2 }}
@@ -76,12 +67,7 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
               />
             </HStack>
           </HStack>
-          <HStack
-            display={isTablet ? "none" : "flex"}
-            justifyContent="flex-end"
-            flex={{ md: 2, lg: 3 }}
-            h="100%"
-          >
+          <HStack display={isTablet ? "none" : "flex"} justifyContent="flex-end" flex={{ md: 2, lg: 3 }} h="100%">
             <HStack gap={"20px"} pl="40px">
               <CBtn
                 borderRadius="50px"
@@ -93,16 +79,8 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
                 onClick={() => console.log("")}
               >
                 <HStack gap={0}>
-                  <Image
-                    alt=""
-                    style={{ width: "20px", height: "20px" }}
-                    src={menuIcon}
-                  ></Image>
-                  <Image
-                    alt=""
-                    style={{ width: "36px", height: "36px" }}
-                    src={userIcon}
-                  ></Image>
+                  <Image alt="" style={{ width: "20px", height: "20px" }} src={menuIcon}></Image>
+                  <Image alt="" style={{ width: "36px", height: "36px" }} src={userIcon}></Image>
                 </HStack>
               </CBtn>
             </HStack>
@@ -118,23 +96,12 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
                   toggleColorMode();
                 }}
               >
-                <Image
-                  alt=""
-                  style={{ width: "23px", height: "23px" }}
-                  src={colorModeImage}
-                ></Image>
+                <Image alt="" style={{ width: "23px", height: "23px" }} src={colorModeImage}></Image>
               </CBtn>
             </Box>
           </HStack>
-          <Box
-            display={isTablet ? "block" : "none"}
-            cursor="pointer"
-            onClick={onOpen}
-          >
-            <Image
-              alt=""
-              src={colorMode === "light" ? menuIcon : menuIconLight}
-            ></Image>
+          <Box display={isTablet ? "block" : "none"} cursor="pointer" onClick={onOpen}>
+            <Image alt="" src={colorMode === "light" ? menuIcon : menuIconLight}></Image>
           </Box>
         </HStack>
       </Box>
@@ -143,21 +110,12 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
         <DrawerContent alignItems="center">
           <DrawerCloseButton color="black.100" alignSelf="end" />
           <DrawerBody w="100%" bg="white">
-            <VStack
-              className="gordita600"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              pt={8}
-            >
+            <VStack className="gordita600" justifyContent="flex-start" alignItems="flex-start" pt={8}>
               {navLinks.map(({ link, text }, index) => {
                 return (
                   <Stack direction={"row"} key={index}>
                     <Link href={link}>
-                      <Typography
-                        color="black.100"
-                        isMobile={isLaptop}
-                        variant="text"
-                      >
+                      <Typography color="black.100" isMobile={isLaptop} variant="text">
                         {text}
                       </Typography>
                     </Link>
@@ -169,12 +127,7 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
               <HStack gap={"70px"}>
                 <HStack spacing={1}>
                   <Link className="navLink" href="/">
-                    <Typography
-                      color="black.100"
-                      isMobile={isLaptop}
-                      variant="text"
-                      className="gordita600"
-                    >
+                    <Typography color="black.100" isMobile={isLaptop} variant="text" className="gordita600">
                       I'm an Organizer
                     </Typography>
                   </Link>
@@ -197,16 +150,8 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
                 borderRadius="50px"
               >
                 <HStack gap={0}>
-                  <Image
-                    alt=""
-                    style={{ width: "18px", height: "18px" }}
-                    src={menuIcon}
-                  ></Image>
-                  <Image
-                    alt=""
-                    style={{ width: "32px", height: "32px" }}
-                    src={userIcon}
-                  ></Image>
+                  <Image alt="" style={{ width: "18px", height: "18px" }} src={menuIcon}></Image>
+                  <Image alt="" style={{ width: "32px", height: "32px" }} src={userIcon}></Image>
                 </HStack>
               </CBtn>
               <Box>
@@ -222,11 +167,7 @@ const Navbar = ({ navbarHeight, dashboardName }) => {
                     toggleColorMode();
                   }}
                 >
-                  <Image
-                    alt=""
-                    style={{ width: "24px", height: "24px" }}
-                    src={colorModeImage}
-                  ></Image>
+                  <Image alt="" style={{ width: "24px", height: "24px" }} src={colorModeImage}></Image>
                 </CBtn>
               </Box>
               <Box>

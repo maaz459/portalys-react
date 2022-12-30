@@ -1,11 +1,5 @@
 import { HStack, Text, VStack } from "@chakra-ui/react";
-import {
-  DateBox,
-  InputBox,
-  SelectBox,
-  SwitchBox,
-  TextBox,
-} from "./SharedModules";
+import { DateBox, InputBox, SelectBox, SwitchBox, TextBox } from "./SharedModules";
 const TicktDetails = (props) => {
   const { handleBlur, handleChange, values, setFieldValue } = props;
   return (
@@ -15,7 +9,7 @@ const TicktDetails = (props) => {
           values={values}
           handleBlur={handleBlur}
           handleChange={handleChange}
-          placeholder="Enter your name"
+          placeholder="Ticket Name"
           label="Ticket Name"
           name="ticketName"
           maxW="45%"
@@ -35,7 +29,7 @@ const TicktDetails = (props) => {
           values={values}
           handleBlur={handleBlur}
           handleChange={handleChange}
-          placeholder="Enter your name"
+          placeholder="Single"
           label="Ticket Type"
           maxW="45%"
           name="ticketType"

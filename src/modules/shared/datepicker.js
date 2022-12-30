@@ -17,28 +17,12 @@ import {
   useOutsideClick,
   VStack,
 } from "@chakra-ui/react";
-import {
-  InputGroup,
-  Input as InputComponent,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { InputGroup, Input as InputComponent, InputRightElement } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
 import { useDayzed } from "dayzed";
 import moment from "moment";
-const MONTH_NAMES_DEFAULT = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+
+const MONTH_NAMES_DEFAULT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const DAY_NAMES_DEFAULT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const DATE_FORMAT_DEFAULT = "DD/MM/YYYY";
 
@@ -57,12 +41,7 @@ const SingleDatepickerBackButtons = (props) => {
       >
         {"<<"}
       </Button>
-      <Button
-        color="black.100"
-        {...getBackProps({ calendars })}
-        variant="ghost"
-        size="sm"
-      >
+      <Button color="black.100" {...getBackProps({ calendars })} variant="ghost" size="sm">
         {"<"}
       </Button>
     </Fragment>
@@ -73,12 +52,7 @@ const SingleDatepickerForwardButtons = (props) => {
   const { calendars, getForwardProps } = props;
   return (
     <Fragment>
-      <Button
-        color="black.100"
-        {...getForwardProps({ calendars })}
-        variant="ghost"
-        size="sm"
-      >
+      <Button color="black.100" {...getForwardProps({ calendars })} variant="ghost" size="sm">
         {">"}
       </Button>
       <Button
@@ -97,8 +71,7 @@ const SingleDatepickerForwardButtons = (props) => {
 };
 
 const SingleDatepickerCalendar = (props) => {
-  const { calendars, getDateProps, getBackProps, getForwardProps, configs } =
-    props;
+  const { calendars, getDateProps, getBackProps, getForwardProps, configs } = props;
 
   if (lodash_isEmpty(calendars)) {
     return null;
@@ -110,17 +83,11 @@ const SingleDatepickerCalendar = (props) => {
         return (
           <VStack w="100%" key={`${calendar.month}${calendar.year}`}>
             <HStack>
-              <SingleDatepickerBackButtons
-                calendars={calendars}
-                getBackProps={getBackProps}
-              />
+              <SingleDatepickerBackButtons calendars={calendars} getBackProps={getBackProps} />
               <Heading color="black.100" size="sm" textAlign="center">
                 {configs.monthNames[calendar.month]} {calendar.year}
               </Heading>
-              <SingleDatepickerForwardButtons
-                calendars={calendars}
-                getForwardProps={getForwardProps}
-              />
+              <SingleDatepickerForwardButtons calendars={calendars} getForwardProps={getForwardProps} />
             </HStack>
             <Divider />
             <SimpleGrid columns={7} spacing={2} textAlign="center">
@@ -245,13 +212,7 @@ export const SingleDatepicker = ({
         </InputGroup>
       </PopoverTrigger>
       <PopoverContent w="100%" ref={ref}>
-        <PopoverBody
-          bg="white.200"
-          padding={"10px 5px"}
-          borderWidth={1}
-          borderColor="blue.400"
-          w="100%"
-        >
+        <PopoverBody bg="white.200" padding={"10px 5px"} borderWidth={1} borderColor="blue.400" w="100%">
           <SingleDatepickerCalendar {...dayzedData} configs={configs} />
         </PopoverBody>
       </PopoverContent>

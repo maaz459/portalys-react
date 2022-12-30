@@ -1,17 +1,5 @@
-import {
-  HStack,
-  InputGroup,
-  VStack,
-  InputRightElement,
-  Input as InputComponent,
-} from "@chakra-ui/react";
-import {
-  DateBox,
-  InputBox,
-  SelectBox,
-  TextBox,
-  TimeBox,
-} from "./SharedModules";
+import { HStack, InputGroup, VStack, InputRightElement, Input as InputComponent } from "@chakra-ui/react";
+import { DateBox, InputBox, SelectBox, TextBox, TimeBox } from "./SharedModules";
 const BasicEvents = (props) => {
   const { handleBlur, handleChange, values, setFieldValue } = props;
 
@@ -22,7 +10,7 @@ const BasicEvents = (props) => {
           values={values}
           handleBlur={handleBlur}
           handleChange={handleChange}
-          placeholder="Type Event Name"
+          placeholder="J Lo Concert"
           label="Event Name"
           name="eventName"
           maxW="70%"
@@ -31,11 +19,11 @@ const BasicEvents = (props) => {
           values={values}
           handleBlur={handleBlur}
           handleChange={setFieldValue}
-          placeholder="Select Type"
+          placeholder="Event"
           label="Type"
           name="eventType"
           maxW="80%"
-          options={[{ label: "Type1", value: "type1" }]}
+          options={[{ label: "Festival", value: "Festival" }]}
         />
       </HStack>
       <HStack spacing={30} justifyContent="space-between" w="100%">

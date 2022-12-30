@@ -78,44 +78,6 @@ const CreateEvent = ({
   const [supply, setSupply] = useState(1);
   const [SOLPRICE, setSOLPRICE] = useState(0.0);
 
-  // useEffect(() => {
-  //   const init = async () => {
-  //     const solanaPrice = await getSolanaPrice();
-  //     setSOLPRICE(solanaPrice);
-  //   };
-  //   init();
-  // }, []);
-
-  // useEffect(() => {
-  //   const dollars = toUSD(price, SOLPRICE);
-  //   setDollars(dollars);
-  // }, [price]);
-
-  // //min price solana
-  // useEffect(() => {
-  //   const minDollars = toUSD(minPrice, SOLPRICE);
-  //   setMinDollars(minDollars);
-  // }, [minPrice]);
-
-  // //max price solana
-  // useEffect(() => {
-  //   const maxDollars = toUSD(maxPrice, SOLPRICE);
-  //   setMaxDollars(maxDollars);
-  // }, [maxPrice]);
-
-  // useEffect(() => {
-  //   const total = supply * dollars;
-  //   setTotalRevenue(total);
-  // }, [supply, dollars]);
-
-  // useEffect(() => {
-  //   const calculateTotalFee = () => {
-  //     const solana_fee = calculateFee(file, supply, SOLPRICE);
-  //     setFees(solana_fee);
-  //   };
-  //   calculateTotalFee();
-  // }, [supply, file]); // ADD change on FileSize
-
   const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
 
   const hanldleCreateEvent = async (values) => {
@@ -177,8 +139,8 @@ const CreateEvent = ({
         const solana_fee = calculateFee(values?.eventImage?.image?.size, supply, solanaPrice);
         const LamportsFee = solana_fee * LAMPORTS_PER_SOL;
         const receiverPublicKey = "BNfYrWMU46SssCLTEY8TSpJk3swRbJYXE7TSNPYhtTtx"; // TODO: env var
-       console.log({LamportsFee})
-        formData.append('fee',LamportsFee?.toFixed(0))
+        console.log({ LamportsFee });
+        formData.append("fee", LamportsFee?.toFixed(0));
         const payment = await paySolFee(receiverPublicKey, LamportsFee?.toFixed(0));
         if (payment.code || payment.data) {
           toast({
@@ -188,6 +150,7 @@ const CreateEvent = ({
             duration: 4000,
             isClosable: true,
           });
+          setLoader(false);
         } else {
           await postEvent(formData)
             .then((ne) => {
@@ -251,6 +214,10 @@ const CreateEvent = ({
     if (step <= 4) setStep(step + 1);
   };
 
+  const onProgressChange = (st) => {
+    setStep(st + 1);
+  };
+
   const onGoBack = () => {
     if (step < 2) {
       navigate(-1);
@@ -282,18 +249,20 @@ const CreateEvent = ({
                     onGoBack,
                     endStep: step === 5,
                     handleSubmit,
+                    onProgressChange,
                   }}
-                />
-                <HStack mt={56} w="100%">
-                  {step !== 5 && <Box flex={1}></Box>}
+                >
+                  <HStack mt={56} w="100%">
+                    {step !== 5 && <Box flex={1}></Box>}
 
-                  <Box color={textValue} w="100%" flex={7}>
-                    {" "}
-                    <VStack w="100%">
-                      <RenderForms {...{ values, handleBlur, handleChange, setFieldValue }} />
-                    </VStack>
-                  </Box>
-                </HStack>
+                    <Box color={textValue} w="100%" flex={7}>
+                      {" "}
+                      <VStack w="100%">
+                        <RenderForms {...{ values, handleBlur, handleChange, setFieldValue }} />
+                      </VStack>
+                    </Box>
+                  </HStack>
+                </EventBar>
               </Box>
             );
           }}

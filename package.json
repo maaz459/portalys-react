@@ -26,6 +26,7 @@
     "@web3auth/solana-wallet-connector-plugin": "^4.0.0",
     "@web3auth/solflare-adapter": "^4.0.0",
     "@web3auth/torus-solana-adapter": "^4.0.0",
+    "antd": "^5.1.1",
     "axios": "^1.2.1",
     "dayzed": "^3.2.3",
     "eslint": "8.27.0",

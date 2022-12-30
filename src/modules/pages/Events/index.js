@@ -18,6 +18,7 @@ import {
   TableContainer,
   Text,
   Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { SingleDatepicker } from "../../shared/datepicker";
@@ -37,6 +38,7 @@ import { getEvents } from "../../../utils/actions/event";
 import { user } from "../../../recoil/atoms/user";
 import { useRecoilState } from "recoil";
 import { isEmpty } from "lodash";
+
 const spacing = {
   gap: 0,
   spacing: 0,
@@ -57,10 +59,8 @@ const events = [SingleEvent];
 
 const EventsComponent = () => {
   const [date, setDate] = useState(null);
-  const [evnt, setEvnt] = useState([]);
   const [data, setData] = useState([]);
-  const [_, setUser] = useRecoilState(user);
-
+  const colorValue = useColorModeValue("black.100", "gray.100");
   const [displayType, setDisplayType] = useState("table");
   const navigate = useNavigate();
 
@@ -82,22 +82,6 @@ const EventsComponent = () => {
     };
 
     init();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setEvnt((val) => [
-        {
-          image: dance,
-          eventName: "My New Event",
-          startDate: "24 Dec, 2022",
-          startTime: "01:49",
-          venue: "Lahore",
-          status: "Live",
-          location: "Lahore",
-        },
-      ]);
-    }, 2000);
   }, []);
 
   return (
@@ -127,12 +111,7 @@ const EventsComponent = () => {
             <option></option>
           </Select>
         </HStack>
-        <HStack
-          justifyContent="flex-end"
-          {...{ spacing }}
-          spacing={12}
-          flex={1}
-        >
+        <HStack justifyContent="flex-end" {...{ spacing }} spacing={12} flex={1}>
           <Button
             onClick={() => {
               if (displayType === "table") {
@@ -146,11 +125,7 @@ const EventsComponent = () => {
           >
             <Image src={displayType === "list" ? list : grid}></Image>
           </Button>
-          <Button
-            onClick={() => navigate("/events/create")}
-            bg="primary.100"
-            color="black.100"
-          >
+          <Button onClick={() => navigate("/events/create")} bg="primary.100" color="black.100">
             + Create Event
           </Button>
         </HStack>
@@ -158,30 +133,12 @@ const EventsComponent = () => {
       <Box mt={56} w="100%">
         {displayType === "table" ? (
           <TableContainer>
-            <Table
-              style={{ borderCollapse: "separate", borderSpacing: "0 1em" }}
-              variant="unstyled"
-            >
-              <Thead
-                borderBottom="1px solid"
-                borderColor="rgba(153, 159, 187,0.2)"
-              >
+            <Table style={{ borderCollapse: "separate", borderSpacing: "0 1em" }} variant="unstyled">
+              <Thead borderBottom="1px solid" borderColor="rgba(153, 159, 187,0.2)">
                 <Tr>
-                  {[
-                    "Event eventName",
-                    "Date",
-                    "Start Time",
-                    "Event Venue",
-                    "Status",
-                    "Actions",
-                  ].map((column, index) => {
+                  {["Event eventName", "Date", "Start Time", "Event Venue", "Status"].map((column, index) => {
                     return (
-                      <Th
-                        textTransform="capitalize"
-                        key={index}
-                        fontSize={16}
-                        color="gray.100"
-                      >
+                      <Th textTransform="capitalize" key={index} fontSize={16} color={colorValue}>
                         {column}
                       </Th>
                     );
@@ -189,176 +146,102 @@ const EventsComponent = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.map(
-                  (
-                    {
-                      startDate,
-                      status,
-                      eventName,
-                      startTime,
-                      venue,
-                      eventImage,
-                      location,
-                    },
-                    index
-                  ) => {
-                    return (
-                      <Tr
-                        borderRadius="6px"
-                        bg="#1C1C1C"
-                        color="white.100"
-                        key={index}
-                      >
-                        <Td py={0} h="57px">
-                          <HStack py={0} spacing={10}>
-                            <Image w="57px" h="57px" alt="" src={eventImage} />
-                            <Text className="gordita400" fontSize={16}>
-                              {eventName}
-                            </Text>
-                          </HStack>
-                        </Td>
-                        <Td>
-                          <Text fontSize={14} className="gordita400">
-                            {startDate}
+                {data?.map(({ startDate, status, eventName, startTime, venue, eventImage, location }, index) => {
+                  return (
+                    <Tr borderRadius="6px" bg="#1C1C1C" color="white.100" key={index}>
+                      <Td py={0} h="57px">
+                        <HStack py={0} spacing={10}>
+                          <Image w="57px" h="57px" alt="" src={eventImage} />
+                          <Text className="gordita400" fontSize={16}>
+                            {eventName}
                           </Text>
-                        </Td>
-                        <Td>
-                          <Text fontSize={14} className="gordita400">
-                            {startTime}
-                          </Text>{" "}
-                        </Td>
-                        <Td>
-                          <Text fontSize={14} className="gordita400">
-                            {location}
-                          </Text>{" "}
-                        </Td>
-                        <Td>
-                          <Text fontSize={14} className="gordita400">
-                            Live
-                          </Text>{" "}
-                        </Td>
-                        <Td>
-                          <HStack alignItems="flex-end" spacing={24}>
-                            <VStack justifyContent="center" alignItems="center">
-                              <Image alt="" src={edit}></Image>
-                              <Text className="gordita400" fontSize={12}>
-                                Edit
-                              </Text>
-                            </VStack>
-                            <VStack justifyContent="center" alignItems="center">
-                              <Image alt="" src={cancel}></Image>
-                              <Text className="gordita400" fontSize={12}>
-                                Cancel
-                              </Text>
-                            </VStack>
-                            <VStack justifyContent="center" alignItems="center">
-                              <Image alt="" src={refund}></Image>
-                              <Text className="gordita400" fontSize={12}>
-                                Refund
-                              </Text>
-                            </VStack>
-                          </HStack>
-                        </Td>
-                      </Tr>
-                    );
-                  }
-                )}
+                        </HStack>
+                      </Td>
+                      <Td>
+                        <Text fontSize={14} className="gordita400">
+                          {startDate}
+                        </Text>
+                      </Td>
+                      <Td>
+                        <Text fontSize={14} className="gordita400">
+                          {startTime}
+                        </Text>{" "}
+                      </Td>
+                      <Td>
+                        <Text fontSize={14} className="gordita400">
+                          {location}
+                        </Text>{" "}
+                      </Td>
+                      <Td>
+                        <Text
+                          px="30px"
+                          py={2}
+                          border="1px solid"
+                          borderColor="primary.100"
+                          fontSize={14}
+                          w="max"
+                          borderRadius="25px"
+                          className="gordita400"
+                        >
+                          Live
+                        </Text>{" "}
+                      </Td>
+                    </Tr>
+                  );
+                })}
               </Tbody>
             </Table>
           </TableContainer>
         ) : (
-          <Flex wrap="wrap" gap={1} justifyContent="space-between">
-            {events.map(
-              (
-                {
-                  startDate,
-                  status,
-                  eventName,
-                  startTime,
-                  venue,
-                  image,
-                  location,
-                },
-                index
-              ) => {
-                return (
-                  <Box
-                    flexBasis="23%"
-                    mb={56}
-                    borderRadius="6px"
-                    bg="#1C1C1C"
-                    color="white.100"
-                    key={index}
-                  >
-                    <Image
-                      alt=""
-                      style={{ width: "100%", height: "131px" }}
-                      src={event2}
-                    />
-                    <VStack spacing={10} mt={12} alignItems="flex-start" p={12}>
-                      <Text className="gordita400" fontSize={16}>
-                        Event Name:
-                      </Text>
-                      <Text className="gordita600" fontSize={16}>
-                        {eventName}
-                      </Text>
-                      <Text
-                        className="gordita600"
-                        fontSize={14}
-                        color="primary.100"
-                      >
-                        {startDate + "|" + startTime}
-                      </Text>
-                      <HStack>
-                        <Image alt="" src={locImage} />
-                        <Text className="gordita600" fontSize={14}>
-                          {location}
-                        </Text>
-                      </HStack>
-                    </VStack>
-                    <HStack
-                      borderTop="1px solid #2D2D2D"
-                      px={24}
+          <Flex wrap="wrap" gap="2%">
+            {data.map(({ startDate, status, eventName, startTime, venue, eventImage, location }, index) => {
+              return (
+                <Box
+                  flexBasis={{ base: "", md: "32", lg: "23%" }}
+                  mb={56}
+                  borderRadius="6px"
+                  bg="#1C1C1C"
+                  color="white.100"
+                  key={index}
+                >
+                  <Box pos="relative">
+                    <Box
+                      px="30px"
                       py={2}
-                      alignItems="center"
-                      justifyContent="space-between"
-                      spacing={24}
+                      bg="primary.100"
+                      fontSize={14}
+                      w="max"
+                      borderRadius="25px"
+                      className="gordita600"
+                      pos="absolute"
+                      right={10}
+                      bottom={-20}
+                      color="black.100"
                     >
-                      <VStack
-                        spacing={1}
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <Image alt="" src={edit}></Image>
-                        <Text className="gordita400" fontSize={12}>
-                          Edit
-                        </Text>
-                      </VStack>
-                      <VStack
-                        spacing={1}
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <Image alt="" src={cancel}></Image>
-                        <Text className="gordita400" fontSize={12}>
-                          Cancel
-                        </Text>
-                      </VStack>
-                      <VStack
-                        spacing={1}
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <Image alt="" src={refund}></Image>
-                        <Text className="gordita400" fontSize={12}>
-                          Refund
-                        </Text>
-                      </VStack>
-                    </HStack>
+                      LIVE
+                    </Box>
+                    <Image alt="" style={{ width: "100%", height: "131px" }} src={eventImage} />
                   </Box>
-                );
-              }
-            )}
+                  <VStack spacing={10} mt={12} alignItems="flex-start" p={12}>
+                    <Text className="gordita400" fontSize={16}>
+                      Event Name:
+                    </Text>
+                    <Text className="gordita600" fontSize={16}>
+                      {eventName}
+                    </Text>
+                    <Text className="gordita600" fontSize={14} color="primary.100">
+                      {startDate + "|" + startTime}
+                    </Text>
+                    <HStack>
+                      <Image alt="" src={locImage} />
+                      <Text className="gordita600" fontSize={14}>
+                        {location}
+                      </Text>
+                    </HStack>
+                  </VStack>
+                </Box>
+              );
+            })}
           </Flex>
         )}
       </Box>

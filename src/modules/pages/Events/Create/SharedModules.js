@@ -12,8 +12,9 @@ import {
   Box,
   InputGroup,
   InputRightElement,
+  useColorMode,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { theme } from "../../../../styles/theme/base";
 import { SingleDatepicker } from "../../../shared/datepicker";
 import { BsArrowRight, BsChevronLeft } from "react-icons/bs";
@@ -21,6 +22,31 @@ import { TimeIcon } from "@chakra-ui/icons";
 import { TimeBoxWrapper } from "../../../../styles/pages/dashboard";
 import isEmpty from "lodash/isEmpty";
 import moment from "moment";
+import { EventBar as EventStyles, SelectItem } from "../../../../styles/layout/sharedModules";
+import { Steps } from "antd";
+
+const stepss = [
+  {
+    status: "wait",
+    title: "Event Basics",
+  },
+  {
+    status: "wait",
+    title: "Ticket Details ",
+  },
+  {
+    status: "wait",
+    title: "Artist and Lineup",
+  },
+  {
+    status: "wait",
+    title: "Permotion",
+  },
+  {
+    status: "wait",
+    title: "Summary",
+  },
+];
 
 export const EventBar = ({
   textValue,
@@ -30,69 +56,89 @@ export const EventBar = ({
   onGoBack,
   endStep,
   handleSubmit,
-}) => (
-  <HStack justifyContent="space-between" spacing={10} flex={1}>
-    <HStack
-      alignItems="center"
-      onClick={onGoBack}
-      flex={1}
-      cursor="pointer"
-      className="gordita600"
-      color={textValue}
-      fontSize={16}
-    >
-      <BsChevronLeft />
-      <Text pt={1}>Go Back</Text>
-    </HStack>
-    <HStack
-      bgGradient="linear-gradient(89.98deg, #816CFF 1.37%, #9B6CFF 101.52%)"
-      borderRadius="6px"
-      h="48px"
-      px={24}
-      fontSize={16}
-      className="gordita600"
-      flex={6}
-      color={textValue}
-      justifyContent="space-between"
-    >
-      <Text>{heading}</Text>
-      <Text>{"STEP " + step + " OF 5"}</Text>
-    </HStack>
-    <Flex justifyContent="flex-end" flex={1}>
-      <Button
-        className="gordita600"
-        onClick={endStep ? handleSubmit : onStepChange}
-        bg="primary.100"
-        color="black.100"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        gap={4}
-        fontSize={16}
-        h="48px"
-      >
-        {endStep ? "Publish" : "Next Step"}
-        <BsArrowRight />
-      </Button>
-    </Flex>
-  </HStack>
-);
+  onProgressChange,
+  children,
+}) => {
+  const [items, setItems] = useState();
+  const color = useColorModeValue("#000000", "#ffffff");
+  useEffect(() => {
+    const newSteps = stepss.map((val, index) => (index === step - 1 ? { status: "process", title: val.title } : val));
+    setItems(newSteps);
+  }, [step]);
+  return (
+    <EventStyles color={color}>
+      <HStack justifyContent="space-between" spacing={10} flex={1}>
+        <HStack
+          alignItems="center"
+          onClick={onGoBack}
+          flex={1}
+          cursor="pointer"
+          className="gordita600"
+          color={textValue}
+          fontSize={16}
+        >
+          <BsChevronLeft />
+          <Text pt={1}>Go Back</Text>
+        </HStack>
+        <HStack h="48px" px={24} className="gordita600" flex={6} color={textValue}>
+          <Steps
+            type="navigation"
+            current={step - 1}
+            onChange={onProgressChange}
+            className="site-navigation-steps"
+            items={items}
+          />
+        </HStack>
+        {endStep && (
+          <Flex mt={56} justifyContent="flex-end" flex={1}>
+            <Button
+              className="gordita600"
+              onClick={endStep ? handleSubmit : onStepChange}
+              bg="primary.100"
+              color="black.100"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              gap={4}
+              fontSize={16}
+              h="48px"
+            >
+              {endStep ? "Publish" : "Next Step"}
+              <BsArrowRight />
+            </Button>
+          </Flex>
+        )}
+      </HStack>
+      {children}
+      {step < 5 && (
+        <Flex mt={56} justifyContent="flex-end" flex={1}>
+          <Button
+            className="gordita600"
+            onClick={endStep ? handleSubmit : onStepChange}
+            bg="primary.100"
+            color="black.100"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap={4}
+            fontSize={16}
+            h="48px"
+          >
+            {endStep ? "Publish" : "Next Step"}
+            <BsArrowRight />
+          </Button>
+        </Flex>
+      )}
+    </EventStyles>
+  );
+};
 
 export const InputBox = ({ label, name, placeholder, maxW, ...rest }) => {
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
     <Box w={maxW}>
-      <Text
-        mb="8px"
-        fontSize={14}
-        color={textValue}
-        className="heebo"
-        fontWeight={500}
-      >
+      <Text mb="8px" fontSize={14} color={textValue} className="heebo" fontWeight={500}>
         {label}
       </Text>
       <Input
@@ -117,10 +163,7 @@ export const InputBox = ({ label, name, placeholder, maxW, ...rest }) => {
   );
 };
 export const TextBox = ({ name, label, placeholder, ...rest }) => {
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
     <Box w="100%" spacing={0} alignItems="flex-start">
@@ -147,75 +190,47 @@ export const TextBox = ({ name, label, placeholder, ...rest }) => {
   );
 };
 
-export const SelectBox = ({
-  label,
-  placeholder,
-  name,
-  maxW,
-  options,
-  ...rest
-}) => {
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+export const SelectBox = ({ label, placeholder, name, maxW, options, ...rest }) => {
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
     <Box w={maxW}>
-      <Text
-        fontSize={14}
-        mb="8px"
-        color={textValue}
-        className="heebo"
-        fontWeight={500}
-      >
-        {label}
-      </Text>
-      <Select
-        bg="black.400"
-        color="purple.100"
-        w="100%"
-        maxW={maxW}
-        h="56px"
-        borderRadius="8px"
-        border="none"
-        handleBlur={handleBlur}
-        value={values[name]}
-        placeholder={placeholder}
-        onChange={(e) => handleChange(name, e.target.value)}
-      >
-        {!isEmpty(options) &&
-          options.map(({ label, value }, index) => (
-            <option value={value}>{label}</option>
-          ))}
-      </Select>
+      <SelectItem>
+        <Text fontSize={14} mb="8px" color={textValue} className="heebo" fontWeight={500}>
+          {label}
+        </Text>
+        <Select
+          bg="black.400"
+          color="purple.100"
+          w="100%"
+          maxW={maxW}
+          h="56px"
+          borderRadius="8px"
+          border="none"
+          handleBlur={handleBlur}
+          value={values[name]}
+          placeholder={placeholder}
+          onChange={(e) => handleChange(name, e.target.value)}
+        >
+          {!isEmpty(options) &&
+            options.map(({ label, value }, index) => (
+              <option className="optionss" value={value}>
+                {label}
+              </option>
+            ))}
+        </Select>
+      </SelectItem>
     </Box>
   );
 };
 
-export const DateBox = ({
-  name,
-  label,
-  placeholder,
-  maxW,
-  format,
-  ...rest
-}) => {
+export const DateBox = ({ name, label, placeholder, maxW, format, ...rest }) => {
   const [date, setDate] = useState();
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
     <Box w={maxW || "100%"}>
-      <Text
-        fontSize={14}
-        mb="8px"
-        color={textValue}
-        className="heebo"
-        fontWeight={500}
-      >
+      <Text fontSize={14} mb="8px" color={textValue} className="heebo" fontWeight={500}>
         {label}
       </Text>
       <SingleDatepicker
@@ -230,26 +245,11 @@ export const DateBox = ({
 };
 
 export const SwitchBox = ({ name, maxW, label, placeholder, ...rest }) => {
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
-    <HStack
-      w="100%"
-      maxW={maxW}
-      spacing={0}
-      alignItems="flex-start"
-      justifyContent="space-between"
-    >
-      <Text
-        mb="8px"
-        fontSize={14}
-        color={textValue}
-        className="heebo"
-        fontWeight={500}
-      >
+    <HStack w="100%" maxW={maxW} spacing={0} alignItems="flex-start" justifyContent="space-between">
+      <Text mb="8px" fontSize={14} color={textValue} className="heebo" fontWeight={500}>
         {label}
       </Text>
       <Switch
@@ -262,19 +262,9 @@ export const SwitchBox = ({ name, maxW, label, placeholder, ...rest }) => {
   );
 };
 
-export const TimeBox = ({
-  name,
-  label,
-  placeholder,
-  maxW,
-  color = "purple.100",
-  ...rest
-}) => {
+export const TimeBox = ({ name, label, placeholder, maxW, color = "purple.100", ...rest }) => {
   const [date, setDate] = useState();
-  const textValue = useColorModeValue(
-    theme.colors.black[100],
-    theme.colors.white[100]
-  );
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
 
   const icon = <TimeIcon fontSize="sm" />;
@@ -282,13 +272,7 @@ export const TimeBox = ({
   return (
     <TimeBoxWrapper>
       <Box w={maxW || "100%"}>
-        <Text
-          fontSize={14}
-          mb="8px"
-          color={textValue}
-          className="heebo"
-          fontWeight={500}
-        >
+        <Text fontSize={14} mb="8px" color={textValue} className="heebo" fontWeight={500}>
           {label}
         </Text>
 

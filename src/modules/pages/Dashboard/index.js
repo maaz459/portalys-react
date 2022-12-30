@@ -13,14 +13,10 @@ import {
   CircularProgress,
   CircularProgressLabel,
   Progress as LinearProgress,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import {
-  down,
-  pdf,
-  up,
-  xls,
-} from "../../../static/assets/images/dashboard/sidebar";
+import { down, pdf, up, xls } from "../../../static/assets/images/dashboard/sidebar";
 import DashboardLayout from "../../layout/dashboard/index";
 import Typography from "../../shared/typography";
 import { useMediaQuery } from "../../../utils/useMediaQuery";
@@ -37,6 +33,7 @@ import {
   Bar,
 } from "recharts";
 import { SearchIcon } from "@chakra-ui/icons";
+import { zoom } from "../../../static/assets/images";
 const data = [
   {
     name: "Mon",
@@ -105,43 +102,22 @@ const analytics = [
 const Tabs = ({ name, color, setSelected }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   return (
-    <Text
-      fontSize={18}
-      className="gordita700"
-      cursor="pointer"
-      onClick={() => setSelected(name)}
-      color={color}
-    >
+    <Text fontSize={18} className="gordita700" cursor="pointer" onClick={() => setSelected(name)} color={color}>
       {name}
     </Text>
   );
 };
 
 const Progress = ({ trackColor, color }) => (
-  <Box
-    w="100%"
-    h="8px"
-    borderRadius="70px"
-    zIndex={0}
-    bg={trackColor}
-    pos="relative"
-  >
-    <Box
-      borderRadius="70px"
-      bg={color}
-      left={0}
-      top={0}
-      w="80%"
-      height="100%"
-      zIndex={2}
-      pos="absolute"
-    ></Box>
+  <Box w="100%" h="8px" borderRadius="70px" zIndex={0} bg={trackColor} pos="relative">
+    <Box borderRadius="70px" bg={color} left={0} top={0} w="80%" height="100%" zIndex={2} pos="absolute"></Box>
   </Box>
 );
 
 const DashboardComponent = () => {
   const [selected, setSelected] = useState("Tickets");
-
+  const [graph, setGraph] = useState("Yearly");
+  const colorValue = useColorModeValue("black.100", "white.100");
   return (
     <Box w="100%">
       <Select
@@ -156,31 +132,16 @@ const DashboardComponent = () => {
       >
         <option></option>
       </Select>
-      <Flex
-        gap={24}
-        justifyContent="space-between"
-        color="white.100"
-        mt={12}
-        w="100%"
-      >
+      <Flex gap={24} justifyContent="space-between" color="white.100" mt={12} w="100%">
         {analytics.map(({ name, percentage, quantity, type }, index) => (
           <Box p={24} bg="#1C1C1C" borderRadius="6px" flexBasis="25%">
             <Text className="gordita700">{name}</Text>
-            <HStack
-              mt={12}
-              justifyContent="space-between"
-              alignItems="flex-end"
-              color="primary.100"
-            >
+            <HStack mt={12} justifyContent="space-between" alignItems="flex-end" color="primary.100">
               <Text fontSize={24} className="gordita700">
                 {quantity}
               </Text>
               <Flex gap={2}>
-                <Text
-                  color={type === "up" ? "primary.100" : "#FF5C00"}
-                  className="gordita400"
-                  fontSize={12}
-                >
+                <Text color={type === "up" ? "primary.100" : "#FF5C00"} className="gordita400" fontSize={12}>
                   {percentage}
                 </Text>
                 <Image alt="" src={type === "up" ? up : down}></Image>
@@ -194,15 +155,15 @@ const DashboardComponent = () => {
         <VStack justifyContent="center" flexBasis="50%" alignItems="flex-start">
           <HStack alignItems="center" justifyContent="center" mt={24}>
             <Tabs
-              color={selected === "Tickets" ? "primary.100" : "white.100"}
+              color={selected === "Tickets" ? "primary.100" : colorValue}
               setSelected={setSelected}
               name={"Tickets"}
             />
-            <Text fontSize={{ base: 16, md: 20, lg: 22 }} color="white.100">
+            <Text fontSize={{ base: 16, md: 20, lg: 22 }} color={colorValue}>
               |
             </Text>
             <Tabs
-              color={selected === "Collectables" ? "primary.100" : "white.100"}
+              color={selected === "Collectables" ? "primary.100" : colorValue}
               setSelected={setSelected}
               name={"Collectables"}
             />
@@ -210,14 +171,47 @@ const DashboardComponent = () => {
           <Box w="100%" color="white.100" px={10} py={24} bg="#1C1C1C">
             <HStack justifyContent="space-between" mb={12}>
               <Text className="gordita700" fontSize={14}>
-                Total Sales
+                Tickets Sold
               </Text>
-              <HStack>
-                <Text className="gordita400" fontSize={14}>
-                  Primary Sales
+              <HStack gap={8}>
+                <Text
+                  bg={graph === "Yearly" ? "rgba(2, 246, 173, 0.34)" : ""}
+                  border={graph === "Yearly" ? "0.8px solid" : ""}
+                  borderColor="#02F6AD"
+                  className="gordita400"
+                  borderRadius="8px"
+                  px={4}
+                  fontSize={14}
+                  cursor="pointer"
+                  onClick={() => setGraph("Yearly")}
+                >
+                  Yearly
                 </Text>
-                <Text className="gordita400" fontSize={14}>
-                  Secondary Sales
+                <Text
+                  bg={graph === "Monthly" ? "rgba(2, 246, 173, 0.34)" : ""}
+                  border={graph === "Monthly" ? "0.8px solid" : ""}
+                  borderColor="#02F6AD"
+                  className="gordita400"
+                  borderRadius="8px"
+                  px={4}
+                  fontSize={14}
+                  cursor="pointer"
+                  onClick={() => setGraph("Monthly")}
+                >
+                  Monthly
+                </Text>
+                <Text
+                  bg={graph === "Daily" ? "rgba(2, 246, 173, 0.34)" : ""}
+                  border={graph === "Daily" ? "0.8px solid" : ""}
+                  borderColor="#02F6AD"
+                  className="gordita400"
+                  borderRadius="8px"
+                  px={4}
+                  fontSize={14}
+                  cursor="pointer"
+                  onClick={() => setGraph("Daily")}
+                >
+                  Daily
                 </Text>
               </HStack>
             </HStack>
@@ -235,12 +229,7 @@ const DashboardComponent = () => {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Line
-                  type="basis"
-                  dataKey="pv"
-                  stroke="#A8C5DA"
-                  activeDot={{ r: 8 }}
-                />
+                <Line type="basis" dataKey="pv" stroke="#A8C5DA" activeDot={{ r: 8 }} />
               </LineChart>
             </ResponsiveContainer>
           </Box>
@@ -270,26 +259,31 @@ const DashboardComponent = () => {
 
       <HStack alignItems="center" mt={24}>
         <HStack flex={1}>
-          <Text flex={2} fontSize={18} color="white.100" className="gordita700">
+          <Text flex={2} fontSize={18} color={colorValue} className="gordita700">
             Total Tickets Sold
           </Text>
           <InputGroup flex={3}>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<SearchIcon color="gray.300" />}
+            <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
+            <Input
+              border="1px solid"
+              borderColor={colorValue}
+              type="text"
+              placeholder="Filter By Event"
+              _placeholder={{ color: colorValue }}
+              color={colorValue}
+              pl={38}
             />
-            <Input type="text" placeholder="Filter By Event" pl={38} />
           </InputGroup>{" "}
         </HStack>
         <HStack alignItems="center" justifyContent="flex-end" flex={1}>
           <HStack justifyContent="center" alignItems="center" spacing={0}>
-            <Text fontSize={14} color="white.100" className="gordita700">
+            <Text fontSize={14} color={colorValue} className="gordita700">
               Export to:
             </Text>
             <Image pl={16} src={pdf} />
             <Image pl={16} src={xls} />
           </HStack>
-          <Text pl={30} color="white.100" className="gordita700">
+          <Text pl={30} color={colorValue} className="gordita700">
             View All Events{" "}
           </Text>{" "}
         </HStack>
