@@ -26,7 +26,7 @@ import Layout from "../../modules/layout/layout";
 import { getEventsByUUID } from "../../utils/actions/event";
 import { isEmpty } from "lodash";
 import moment from "moment";
-export default function Portalys2() {
+export default function EventDetail() {
   const tracks = [
     {
       img: track,

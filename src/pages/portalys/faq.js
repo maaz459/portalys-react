@@ -1,5 +1,11 @@
 import {
-  Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Heading
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Heading,
 } from "@chakra-ui/react";
 import React from "react";
 import Layout from "../../modules/layout/layout";
@@ -89,7 +95,12 @@ export default function Faq() {
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
-                  <AccordionPanel pb={4} fontSize="18" fontWeight="400" padding="15px">
+                  <AccordionPanel
+                    pb={4}
+                    fontSize="18"
+                    fontWeight="400"
+                    padding="15px"
+                  >
                     {item.answer}
                   </AccordionPanel>
                 </AccordionItem>

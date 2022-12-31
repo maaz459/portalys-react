@@ -122,7 +122,7 @@ export default function Profile() {
                 marginTop="20px"
                 width="110px"
               >
-                Choose file
+                Choose File
               </Button>
               <Text fontSize="14px" color="#FFFFFF" marginTop="20px">
                 Upload File

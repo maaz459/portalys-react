@@ -14,7 +14,7 @@ import srch from "../../static/assets/images/srch.svg";
 import "../../styles/portalys/portalys.css";
 import { getAllEvents } from "../../utils/actions/event";
 import AllTeam from "./allteam";
-export default function Portalys1() {
+export default function NewsEvents() {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
 
