@@ -1,11 +1,17 @@
 import {
-  Box, Button, chakra, Divider, Image, Input, Text
+  Box,
+  Button,
+  chakra,
+  Divider,
+  Image,
+  Input,
+  Text,
 } from "@chakra-ui/react";
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import calendar1 from "../../static/assets/images/calendar1.svg";
 import facebook from "../../static/assets/images/fb.svg";
-import leftarr from "../../static/assets/images/leftarrow.svg";
+import leftarrow from "../../static/assets/images/leftarrow.svg";
 import men from "../../static/assets/images/man.svg";
 import order from "../../static/assets/images/order.svg";
 import setting from "../../static/assets/images/setting.svg";
@@ -88,7 +94,7 @@ export default function Profile() {
               display="flex"
               cursor="pointer"
             >
-              <Image width="21px" src={leftarr} />
+              <Image width="21px" src={leftarrow} />
               <Text color="#FBFAFB" fontSize="15px">
                 Logout
               </Text>
@@ -228,7 +234,7 @@ export default function Profile() {
                     borderRadius="100px"
                   />
                   <Link>
-                    <Text color="#FFFFFF">www.facebook.com/Anjumch325 </Text>{" "}
+                    <Text color="#FFFFFF">www.facebook.com/Anjumch325 </Text>
                   </Link>
                 </Box>
                 <Button

@@ -13,6 +13,7 @@ import EventDetail from "../pages/portalys/eventdetail";
 import NewsEvents from "../pages/portalys/newsevents";
 import Profile2 from "../pages/profile/profile2";
 import Profile from "../pages/profile/profile";
+import Collaborate from "../pages/collaborate/collaborate";
 const Routes = (props) => {
   return (
     <DomRoutes>
@@ -30,6 +31,7 @@ const Routes = (props) => {
       <Route path="faq" element={<Faq />} />
       <Route path="profile" element={<Profile />} />
       <Route path="profile2" element={<Profile2 />} />
+      <Route path="collaborate" element={<Collaborate />} />
       <Route path="resetpassword" element={<Home />} />
     </DomRoutes>
   );
