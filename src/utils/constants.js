@@ -1,7 +1,7 @@
 export const navLinks = [
   { text: "Marketplace", link: "/" },
   { text: "My Tickets", link: "/mytickets" },
-  { text: "Work With Us", link: "/" },
+  { text: "Work With Us", link: "/collaborate" },
   { text: "Our Vision", link: "/about" },
 ];
 

@@ -29,7 +29,7 @@ const Routes = (props) => {
       <Route key="tickets" path="mytickets" element={<Tickets {...props} />} />
       <Route path="about" element={<About />} />
       <Route path="faq" element={<Faq />} />
-      <Route path="profile" element={<Profile />} />
+      <Route path="settings" element={<Profile />} />
       <Route path="profile2" element={<Profile2 />} />
       <Route path="collaborate" element={<Collaborate />} />
       <Route path="resetpassword" element={<Home />} />
