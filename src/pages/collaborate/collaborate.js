@@ -14,9 +14,7 @@ import Layout from "../../modules/layout/layout";
 
 export default function Collaborate() {
   return (
-    // <Layout>
-     
-    // </Layout>
+    <Layout>
     <Box background="black">
     <Box className="collaboratebg">
       <Box maxW="900px" textAlign="center" className="collaboration_hero">
@@ -124,5 +122,7 @@ export default function Collaborate() {
       <GlobalPoints />
     </Box>
   </Box>
+    </Layout>
+   
   );
 }
