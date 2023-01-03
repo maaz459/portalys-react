@@ -138,7 +138,7 @@ const EventsComponent = () => {
                 <Tr>
                   {["Event eventName", "Date", "Start Time", "Event Venue", "Status"].map((column, index) => {
                     return (
-                      <Th textTransform="capitalize" key={index} fontSize={16} color={colorValue}>
+                      <Th textTransform="capitalize" key={index} fontSize={16} color="gray.100">
                         {column}
                       </Th>
                     );
@@ -216,7 +216,7 @@ const EventsComponent = () => {
                       pos="absolute"
                       right={10}
                       bottom={-20}
-                      color="black.100"
+                      color='black.100'
                     >
                       LIVE
                     </Box>

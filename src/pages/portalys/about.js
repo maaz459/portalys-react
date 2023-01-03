@@ -1,43 +1,41 @@
-import { React, useState } from "react";
 import {
   Box,
+  Button,
+  chakra,
+  Heading,
+  HStack,
+  Image,
+  Input,
   Text,
   VStack,
-  Image,
-  Progress as LinearProgress,
-  Heading,
-  chakra,
-  HStack,
-  Button,
-  Input,
-  grid,
 } from "@chakra-ui/react";
-import "../../styles/portalys/portalys.css";
+import { React } from "react";
 import Slider from "react-slick";
-import thumb from "../../static/assets/images/sld1.svg";
-import marker from "../../static/assets/images/marker.svg";
-import calender from "../../static/assets/images/calender.svg";
-import box from "../../static/assets/images/box.svg";
-import home from "../../static/assets/images/home.svg";
-import boxline from "../../static/assets/images/boxline.svg";
-import singer from "../../static/assets/images/singer.svg";
-import verify from "../../static/assets/images/verify.svg";
-import exper from "../../static/assets/images/exper.svg";
-import full from "../../static/assets/images/full.svg";
-import calenderImg from "../../static/assets/images/calendar.svg";
 import {
   disk1,
-  disk3,
   disk2,
+  disk3,
   disk4,
   lights2 as light1,
   mbl as mobile,
+  profession,
   publicImage as public1,
   writer,
-  profession,
 } from "../../static/assets/images";
+import box from "../../static/assets/images/box.svg";
+import boxline from "../../static/assets/images/boxline.svg";
+import calenderImg from "../../static/assets/images/calendar.svg";
+import calender from "../../static/assets/images/calender.svg";
+import exper from "../../static/assets/images/exper.svg";
+import full from "../../static/assets/images/full.svg";
+import home from "../../static/assets/images/home.svg";
+import marker from "../../static/assets/images/marker.svg";
+import singer from "../../static/assets/images/singer.svg";
+import thumb from "../../static/assets/images/sld1.svg";
+import verify from "../../static/assets/images/verify.svg";
 import "../../styles/about/about.css";
 import Layout from "../../modules/layout/layout";
+import "../../styles/portalys/portalys.css";
 
 export default function About() {
   const management = [
@@ -104,20 +102,45 @@ export default function About() {
             </div>
           </Slider>
           <Box position="absolute" top="38%" left="80px" className="wolveshero">
-            <Heading fontSize="35px" fontWeight="800" width="500px" className="wolvesheader">
+            <Heading
+              fontSize="35px"
+              fontWeight="800"
+              width="500px"
+              className="wolvesheader"
+            >
               <chakra.span color="#02F6AD">ABOUT THE CLUB &nbsp; </chakra.span>
-              <chakra.span color="white">WELCOME TO THE HOME OF WOLVES FC</chakra.span>
+              <chakra.span color="white">
+                WELCOME TO THE HOME OF WOLVES FC
+              </chakra.span>
             </Heading>
           </Box>
         </Box>
         {/* / */}
-        <Box display="flex" justifyContent="center" alignItems="center" padding="120px" className="consecteturhero">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          padding="120px"
+          className="consecteturhero"
+        >
           <Box maxWidth="700px" width="100%" textAlign="center">
-            <Heading fontSize="31px" fontWeight="700" color="#ffff" className="ametheader">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas massa, sed porta dui.
+            <Heading
+              fontSize="31px"
+              fontWeight="700"
+              color="#ffff"
+              className="ametheader"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+              massa, sed porta dui.
             </Heading>
-            <Text fontSize="16px" fontWeight="500" color="#02F6AD" paddingTop="12px">
-              Consetetur omittantur consequuntur eos et. Eleifend praesent iudicabit no mea tollit persequeris ex pri.
+            <Text
+              fontSize="16px"
+              fontWeight="500"
+              color="#02F6AD"
+              paddingTop="12px"
+            >
+              Consetetur omittantur consequuntur eos et. Eleifend praesent
+              iudicabit no mea tollit persequeris ex pri.
             </Text>
           </Box>
         </Box>
@@ -127,10 +150,20 @@ export default function About() {
             return (
               <VStack key={index} textAlign="center" maxW="250px" width="100%">
                 <Image height="30px" w="30px" src={item.img} />
-                <Heading color="#02F6AD" fontWeight="700" fontSize="16px" paddingTop="25px">
+                <Heading
+                  color="#02F6AD"
+                  fontWeight="700"
+                  fontSize="16px"
+                  paddingTop="25px"
+                >
                   {item.title}
                 </Heading>
-                <Text color="#FFFFFF" fontWeight="400" fontSize="14px" paddingTop="12px">
+                <Text
+                  color="#FFFFFF"
+                  fontWeight="400"
+                  fontSize="14px"
+                  paddingTop="12px"
+                >
                   {item.para}
                 </Text>
               </VStack>
@@ -143,26 +176,45 @@ export default function About() {
             <chakra.span color="#FFFFFF">The design can </chakra.span>
             <chakra.span color="#02F6AD">change the world. </chakra.span>
           </Heading>
-          <Box display="grid" justifyContent="center" alignItems="center" marginTop="25px">
+          <Box
+            display="grid"
+            justifyContent="center"
+            alignItems="center"
+            marginTop="25px"
+          >
             <Image src={boxline} width="250px" />
           </Box>
           <Text marginTop="25px" color="#FFFFFF" fontSize="15px">
             Lorem ipsum dolor sit amet, consectetuelit.
           </Text>
-          <HStack justifyContent="space-evenly" marginTop="50px" className="mobileimgshero">
+          <HStack
+            justifyContent="space-evenly"
+            marginTop="50px"
+            className="mobileimgshero"
+          >
             <Image className="mobileimg" src={mobile} width="290px" />
             <Image className="mobileimg" src={mobile} width="290px" />
             <Image className="mobileimg" src={mobile} width="290px" />
           </HStack>
-          <HStack textAlign="left" justifyContent="space-evenly" marginTop="50px" className="searchhero">
+          <HStack
+            textAlign="left"
+            justifyContent="space-evenly"
+            marginTop="50px"
+            className="searchhero"
+          >
             <Box src={mobile} width="290px" className="searchheroone">
-              <Heading fontSize="35px" fontWeight="700" className="designheader">
+              <Heading
+                fontSize="35px"
+                fontWeight="700"
+                className="designheader"
+              >
                 <chakra.span color="#FFFFFF">Advanced&nbsp;</chakra.span>
                 <chakra.span color="#02F6AD">Event Search System </chakra.span>
               </Heading>
               <Text color="#FFFFFF" fontSize="15px" paddingTop="25px">
-                Your customers can filter events according to their own needs with event search tool. Advanced and
-                modern event filtering options.
+                Your customers can filter events according to their own needs
+                with event search tool. Advanced and modern event filtering
+                options.
               </Text>
             </Box>
             <Image src={writer} width="320px" searchherotwo />
@@ -179,45 +231,106 @@ export default function About() {
         >
           <HStack gap="15px" width="50%" className="publicimghero">
             <Image src={public1} width="400px" className="searchherotwo" />
-            <Image src={singer} width="250px" height="440px" className="singerimg" />
+            <Image
+              src={singer}
+              width="250px"
+              height="440px"
+              className="singerimg"
+            />
           </HStack>
           <Box width="40%" className="controlhero">
-            <Heading fontSize="50px" fontWeight="700" color="#02F6AD" className="designheader">
+            <Heading
+              fontSize="50px"
+              fontWeight="700"
+              color="#02F6AD"
+              className="designheader"
+            >
               Take Control of Your Tickets
             </Heading>
-            <Text fontSize="15px" textAlign="left" fontWeight="400" color="#FBFAFB" marginTop="20px">
+            <Text
+              fontSize="15px"
+              textAlign="left"
+              fontWeight="400"
+              color="#FBFAFB"
+              marginTop="20px"
+            >
               One wallet, for all event tickets, that you own.
             </Text>
 
-            <HStack gap="30px" paddingTop="40px" display="flex" alignItems="end">
+            <HStack
+              gap="30px"
+              paddingTop="40px"
+              display="flex"
+              alignItems="end"
+            >
               <Image src={verify} width="26px" />
               <VStack textAlign="left" display="block">
-                <Text fontSize="22px" fontWeight="700" color="#FFFFFF" marginBottom="-2px">
+                <Text
+                  fontSize="22px"
+                  fontWeight="700"
+                  color="#FFFFFF"
+                  marginBottom="-2px"
+                >
                   We verify that you own it
                 </Text>
-                <chakra.span fontSize="15px" textAlign="left" fontWeight="400" color="#FBFAFB">
+                <chakra.span
+                  fontSize="15px"
+                  textAlign="left"
+                  fontWeight="400"
+                  color="#FBFAFB"
+                >
                   Only your event ticket ownership scans across all events
                 </chakra.span>
               </VStack>
             </HStack>
-            <HStack gap="30px" paddingTop="40px" display="flex" alignItems="end">
+            <HStack
+              gap="30px"
+              paddingTop="40px"
+              display="flex"
+              alignItems="end"
+            >
               <Image src={full} width="26px" />
               <VStack textAlign="left" display="block">
-                <Text fontSize="22px" fontWeight="700" color="#FFFFFF" marginBottom="-2px">
+                <Text
+                  fontSize="22px"
+                  fontWeight="700"
+                  color="#FFFFFF"
+                  marginBottom="-2px"
+                >
                   We verify that you own it
                 </Text>
-                <chakra.span fontSize="15px" textAlign="left" fontWeight="400" color="#FBFAFB">
+                <chakra.span
+                  fontSize="15px"
+                  textAlign="left"
+                  fontWeight="400"
+                  color="#FBFAFB"
+                >
                   Only your event ticket ownership scans across all events
                 </chakra.span>
               </VStack>
             </HStack>
-            <HStack gap="30px" paddingTop="40px" display="flex" alignItems="end">
+            <HStack
+              gap="30px"
+              paddingTop="40px"
+              display="flex"
+              alignItems="end"
+            >
               <Image src={exper} width="26px" />
               <VStack textAlign="left" display="block">
-                <Text fontSize="22px" fontWeight="700" color="#FFFFFF" marginBottom="-2px">
+                <Text
+                  fontSize="22px"
+                  fontWeight="700"
+                  color="#FFFFFF"
+                  marginBottom="-2px"
+                >
                   We verify that you own it
                 </Text>
-                <chakra.span fontSize="15px" textAlign="left" fontWeight="400" color="#FBFAFB">
+                <chakra.span
+                  fontSize="15px"
+                  textAlign="left"
+                  fontWeight="400"
+                  color="#FBFAFB"
+                >
                   Only your event ticket ownership scans across all events
                 </chakra.span>
               </VStack>
@@ -227,12 +340,23 @@ export default function About() {
         {/* // */}
         <HStack padding="60px" gap="20px" className="ticketshero">
           <Box>
-            <Heading fontSize="50px" fontWeight="700" color="#02F6AD" className="designheader">
+            <Heading
+              fontSize="50px"
+              fontWeight="700"
+              color="#02F6AD"
+              className="designheader"
+            >
               Online Ticket Sales & Reservation
             </Heading>
-            <Text fontSize="15px" fontWeight="400" color="#FFFFFF" marginTop="25px" paddingRight="80px">
-              Sell your event tickets with online payment methods or offline reservation system. More than 100 payment
-              gateways ready to use.
+            <Text
+              fontSize="15px"
+              fontWeight="400"
+              color="#FFFFFF"
+              marginTop="25px"
+              paddingRight="80px"
+            >
+              Sell your event tickets with online payment methods or offline
+              reservation system. More than 100 payment gateways ready to use.
             </Text>
           </Box>
           <Box>
@@ -252,7 +376,12 @@ export default function About() {
             <Image src={calenderImg} width="100%" />
           </Box>
           <Box textAlign="left">
-            <Heading fontSize="50px" fontWeight="700" color="#FFFFFF" className="designheader">
+            <Heading
+              fontSize="50px"
+              fontWeight="700"
+              color="#FFFFFF"
+              className="designheader"
+            >
               Events <chakra.span color="#02F6AD">Calendar</chakra.span>
             </Heading>
           </Box>
@@ -260,7 +389,13 @@ export default function About() {
         {/* // */}
         <Box paddingTop="60px" className="ticketshero">
           <Box>
-            <Heading fontSize="50px" textAlign="center" fontWeight="700" color="#FFFFFF" className="designheader">
+            <Heading
+              fontSize="50px"
+              textAlign="center"
+              fontWeight="700"
+              color="#FFFFFF"
+              className="designheader"
+            >
               Events <chakra.span color="#02F6AD">GALLERY</chakra.span>
             </Heading>
           </Box>
@@ -301,16 +436,31 @@ export default function About() {
 
           <VStack width="50%" className="light1hero">
             <Box textAlign="left" display="grid" alignItems="baseline">
-              <Heading color="#FFFFFF" fontWeight="700" fontSize="34px" className="designheader">
+              <Heading
+                color="#FFFFFF"
+                fontWeight="700"
+                fontSize="34px"
+                className="designheader"
+              >
                 Sign Up Our Newsletter
               </Heading>
-              <Text color="#FFFFFF" fontWeight="400" fontSize="15px" paddingTop="15px">
+              <Text
+                color="#FFFFFF"
+                fontWeight="400"
+                fontSize="15px"
+                paddingTop="15px"
+              >
                 Lorem ipsum dolor sit amet, consectetuelit.
               </Text>
             </Box>
             <HStack paddingTop="25px">
               {" "}
-              <Input type="text" placeholder="Email" padding="20px 40px" background="#FFFFFF" />
+              <Input
+                type="text"
+                placeholder="Email"
+                padding="20px 40px"
+                background="#FFFFFF"
+              />
               <Button
                 background="#02F6AD"
                 borderRadius="5px"
