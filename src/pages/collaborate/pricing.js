@@ -61,6 +61,8 @@ export default function Pricing() {
       display="flex"
       alignItems="center"
       justifyContent="space-between"
+      flexWrap="wrap"
+      className="pricinghero"
     >
       {data.map((item, index) => {
         return (
@@ -70,6 +72,8 @@ export default function Pricing() {
             padding="22px"
             key={index}
             maxW="370px"
+            width="100%"
+            className="pricingcard"
           >
             <Heading
               color="#FFFFFF"
@@ -80,7 +84,7 @@ export default function Pricing() {
               {item.personal}
             </Heading>
             <HStack display="flex" alignItems="end" marginTop="10px">
-              <Heading color="#FFFFFF" fontSize="45px">
+              <Heading color="#FFFFFF" fontSize="45px" className="globalheading">
                 {item.price}
               </Heading>
               <chakra.span color="#71717A" fontSize="17px">
