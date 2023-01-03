@@ -130,7 +130,7 @@ const Sidebar = ({ navbarHeight, sidebarWidth }) => {
                 selectedImage: settingPrimary,
                 lightImage: settingLight,
                 darkImage: settingDark,
-                link: "",
+                link: "/settings",
               },
             ].map((sideLink, index) => (
               <RenderSideLink key={index} {...sideLink} />
