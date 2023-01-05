@@ -30,7 +30,7 @@ export default function Collaborate() {
           background="#02F6AD"
           marginTop="30px"
         >
-          Start Callboration
+          Start Collaboration
         </Button>
       </Box>
     </Box>
