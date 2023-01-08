@@ -1,22 +1,13 @@
-import React from "react";
 import {
-  Box,
-  Button,
-  chakra,
-  Divider,
-  Heading,
-  HStack,
-  Image,
-  Input,
-  Text,
-  VStack,
+  Box, chakra, Heading, Image, Text
 } from "@chakra-ui/react";
-import shakehand from "../../static/assets/images/collaborate/shakehand.svg";
-import mirror from "../../static/assets/images/collaborate/mirror.svg";
-import doller from "../../static/assets/images/collaborate/doller.svg";
-import light from "../../static/assets/images/collaborate/light.svg";
-import phone from "../../static/assets/images/collaborate/phone.svg";
+import React from "react";
 import calender from "../../static/assets/images/collaborate/calender.svg";
+import dollar from "../../static/assets/images/collaborate/doller.svg";
+import light from "../../static/assets/images/collaborate/light.svg";
+import mirror from "../../static/assets/images/collaborate/mirror.svg";
+import phone from "../../static/assets/images/collaborate/phone.svg";
+import shakehand from "../../static/assets/images/collaborate/shakehand.svg";
 import "../../styles/collaborate/collaborate.css";
 
 export default function Features() {
@@ -32,7 +23,7 @@ export default function Features() {
       text: "The Best and Perfect Venue",
     },
     {
-      img: doller,
+      img: dollar,
       title: "Crypto Payment",
       text: "We Made Your Payments Easy",
     },
@@ -59,6 +50,7 @@ export default function Features() {
         fontSize="45px"
         fontWeight="700"
         textAlign="center"
+        className="globalheading"
       >
         Product <chakra.span color="#02F6AD">Features</chakra.span>
       </Heading>
@@ -74,8 +66,9 @@ export default function Features() {
           return (
            <Box  key={index} className="tablehero">
             <Box className="teamhero">
-                <Image src={item.img} width="65px" />
-                <Heading
+<Box display="flex" justifyContent="center" flexDir="column" alignItems="center" textAlign="center">
+<Image src={item.img} width="65px" />               
+<Heading
                   marginTop="50px"
                   color="#FFFFFF"
                   fontSize="25px"
@@ -91,6 +84,7 @@ export default function Features() {
                 >
                   {item.text}
                 </Text>
+               </Box>
               </Box>
            </Box>
           );

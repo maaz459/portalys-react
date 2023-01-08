@@ -24,7 +24,7 @@ import {
     };
     return (
       <Box background="black">
-        <Box width="100%" paddingTop="15px" display="flex" gap="30px">
+        <Box width="100%" paddingTop="15px" display="flex" gap="30px" minHeight="100vh">
           {/* sidebar */}
           <Box width="23%" background="#1C1C1C" display="grid">
             <Box padding="25px 20px" display="block" gap="30px">

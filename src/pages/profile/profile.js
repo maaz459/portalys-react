@@ -16,6 +16,7 @@ import men from "../../static/assets/images/man.svg";
 import order from "../../static/assets/images/order.svg";
 import setting from "../../static/assets/images/setting.svg";
 import square from "../../static/assets/images/square.svg";
+import "../../styles/profile/profile.css"
 
 export default function Profile() {
   const [show, setShow] = useState(1);
@@ -24,7 +25,7 @@ export default function Profile() {
   };
   return (
     <Box background="black">
-      <Box width="100%" paddingTop="15px" display="flex" gap="30px">
+      <Box width="100%" paddingTop="15px" display="flex" gap="30px" minHeight="100vh">
         {/* sidebar */}
         <Box width="23%" background="#1C1C1C" display="grid">
           <Box padding="25px 20px" display="block" gap="30px">
@@ -37,7 +38,7 @@ export default function Profile() {
               cursor="pointer"
             >
               <Image width="21px" src={square} />
-              <Text color="#FBFAFB" fontSize="15px">
+              <Text color="#FBFAFB" fontSize="15px" className="orderhero">
                 Dashboard
               </Text>
             </Box>
@@ -50,7 +51,9 @@ export default function Profile() {
               cursor="pointer"
             >
               <Image width="21px" src={calendar1} />
-              <Text color="#FBFAFB" fontSize="15px">
+              <Text color="#FBFAFB" fontSize="15px"
+              className="orderhero"
+              >
                 Events
               </Text>
             </Box>
@@ -63,7 +66,7 @@ export default function Profile() {
               cursor="pointer"
             >
               <Image width="21px" src={order} />
-              <Text color="#FBFAFB" fontSize="15px">
+              <Text color="#FBFAFB" fontSize="15px" className="orderhero">
                 Orders
               </Text>
             </Box>
@@ -74,12 +77,15 @@ export default function Profile() {
               alignItems="center"
               display="flex"
               cursor="pointer"
+            
+              
             >
               <Image width="21px" src={setting} />
               <Text
                 color="#FBFAFB"
                 fontSize="15px"
                 style={{ color: show == 1 ? "#02F6AD" : "#FBFAFB" }}
+                className="orderhero"
               >
                 Settings
               </Text>
