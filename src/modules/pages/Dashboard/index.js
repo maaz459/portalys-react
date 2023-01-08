@@ -34,6 +34,9 @@ import {
 } from "recharts";
 import { SearchIcon } from "@chakra-ui/icons";
 import { zoom } from "../../../static/assets/images";
+import { Dropdown, Space, Button as ABT } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { theme } from "../../../styles/theme/base";
 const data = [
   {
     name: "Mon",
@@ -118,20 +121,91 @@ const DashboardComponent = () => {
   const [selected, setSelected] = useState("Tickets");
   const [graph, setGraph] = useState("Yearly");
   const colorValue = useColorModeValue("black.100", "white.100");
+  const [selectedEvent, setSelectedEvent] = useState("Last Month");
+  const [hover, setHover] = useState("");
+  const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
+
   return (
     <Box w="100%">
-      <Select
-        placeholder={"Last Month"}
-        fontSize={18}
-        color="white.100"
-        w="160px"
-        border="none"
-        bg="transparent"
-        className="gordita700"
-        h="26px"
-      >
-        <option></option>
-      </Select>
+      <Box w={"150px"}>
+        <Dropdown
+          menu={{
+            items: [
+              {
+                label: "Last Month",
+                key: "1",
+                style: {
+                  backgroundColor: selectedEvent === "Last Month" || hover === "Last Month" ? "#02F6AD" : "#ffffff",
+                  border: selectedEvent === "Last Month" ? "1px solid" : "none",
+                  color: "#141414",
+                  fontSize: 14,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                },
+                className: "gordita400",
+                onClick: () => setSelectedEvent("Last Month"),
+                onMouseEnter: () => setHover("Last Month"),
+                onMouseLeave: () => setHover(""),
+              },
+              {
+                label: "Last Week",
+                key: "1",
+                style: {
+                  backgroundColor: selectedEvent === "Last Week" || hover === "Last Week" ? "#02F6AD" : "#ffffff",
+                  border: selectedEvent === "Last Week" ? "1px solid" : "none",
+                  color: "#141414",
+                  fontSize: 14,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                },
+                onClick: () => setSelectedEvent("Last Week"),
+                className: "gordita400",
+                onMouseEnter: () => setHover("Last Week"),
+                onMouseLeave: () => setHover(""),
+              },
+              {
+                label: "Last Year",
+                key: "1",
+                style: {
+                  backgroundColor: selectedEvent === "Last Year" || hover === "Last Year" ? "#02F6AD" : "#ffffff",
+                  border: selectedEvent === "Last Year" ? "1px solid" : "none",
+                  color: "#141414",
+                  fontSize: 14,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                },
+                onClick: () => setSelectedEvent("Last Year"),
+                className: "gordita400",
+                onMouseEnter: () => setHover("Last Year"),
+                onMouseLeave: () => setHover(""),
+              },
+            ],
+          }}
+          overlayStyle={{
+            padding: 0,
+            margin: 0,
+          }}
+        >
+          <ABT
+            style={{
+              backgroundColor: "transparent",
+              color: "#ffffff",
+              width: "100%",
+              height: "56px",
+              border: "none",
+              fontSize: "48px",
+            }}
+            className="gordita700"
+          >
+            <Space
+              style={{ width: "100%", display: "flex", justifyContent: "space-between", fontSize: "18px" }}
+              className="gordita700"
+            >
+              {selectedEvent} <DownOutlined />
+            </Space>
+          </ABT>
+        </Dropdown>
+      </Box>
       <Flex gap={24} justifyContent="space-between" color="white.100" mt={12} w="100%">
         {analytics.map(({ name, percentage, quantity, type }, index) => (
           <Box p={24} bg="#1C1C1C" borderRadius="6px" flexBasis="25%">

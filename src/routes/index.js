@@ -28,7 +28,7 @@ const Routes = (props) => {
       <Route key="bookingSeat" path="booking/seat" element={<Seat {...props} />} />
       <Route key="bookingDetail" path="booking/detail" element={<Detail {...props} />} />
       <Route key="tickets" path="mytickets" element={<Tickets {...props} />} />
-      <Route path="about" element={<About />} />
+      <Route path="ourvision" element={<About />} />
       <Route path="faq" element={<Faq />} />
       <Route path="settings" element={<Profile />} />
       <Route path="profile2" element={<Profile2 />} />

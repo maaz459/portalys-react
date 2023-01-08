@@ -41,6 +41,7 @@ import Features from "./Features";
 import { useEffect, useState } from "react";
 import { getAllEvents } from "../../../utils/actions/event";
 import isEmpty from "lodash/isEmpty";
+import { useNavigate } from "react-router-dom";
 const festivals = [
   {
     image: fest1,
@@ -76,6 +77,7 @@ const HomePage = () => {
   const isTablet = useMediaQuery("(max-width: 1024px)");
   const [events, setEvents] = useState([]);
   const maxW = "1662px";
+  const navigate = useNavigate();
 
   useEffect(() => {
     const init = async () => {
@@ -215,7 +217,15 @@ const HomePage = () => {
               Create your first event and sell tickets on biggest 2+ billion users plaftorm
             </Text>
             <Box mt={30}>
-              <Button borderRadius="50px">Become A Host</Button>
+              <Button
+                onClick={() => {
+                  navigate("/organizer");
+                  window.scrollTo(0, 0);
+                }}
+                borderRadius="50px"
+              >
+                Become A Host
+              </Button>
             </Box>
           </Box>
         </Flex>

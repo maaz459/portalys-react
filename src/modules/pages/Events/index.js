@@ -95,7 +95,7 @@ const EventsComponent = () => {
             onDateChange={setDate}
             placeholder="Date Range"
             maxW="281px"
-            color="white.100"
+            color="#ffffff"
           />
           <Dropdown
             menu={{
