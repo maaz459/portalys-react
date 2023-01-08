@@ -55,3 +55,5 @@ export const SelectItem = styled.div`
     height: 56px !important;
   }
 `;
+
+export const DatePicker = styled.div``;

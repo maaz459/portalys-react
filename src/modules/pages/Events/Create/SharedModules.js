@@ -13,12 +13,13 @@ import {
   InputGroup,
   InputRightElement,
   useColorMode,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { theme } from "../../../../styles/theme/base";
 import { SingleDatepicker } from "../../../shared/datepicker";
 import { BsArrowRight, BsChevronLeft } from "react-icons/bs";
-import { TimeIcon } from "@chakra-ui/icons";
+import { InfoOutlineIcon, TimeIcon } from "@chakra-ui/icons";
 import { TimeBoxWrapper } from "../../../../styles/pages/dashboard";
 import isEmpty from "lodash/isEmpty";
 import moment from "moment";
@@ -133,19 +134,27 @@ export const EventBar = ({
   );
 };
 
-export const InputBox = ({ label, name, placeholder, maxW, ...rest }) => {
+export const InputBox = ({ label, name, placeholder, maxW, tooltip = false, ...rest }) => {
   const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
     <Box w={maxW}>
-      <Text mb="8px" fontSize={14} color={textValue} className="heebo" fontWeight={500}>
-        {label}
-      </Text>
+      <Flex mb="8px" alignItems="center" gap={10}>
+        <Text fontSize={14} color={textValue} className="heebo" fontWeight={500}>
+          {label}
+        </Text>
+        {tooltip && (
+          <Tooltip hasArrow label="Data Required" bg="gray.300" color="black">
+            <InfoOutlineIcon />
+          </Tooltip>
+        )}
+      </Flex>
       <Input
         name={name}
         w="100%"
         type="text"
         h="56px"
+        className="gordita400"
         borderRadius="8px"
         bg="black.400"
         border="none"
@@ -174,6 +183,7 @@ export const TextBox = ({ name, label, placeholder, ...rest }) => {
         bg="black.400"
         borderRadius="8px"
         w="100%"
+        className="gordita400"
         placeholder={placeholder}
         value={values[name]}
         onChange={handleChange}
@@ -184,6 +194,7 @@ export const TextBox = ({ name, label, placeholder, ...rest }) => {
         color="purple.100"
         _placeholder={{
           color: "purple.100",
+          fontSize: 16,
         }}
       />
     </Box>
@@ -204,6 +215,7 @@ export const SelectBox = ({ label, placeholder, name, maxW, options, ...rest }) 
           color="purple.100"
           w="100%"
           maxW={maxW}
+          className="gordita400"
           h="56px"
           borderRadius="8px"
           border="none"
@@ -234,24 +246,36 @@ export const DateBox = ({ name, label, placeholder, maxW, format, ...rest }) => 
         {label}
       </Text>
       <SingleDatepicker
+        className="shared"
         color="purple.100"
         name={name}
-        date={values[name]}
-        onDateChange={(val) => handleChange(name, moment(val).format(format))}
+        maxW={"100%"}
+        date={values[name + "1"]}
+        onDateChange={(date, dateString) => {
+          handleChange(name, moment(date).format(format));
+          handleChange(name + "1", date);
+        }}
         placeholder={placeholder}
       />
     </Box>
   );
 };
 
-export const SwitchBox = ({ name, maxW, label, placeholder, ...rest }) => {
+export const SwitchBox = ({ name, maxW, label, placeholder, tooltip = false, ...rest }) => {
   const textValue = useColorModeValue(theme.colors.black[100], theme.colors.white[100]);
   const { values, handleBlur, handleChange } = rest;
   return (
     <HStack w="100%" maxW={maxW} spacing={0} alignItems="flex-start" justifyContent="space-between">
-      <Text mb="8px" fontSize={14} color={textValue} className="heebo" fontWeight={500}>
-        {label}
-      </Text>
+      <Flex mb="8px" alignItems="center" gap={10}>
+        <Text fontSize={14} color={textValue} className="heebo" fontWeight={500}>
+          {label}
+        </Text>
+        {tooltip && (
+          <Tooltip hasArrow label="Data Required" bg="gray.300" color="black">
+            <InfoOutlineIcon />
+          </Tooltip>
+        )}
+      </Flex>
       <Switch
         defaultChecked={values[name]}
         onChange={(val) => handleChange(name, val.target.checked)}

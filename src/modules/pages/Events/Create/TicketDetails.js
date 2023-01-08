@@ -19,9 +19,29 @@ const TicktDetails = (props) => {
           handleBlur={handleBlur}
           handleChange={handleChange}
           placeholder="Enter quantity"
-          label="Ticket Quantity"
+          label="Regular Ticket Quantity"
           maxW="45%"
           name="ticketQuantity"
+        />
+      </HStack>
+      <HStack spacing={30} flex={1} justifyContent="flex-start" w="100%">
+        <InputBox
+          values={values}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+          placeholder="Ticket Name"
+          label="Early Bird Ticket Quantity"
+          name="earlyBirdTicketQuantity"
+          maxW="45%"
+        />
+        <InputBox
+          values={values}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+          placeholder="Enter quantity"
+          label="Vip Ticket Quantity"
+          maxW="45%"
+          name="vipTicketQuantity"
         />
       </HStack>
       <HStack w="100%">
@@ -86,6 +106,7 @@ const TicktDetails = (props) => {
           maxW="25%"
           values={values}
           label="Assign collectible to ticket"
+          tooltip={true}
         />
         <SwitchBox
           name="allowTransfer"
@@ -93,6 +114,7 @@ const TicktDetails = (props) => {
           maxW="25%"
           values={values}
           label="Allow transfers of this ticket"
+          tooltip={true}
         />
         <SwitchBox
           name="allowResale"
@@ -100,28 +122,31 @@ const TicktDetails = (props) => {
           maxW="25%"
           values={values}
           label="Allow resale of this ticket"
+          tooltip={true}
         />
       </VStack>
-      <HStack spacing={30} flex={1} justifyContent="flex-start" w="100%">
-        <InputBox
-          values={values}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          placeholder="Enter min resale"
-          label="Minimum Resale"
-          maxW="45%"
-          name="minimumResale"
-        />
-        <InputBox
-          values={values}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          placeholder="Enter max resale"
-          label="Maximum Resale"
-          maxW="45%"
-          name="maximumResale"
-        />
-      </HStack>
+      {values?.allowResale && (
+        <HStack spacing={30} flex={1} justifyContent="flex-start" w="100%">
+          <InputBox
+            values={values}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            placeholder="Enter min resale"
+            label="Minimum Resale"
+            maxW="45%"
+            name="minimumResale"
+          />
+          <InputBox
+            values={values}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            placeholder="Enter max resale"
+            label="Maximum Resale"
+            maxW="45%"
+            name="maximumResale"
+          />
+        </HStack>
+      )}
     </VStack>
   );
 };

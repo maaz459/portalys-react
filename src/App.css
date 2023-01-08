@@ -112,3 +112,45 @@
 .chakra-checkbox__label {
   margin-top: 5px !important;
 }
+
+.ant-picker-content td {
+  border: none !important;
+}
+
+.ant-picker-content th {
+  border: none !important;
+}
+
+.ant-picker-cell-selected .ant-picker-cell-inner {
+  background-color: #02f6ad !important;
+}
+
+.ant-picker-content input {
+  color: white !important;
+}
+
+.ant-picker-suffix {
+  color: white !important;
+}
+
+.ant-picker-input input::placeholder {
+  color: white !important;
+}
+
+.shared .ant-picker-input input::placeholder {
+  color: #a6a0bb !important;
+  font-size: 16px;
+}
+
+.shared .ant-picker-suffix {
+  color: #a6a0bb !important;
+}
+
+.shared .ant-picker-input input {
+  color: #a6a0bb !important;
+  font-size: 16px;
+}
+
+.ant-dropdown-menu:hover {
+  background-color: #02f6ad !important ;
+}

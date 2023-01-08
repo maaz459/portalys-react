@@ -21,7 +21,8 @@ import { InputGroup, Input as InputComponent, InputRightElement } from "@chakra-
 import { CalendarIcon } from "@chakra-ui/icons";
 import { useDayzed } from "dayzed";
 import moment from "moment";
-
+import { DatePicker as DStyle } from "../../styles/layout/sharedModules";
+import { DatePicker, Space } from "antd";
 const MONTH_NAMES_DEFAULT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const DAY_NAMES_DEFAULT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const DATE_FORMAT_DEFAULT = "DD/MM/YYYY";
@@ -142,6 +143,9 @@ export const SingleDatepicker = ({
     dayNames: DAY_NAMES_DEFAULT,
   },
   color,
+  dark,
+  w,
+  className,
   ...props
 }) => {
   const { date, name, disabled, onDateChange, id, placeholder, maxW } = props;
@@ -174,48 +178,22 @@ export const SingleDatepicker = ({
   });
 
   return (
-    <Popover
-      placement="bottom-start"
-      variant="responsive"
-      isOpen={popoverOpen}
-      onClose={() => setPopoverOpen(false)}
-      initialFocusRef={initialFocusRef}
-      isLazy
-    >
-      <PopoverTrigger>
-        <InputGroup maxW={maxW}>
-          <InputComponent
-            id={id}
-            w="100%"
-            bg="black.400"
-            h="56px"
-            autoComplete="off"
-            isDisabled={disabled}
-            ref={initialFocusRef}
-            onClick={() => setPopoverOpen(!popoverOpen)}
-            name={name}
-            color={color}
-            placeholder={placeholder}
-            _placeholder={{
-              color,
-            }}
-            value={!date ? "" : moment(date).format(configs.dateFormat)}
-            onChange={(e) => e.target.value}
-          />
-          <InputRightElement
-            onClick={() => setPopoverOpen(!popoverOpen)}
-            color="gray.500"
-            cursor="pointer"
-            mt={2}
-            children={icon}
-          />
-        </InputGroup>
-      </PopoverTrigger>
-      <PopoverContent w="100%" ref={ref}>
-        <PopoverBody bg="white.200" padding={"10px 5px"} borderWidth={1} borderColor="blue.400" w="100%">
-          <SingleDatepickerCalendar {...dayzedData} configs={configs} />
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
+    <DStyle dark={dark}>
+      <DatePicker
+        className={className ? className + " gordita400" : "gordita400"}
+        style={{
+          border: "none",
+          backgroundColor: "#1C1C1C",
+          height: 56,
+          color: "white",
+          fontSize: 14,
+          maxWidth: maxW,
+          width: "100%",
+        }}
+        value={date}
+        showToday={true}
+        onChange={onDateChange}
+      />
+    </DStyle>
   );
 };

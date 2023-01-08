@@ -38,7 +38,8 @@ import { getEvents } from "../../../utils/actions/event";
 import { user } from "../../../recoil/atoms/user";
 import { useRecoilState } from "recoil";
 import { isEmpty } from "lodash";
-
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { Button as ABT, Dropdown, Space } from "antd";
 const spacing = {
   gap: 0,
   spacing: 0,
@@ -96,20 +97,40 @@ const EventsComponent = () => {
             maxW="281px"
             color="white.100"
           />
-          <Select
-            bg="black.400"
-            color="white.100"
-            w="100%"
-            maxW="210px"
-            h="56px"
-            borderRadius="8px"
-            border="none"
-            className="gordita400"
-            fontSize={14}
-            placeholder="All Events"
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  label: "Data Required",
+                  key: "1",
+                  style: { backgroundColor: "#02F6AD", border: "none", color: "#141414" },
+                },
+              ],
+              onClick: () => console.log(""),
+            }}
+            overlayStyle={{
+              padding: 0,
+              margin: 0,
+            }}
           >
-            <option></option>
-          </Select>
+            <ABT
+              style={{
+                backgroundColor: "#141414",
+                color: "#ffffff",
+                width: "100%",
+                height: "56px",
+                borderRadius: "8px",
+                border: "none",
+                fontSize: 14,
+                maxWidth: "210px",
+              }}
+            >
+              <Space style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+                All Events
+                <DownOutlined />
+              </Space>
+            </ABT>
+          </Dropdown>
         </HStack>
         <HStack justifyContent="flex-end" {...{ spacing }} spacing={12} flex={1}>
           <Button
@@ -138,7 +159,7 @@ const EventsComponent = () => {
                 <Tr>
                   {["Event eventName", "Date", "Start Time", "Event Venue", "Status"].map((column, index) => {
                     return (
-                      <Th textTransform="capitalize" key={index} fontSize={16} color="gray.100">
+                      <Th textTransform="capitalize" key={index} fontSize={16} color={colorValue}>
                         {column}
                       </Th>
                     );
@@ -216,7 +237,7 @@ const EventsComponent = () => {
                       pos="absolute"
                       right={10}
                       bottom={-20}
-                      color='black.100'
+                      color="black.100"
                     >
                       LIVE
                     </Box>
