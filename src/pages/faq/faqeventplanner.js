@@ -4,13 +4,16 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box, chakra, Heading,
-  Text
+  Box,
+  Heading,
+  Text,
+  chakra,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React , {useState} from "react";
 import Layout from "../../modules/layout/layout";
-import faqarrow from "../../static/assets/images/faqarrow.svg";
 import "../../styles/faq/faq.css";
+import faqarrow from "../../static/assets/images/faqarrow.svg";
+import { constSelector } from "recoil";
 export default function FaqEventPlanner() {
   const[home, setHome] = useState(1)
   const homeHandle = (event) => {
