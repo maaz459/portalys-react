@@ -39,6 +39,7 @@ import { search } from "../../../../static/assets/images";
 import { bool } from "prop-types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SearchBar from "./searchbar";
 
 const ImageRender = ({ image, zIndex, isMobile }) => {
   const { colorMode } = useColorMode();
@@ -53,7 +54,13 @@ const ImageRender = ({ image, zIndex, isMobile }) => {
 const Tabs = ({ name, color, setSelected }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   return (
-    <Typography cursor="pointer" onClick={() => setSelected(name)} color={color} variant="h4" isMobile={isMobile}>
+    <Typography
+      cursor="pointer"
+      onClick={() => setSelected(name)}
+      color={color}
+      variant="h4"
+      isMobile={isMobile}
+    >
       {name}
     </Typography>
   );
@@ -111,7 +118,12 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
               <ImageRender isMobile={isMobile} image={thumbnail2} zIndex={-3} />
               <ImageRender isMobile={isMobile} image={thumbnail3} zIndex={-2} />
               <ImageRender isMobile={isMobile} image={thumbnail4} zIndex={-1} />
-              <Box px={{ base: 10, sm: 20 }} zIndex={10} justifyContent="center" display="flex">
+              <Box
+                px={{ base: 10, sm: 20 }}
+                zIndex={10}
+                justifyContent="center"
+                display="flex"
+              >
                 <Box
                   w="100%"
                   mt={isMobile ? "2%" : ""}
@@ -130,11 +142,13 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                       textAlign={isMobile ? "center" : ""}
                       color="white.100"
                     >
-                      <chakra.span color="primary.100"> A</chakra.span> Blockchain{" "}
+                      <chakra.span color="primary.100"> A</chakra.span>{" "}
+                      Blockchain{" "}
                       <chakra.span color="primary.100">
                         Event Ticketing Marketplace and B2B Solution for Event
                       </chakra.span>{" "}
-                      Organizers <chakra.span color="primary.100">and</chakra.span> Artists
+                      Organizers{" "}
+                      <chakra.span color="primary.100">and</chakra.span> Artists
                     </Box>
 
                     <Box
@@ -171,24 +185,44 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                         direction="row"
                         alignItems="center"
                       >
-                        <Text color="white.100" className="gordita700" fontSize={{ base: 22, md: 32, lg: 38 }}>
+                        <Text
+                          color="white.100"
+                          className="gordita700"
+                          fontSize={{ base: 22, md: 32, lg: 38 }}
+                        >
                           Browse
                         </Text>
-                        <HStack alignItems="center" justifyContent="center" pl={isMobile ? 2 : 8}>
+                        <HStack
+                          alignItems="center"
+                          justifyContent="center"
+                          pl={isMobile ? 2 : 8}
+                        >
                           <Tabs
-                            color={selected === "Events" ? "primary.100" : "white.100"}
+                            color={
+                              selected === "Events"
+                                ? "primary.100"
+                                : "white.100"
+                            }
                             setSelected={setSelected}
                             name={"Events"}
                           />
-                          <Text fontSize={{ base: 16, md: 20, lg: 22 }} color="primary.100">
+                          <Text
+                            fontSize={{ base: 16, md: 20, lg: 22 }}
+                            color="primary.100"
+                          >
                             |
                           </Text>
                           <Tabs
-                            color={selected === "Festivals" ? "primary.100" : "white.100"}
+                            color={
+                              selected === "Festivals"
+                                ? "primary.100"
+                                : "white.100"
+                            }
                             setSelected={setSelected}
                             name={"Festivals"}
                           />
-                          <Box display={isMobile ? "none" : "flex"} pl="30px">
+
+                          {/* <Box display={isMobile ? "none" : "flex"} pl="30px">
                             <Flex
                               borderRadius="30px"
                               color="black.200"
@@ -264,16 +298,35 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                                 </Button>
                               </Box>
                             </Flex>
+                          </Box> */}
+                          <Box>
+                            <SearchBar />
                           </Box>
-                          <HStack display={isMobile ? "none" : "flex"} pl="30px">
-                            <Image alt="" style={{ width: "24px", height: "24px" }} src={filters}></Image>
-                            <Text fontSize={{ base: 12, sm: 14, lg: 16 }} className="gordita600" fontWeight="600">
+
+                          <HStack
+                            display={isMobile ? "none" : "flex"}
+                            pl="30px"
+                          >
+                            <Image
+                              alt=""
+                              style={{ width: "24px", height: "24px" }}
+                              src={filters}
+                            ></Image>
+                            <Text
+                              fontSize={{ base: 12, sm: 14, lg: 16 }}
+                              className="gordita600"
+                              fontWeight="600"
+                            >
                               Filters
                             </Text>
                           </HStack>
                         </HStack>
                       </Stack>
-                      <Stack alignItems="center" direction="row" justifyContent={isMobile ? "space-between" : "center"}>
+                      <Stack
+                        alignItems="center"
+                        direction="row"
+                        justifyContent={isMobile ? "space-between" : "center"}
+                      >
                         <HStack>
                           <Box display={isMobile ? "flex" : "none"}>
                             <Button
@@ -314,9 +367,13 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                         <HStack>
                           <HStack alignItems="center" justifyContent="center">
                             <ChevronLeftIcon
-                              width={isTablet ? (isMobile ? "24px" : "30px") : "38px"}
+                              width={
+                                isTablet ? (isMobile ? "24px" : "30px") : "38px"
+                              }
                               color="rgba(0,0,0,0.5)"
-                              h={isTablet ? (isMobile ? "24px" : "30px") : "38px"}
+                              h={
+                                isTablet ? (isMobile ? "24px" : "30px") : "38px"
+                              }
                               bg="white"
                               p={{ base: "1px", md: "5px" }}
                               borderRadius="100%"
@@ -325,9 +382,13 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                             />
 
                             <ChevronRightIcon
-                              width={isTablet ? (isMobile ? "24px" : "30px") : "38px"}
+                              width={
+                                isTablet ? (isMobile ? "24px" : "30px") : "38px"
+                              }
                               color="rgba(0,0,0,0.5)"
-                              h={isTablet ? (isMobile ? "24px" : "30px") : "38px"}
+                              h={
+                                isTablet ? (isMobile ? "24px" : "30px") : "38px"
+                              }
                               bg="white"
                               p={{ base: "1px", md: "5px" }}
                               borderRadius="100%"

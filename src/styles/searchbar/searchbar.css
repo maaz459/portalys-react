@@ -1,0 +1,61 @@
+.fadeInWidth {
+  animation: 0.2s linear fadeInWidth;
+}
+
+.fadeOutWidth {
+  animation: 0.2s linear fadeOutWidth;
+}
+
+.fadeIn {
+  animation: 0.8s linear fadeIn;
+}
+.fadeOut {
+  animation: 1s linear fadeOut;
+}
+.search-input {
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  padding: 0px 15px;
+  transition: width 0.4s linear;
+  caret-color: rgb(0, 255, 234);
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+.searchbar {
+  width: 530px;
+  height: 60px;
+  background-color: #83ceb7;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchbutton:hover {
+  background-color: black !important;
+}
+.searchbarclose {
+  width: 50px;
+}
+.movesearchbar {
+  text-align: right;
+  animation: 0.2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: mymove 5s infinite;
+  width: 100%;
+}
+.searchbutton {
+  animation-timing-function: ease-out;
+  animation-timing-function: cubic-bezier(0, 0, 1, 1);
+}
+@keyframes mymove {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
+}

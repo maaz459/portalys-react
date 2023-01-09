@@ -14,6 +14,7 @@ import Layout from "../../modules/layout/layout";
 import "../../styles/faq/faq.css";
 import faqarrow from "../../static/assets/images/faqarrow.svg";
 import { constSelector } from "recoil";
+import UserSide from "./userside";
 export default function FaqEventPlanner() {
   const[home, setHome] = useState(1)
   const homeHandle = (event) => {
@@ -122,7 +123,9 @@ export default function FaqEventPlanner() {
         </Box>
         ) : 
         home === 2 ? (
-          <Heading>FAQ</Heading>
+         <Box>
+          <UserSide />
+         </Box>
         ) : ""
        }
       </Box>
