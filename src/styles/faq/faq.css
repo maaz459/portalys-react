@@ -2,23 +2,39 @@
     padding: 50px 90px 120px 90px;
     background-color: black;
 }
-
+.faqplannerhero{
+    padding: 20px 90px 120px 90px;
+    background-color: black;
+}
+.faqhome{
+color: #FBFAFB;
+font-weight: 500;
+font-size: 14px;
+}
+.faqhomeactive{
+    color: #02F6AD;
+font-weight: 500;
+font-size: 14px;
+}
 @media only screen and (max-width: 1200px) {
-    .faqhero{
+    .faqhero, .faqplannerhero{
         padding: 0px 70px 90px 70px;
     }
 }
 @media only screen and (max-width: 768px) {
-    .faqhero{
+    .faqhero, .faqplannerhero{
         padding: 0px 50px 70px 50px;
+    }
+    .faqheader{
+        font-size: 30px !important;
     }
 }
 @media only screen and (max-width: 500px) {
-    .faqhero{
+    .faqhero, .faqplannerhero{
         padding: 0px 25px 70px 25px;
     }
     .faqheader{
-        padding: 40px 0px !important;
+        padding: 20px 0px !important;
     }
     .mainboxfaq{
         padding: 5px !important;

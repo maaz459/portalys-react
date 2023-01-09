@@ -15,6 +15,7 @@ import Profile2 from "../pages/profile/profile2";
 import Profile from "../pages/profile/profile";
 import Collaborate from "../pages/collaborate/collaborate";
 import TicketsDetail from "../pages/ticketdetail/ticketdetail";
+import FaqEventPlanner from "../pages/faq/faqeventplanner";
 const Routes = (props) => {
   return (
     <DomRoutes>
@@ -30,6 +31,7 @@ const Routes = (props) => {
       <Route key="tickets" path="mytickets" element={<Tickets {...props} />} />
       <Route path="ourvision" element={<About />} />
       <Route path="faq" element={<Faq />} />
+      <Route path="faqeventplanner" element={<FaqEventPlanner />} />
       <Route path="settings" element={<Profile />} />
       <Route path="profile2" element={<Profile2 />} />
       <Route path="collaborate" element={<Collaborate />} />
