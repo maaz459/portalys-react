@@ -8,6 +8,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import React from "react";
+import FAQRow from "../../components/faq/faqrow";
 import Layout from "../../modules/layout/layout";
 import "../../styles/faq/faq.css";
 export default function Faq() {
@@ -69,43 +70,7 @@ export default function Faq() {
         </Heading>
         {data.map((item, index) => {
           return (
-            <Box key={index} marginTop="20px">
-              <Accordion
-                allowToggle
-                backgroundColor="#191919"
-                color="#D7D7D7"
-                background="#191919"
-                border="1px solid black"
-              >
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton background="#191919">
-                      <Box
-                        as="span"
-                        flex="1"
-                        textAlign="left"
-                        padding="15px"
-                        background="#191919"
-                        className="mainboxfaq"
-                      >
-                        <Heading fontSize="18" fontWeight="400">
-                          {item.question}
-                        </Heading>
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="18"
-                    fontWeight="400"
-                    padding="15px"
-                  >
-                    {item.answer}
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            </Box>
+           <FAQRow question={item.question} answer={item.answer}/>
           );
         })}
       </Box>
