@@ -135,7 +135,21 @@ const Footer = () => {
             justifyContent={isMobile ? "flex-end" : ""}
             h="100%"
           >
-            <Button bg="primary.100" w="46px" h="46px" px="15px" py="16px" borderRadius="75%" size="xs">
+            <Button
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
+              bg="primary.100"
+              w="46px"
+              h="46px"
+              px="15px"
+              py="16px"
+              borderRadius="75%"
+              size="xs"
+            >
               <Image alt="" style={{ width: "14px", height: "16px" }} src={topIcon}></Image>
             </Button>
           </Stack>

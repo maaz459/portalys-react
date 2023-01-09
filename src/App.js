@@ -24,6 +24,7 @@ import { SolflareAdapter } from "@web3auth/solflare-adapter";
 import { SlopeAdapter } from "@web3auth/slope-adapter";
 import { fetchUserData } from "./utils/actions/registration";
 import { user } from "./recoil/atoms/user";
+import { useColorMode } from "@chakra-ui/react";
 const newTheme = extendTheme(theme);
 
 const clientId = "BBhbmSbaMcjyqJ864MsQXmmVudb_g5godU5Ml_GWpCFUfGdxb40_TBmgUz79J82HiSJ2dmhDoChOVEAOs6kX73I";
@@ -37,7 +38,7 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [cookies, setCookie] = useCookies(["site-password"]);
   const [_, setUser] = useRecoilState(user);
-
+  const { colorMode } = useColorMode();
   useEffect(() => {
     const init = async () => {
       try {
@@ -65,11 +66,11 @@ function App() {
         // adding solana wallet connector plugin
 
         const torusPlugin = new SolanaWalletConnectorPlugin({
-          torusWalletOpts: { modalZIndex: 10000000 },
+          // torusWalletOpts: { modalZIndex: 10000000 },
           walletInitOptions: {
             whiteLabel: {
               name: "Whitelabel Demo",
-              theme: { isDark: true, colors: { torusBrand1: "#00a8ff" } },
+              theme: { isDark: false, colors: { torusBrand1: "#00a8ff" } },
               logoDark: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
               logoLight: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
               topupHide: true,

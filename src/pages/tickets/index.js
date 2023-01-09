@@ -37,10 +37,12 @@ import { InputBox } from "../../modules/pages/Events/Create/SharedModules";
 import { event, location, pdf, xls } from "../../static/assets/images/dashboard/sidebar";
 import { SearchIcon } from "@chakra-ui/icons";
 import { eye } from "../../static/assets/images";
+import { useNavigate } from "react-router-dom";
 export default function Tickets() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selected, setSelected] = useState("Upcomming");
   const tickets = [{ type: "Festival" }, { type: "Event" }, { type: "Festival" }, { type: "Event" }];
+  const navigate = useNavigate();
   const SingleEvent = {
     image: event,
     eventName: "Joker (VIP) Ticket",
@@ -153,6 +155,8 @@ export default function Tickets() {
                   borderRadius={"8px"}
                   px="20px"
                   py="20px"
+                  cursor="pointer"
+                  onClick={() => navigate("/ticketdetail")}
                 >
                   <HStack justifyContent="space-between">
                     <Box>
