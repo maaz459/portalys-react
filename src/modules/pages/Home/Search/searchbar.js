@@ -1,20 +1,17 @@
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  Image,
+  Input,
+  Select,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { search } from "../../../../static/assets/images";
-import {
-  HStack,
-  useColorMode,
-  Stack,
-  Box,
-  chakra,
-  Text,
-  Button,
-  Flex,
-  VStack,
-  Select,
-  Input,
-  Divider,
-  Image,
-} from "@chakra-ui/react";
 import "../../../../styles/searchbar/searchbar.css";
 
 export default function SearchBar() {

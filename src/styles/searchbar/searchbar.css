@@ -19,10 +19,11 @@
   background: none;
   padding: 0px 15px;
   transition: width 0.4s linear;
-  caret-color: rgb(0, 255, 234);
-  animation-name: fadeIn;
-  animation-duration: 0.5s;
+  caret-color: rgb(160, 207, 203);
+  transition: all 0.5s ease-in-out;
+  transition: all 500ms cubic-bezier(0, 0.5, 0.35, 2);
 }
+
 .searchbar {
   width: 530px;
   height: 60px;
@@ -31,12 +32,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 .searchbutton:hover {
   background-color: black !important;
 }
 .searchbarclose {
   width: 50px;
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+  transition: all 0.3s ease-in;
 }
 .movesearchbar {
   text-align: right;
@@ -44,8 +48,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: mymove 5s infinite;
   width: 100%;
+  transition: all 0.5s ease-in-out;
 }
 .searchbutton {
   animation-timing-function: ease-out;
