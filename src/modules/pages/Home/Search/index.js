@@ -42,7 +42,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SearchBar from "./searchbar";
 
 const btnColors = ["primary.100", "#AA08B8", "#FBF100", "#690DFF", "#FF5C00"];
-const textColors = ["black.100", "white.100", "black.100", "white.100", "black.100"];
+const textColors = [
+  "black.100",
+  "white.100",
+  "black.100",
+  "white.100",
+  "black.100",
+];
 
 const ImageRender = ({ image, zIndex, isMobile }) => {
   const { colorMode } = useColorMode();
@@ -88,7 +94,12 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        style={{ width: "100%", height: "100%", position: "absolute", zIndex: -10 }}
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          zIndex: -10,
+        }}
       >
         {[
           {
@@ -107,7 +118,10 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
             image: hero5,
           },
         ].map(({ btnColor, image, textColor }, index) => (
-          <SwiperSlide key={index} style={{ width: "100%", position: "relative" }}>
+          <SwiperSlide
+            key={index}
+            style={{ width: "100%", position: "relative" }}
+          >
             <ImageRender isMobile={isMobile} image={image} zIndex={-4} />
             <ImageRender isMobile={isMobile} image={thumbnail2} zIndex={-3} />
             <ImageRender isMobile={isMobile} image={thumbnail3} zIndex={-2} />
@@ -115,7 +129,13 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Box pos="relative" px={{ base: 10, sm: 20 }} zIndex={100} justifyContent="center" display="flex">
+      <Box
+        pos="relative"
+        px={{ base: 10, sm: 20 }}
+        zIndex={100}
+        justifyContent="center"
+        display="flex"
+      >
         <Box
           w="100%"
           mt={isMobile ? "2%" : ""}
@@ -135,8 +155,11 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
               color="white.100"
             >
               <chakra.span color="primary.100"> A</chakra.span> Blockchain{" "}
-              <chakra.span color="primary.100">Event Ticketing Marketplace and B2B Solution for Event</chakra.span>{" "}
-              Organizers <chakra.span color="primary.100">and</chakra.span> Artists
+              <chakra.span color="primary.100">
+                Event Ticketing Marketplace and B2B Solution for Event
+              </chakra.span>{" "}
+              Organizers <chakra.span color="primary.100">and</chakra.span>{" "}
+              Artists
             </Box>
 
             <Box
@@ -167,21 +190,39 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
               direction={{ base: "column", md: "row" }}
               justifyContent="space-between"
             >
-              <Stack justifyContent={{ base: "center", md: "flex-start" }} flex={1} direction="row" alignItems="center">
-                <Text color="white.100" className="gordita700" fontSize={{ base: 22, md: 32, lg: 38 }}>
+              <Stack
+                justifyContent={{ base: "center", md: "flex-start" }}
+                flex={1}
+                direction="row"
+                alignItems="center"
+              >
+                <Text
+                  color="white.100"
+                  className="gordita700"
+                  fontSize={{ base: 22, md: 32, lg: 38 }}
+                >
                   Browse
                 </Text>
-                <HStack alignItems="center" justifyContent="center" pl={isMobile ? 2 : 8}>
+                <HStack
+                  alignItems="center"
+                  justifyContent="center"
+                  pl={isMobile ? 2 : 8}
+                >
                   <Tabs
                     color={selected === "Events" ? "primary.100" : "white.100"}
                     setSelected={setSelected}
                     name={"Events"}
                   />
-                  <Text fontSize={{ base: 16, md: 20, lg: 22 }} color="primary.100">
+                  <Text
+                    fontSize={{ base: 16, md: 20, lg: 22 }}
+                    color="primary.100"
+                  >
                     |
                   </Text>
                   <Tabs
-                    color={selected === "Festivals" ? "primary.100" : "white.100"}
+                    color={
+                      selected === "Festivals" ? "primary.100" : "white.100"
+                    }
                     setSelected={setSelected}
                     name={"Festivals"}
                   />
@@ -189,91 +230,53 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                     <Flex
                       borderRadius="30px"
                       color="black.200"
-                      bg="white.100"
                       w="100%"
                       maxW="565px"
                       pr={2}
                       h="52px"
                       alignItems="center"
                     >
-                      <HStack justifyContent="center" alignItems="center" spacing={0} gap={0}>
-                        <VStack justifyContent="center" alignItems="center" spacing={0} gap={1} p={0}>
-                          <Text fontSize={{ base: 12 }} className="gordita600">
-                            CITY
-                          </Text>
-                          <Select
-                            h="max-content"
-                            fontSize={{ base: 14 }}
-                            className="gordita700"
-                            placeholder="Berlin"
-                            w="90px"
-                          ></Select>
-                        </VStack>
-                        <Divider orientation="vertical" h="80%" bg="black.200" opacity={0.3}></Divider>
-                        <VStack justifyContent="center" alignItems="center" spacing={0} gap={1} px={16}>
-                          <Text fontSize={{ base: 12 }} className="gordita600">
-                            CATEGORY
-                          </Text>
-                          <Select
-                            h="max-content"
-                            fontSize={{ base: 14 }}
-                            className="gordita700"
-                            w="100px"
-                            placeholder="Parties"
-                          ></Select>
-                        </VStack>
-                        <Divider orientation="vertical" h="80%" bg="black.200" opacity={0.3}></Divider>
-                        <VStack justifyContent="center" alignItems="flex-start" spacing={0} gap={1} pl={24}>
-                          <Text fontSize={{ base: 12 }} className="gordita600">
-                            TYPE
-                          </Text>
-                          <Input
-                            h="max-content"
-                            fontSize={{ base: 12 }}
-                            placeholder="What are you looking for..."
-                            color="black.200"
-                            className="gordita600"
-                            p={0}
-                            _placeholder={{
-                              color: "black.200",
-                            }}
-                          ></Input>
-                        </VStack>
+                      <HStack
+                        justifyContent="center"
+                        alignItems="center"
+                        spacing={0}
+                        gap={0}
+                      >
+                        <SearchBar />
                       </HStack>
-                      <Box>
-                        <Button
-                          bg="black.100"
-                          border="solid 4px"
-                          borderColor="primary.100"
-                          borderRadius="100%"
-                          p={1}
-                          w="48px"
-                          h="48px"
-                        >
-                          <Image
-                            alt=""
-                            style={{
-                              width: xsmall ? "24" : "17px",
-                              height: "17px",
-                            }}
-                            src={search}
-                          ></Image>
-                        </Button>
-                      </Box>
                     </Flex>
                   </Box>
                   <HStack display={isMobile ? "none" : "flex"} pl="30px">
-                    <Image alt="" style={{ width: "24px", height: "24px" }} src={filters}></Image>
-                    <Text fontSize={{ base: 12, sm: 14, lg: 16 }} className="gordita600" fontWeight="600">
+                    <Image
+                      alt=""
+                      style={{ width: "24px", height: "24px" }}
+                      src={filters}
+                    ></Image>
+                    <Text
+                      fontSize={{ base: 12, sm: 14, lg: 16 }}
+                      className="gordita600"
+                      fontWeight="600"
+                    >
                       Filters
                     </Text>
                   </HStack>
                 </HStack>
               </Stack>
-              <Stack alignItems="center" direction="row" justifyContent={isMobile ? "space-between" : "center"}>
+
+              <Stack
+                alignItems="center"
+                direction="row"
+                justifyContent={isMobile ? "space-between" : "center"}
+              >
                 <HStack>
                   <Box display={isMobile ? "flex" : "none"}>
-                    <Button bg="black.100" border="solid 4px" borderColor="primary.100" borderRadius="100%" p={2}>
+                    <Button
+                      bg="black.100"
+                      border="solid 4px"
+                      borderColor="primary.100"
+                      borderRadius="100%"
+                      p={2}
+                    >
                       <Image
                         alt=""
                         style={{
@@ -284,6 +287,7 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                       ></Image>
                     </Button>
                   </Box>
+
                   <HStack display={isMobile ? "flex" : "none"}>
                     <Image
                       alt=""
@@ -293,7 +297,11 @@ const SearchSection = ({ isMobile, isTablet, xsmall, maxW }) => {
                       }}
                       src={filters}
                     ></Image>
-                    <Text fontSize={{ base: 12, sm: 14, lg: 16 }} className="poppinsBold" pl={{ base: "", sm: "5px" }}>
+                    <Text
+                      fontSize={{ base: 12, sm: 14, lg: 16 }}
+                      className="poppinsBold"
+                      pl={{ base: "", sm: "5px" }}
+                    >
                       Filters
                     </Text>
                   </HStack>
